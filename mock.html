@@ -1,91 +1,106 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mock Test - Govt Exams</title>
+<title>Mock Test - Govt Exam Typing Tool</title>
 <style>
-body{font-family:'Segoe UI',sans-serif;background:#f4f7f9;margin:0;padding:20px}
-.container{max-width:900px;margin:20px auto;background:#fff;padding:20px;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,0.1)}
-nav a{margin:5px;padding:10px 15px;background:#1a73e8;color:#fff;text-decoration:none;border-radius:5px;display:inline-block;font-weight:bold}
-nav a:hover{background:#1557b0}
-h1{color:#1a73e8;text-align:center}
-select,button{background:#1a73e8;color:#fff;border:none;padding:12px 20px;border-radius:5px;cursor:pointer;font-size:16px;margin:5px}
-button:hover{background:#1557b0}
-#quizBox{background:#f9f9f9;padding:15px;border-radius:8px;margin-top:20px}
-label{display:block;padding:10px;margin:8px 0;background:#fff;border:1px solid #ddd;border-radius:5px;cursor:pointer}
-label:hover{background:#e8f0fe}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial}
+body{background:#f4f6f9;color:#333}
+header{background:#004aad;padding:15px 30px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10;flex-wrap:wrap}
+.logo{display:flex;align-items:center;font-size:20px;font-weight:bold;color:#fff}
+.logo img{height:45px;vertical-align:middle;margin-right:10px}
+.logo span{color:#ffd700}
+nav a{color:#fff;text-decoration:none;margin:0 10px;padding:8px 14px;border-radius:5px;font-weight:600}
+nav a:hover, nav a.active{background:#ffd700;color:#004aad}
+.container{max-width:900px;margin:20px auto;padding:20px}
+.card{background:#fff;padding:25px;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,0.1);margin-bottom:20px}
+h1{color:#004aad;margin-bottom:15px}
+select, button{padding:12px 18px;font-size:16px;border:2px solid #004aad;border-radius:6px;margin:10px 5px}
+button{background:#004aad;color:#fff;cursor:pointer;font-weight:bold}
+button:hover{background:#00337a}
+#questionBox{display:none}
+.question{font-size:20px;font-weight:600;margin-bottom:15px}
+.options label{display:block;background:#f8faff;padding:12px;margin:8px 0;border-radius:6px;cursor:pointer;border:2px solid #e2e8f0}
+.options label:hover{border-color:#004aad}
+.options input{margin-right:10px}
+.timer{font-size:22px;color:#dc2626;font-weight:bold;text-align:right}
+#result{display:none;text-align:center}
+#result h2{color:#16a34a;font-size:28px}
 </style>
 </head>
 <body>
-<nav>
-  <a href="index.html">⌨️ Typing Test</a>
-  <a href="mock.html">📚 Mock Test</a>
-</nav>
+
+<header>
+  <div class="logo">
+    <img src="govt-logo.png" alt="Govt Exam Typing Tool">
+    <span>Govt Exam Typing Tool</span>
+  </div>
+  <nav>
+    <a href="index.html">Typing Test</a>
+    <a href="mock.html" class="active">Mock Test</a>
+    <a href="#">Results</a>
+    <a href="#">Practice</a>
+  </nav>
+</header>
+
 <div class="container">
-<h1>📚 Govt Exam Mock Test</h1>
-<div id="setup">
-<h3>Exam Select karo:</h3>
-<select id="examSelect">
-<option value="">-- Exam Select --</option>
-<option value="ssc">SSC CHSL - Demo 2Q</option>
-<option value="upsssc_vdo">UPSSSC VDO - Demo 2Q</option>
-</select><br><br>
-<button onclick="startTest('exam')">📝 Exam Mode</button>
-<button onclick="startTest('practice')">📖 Practice Mode</button>
-</div>
+  <div class="card" id="startBox">
+    <h1>📚 Select Mock Test</h1>
+    <select id="examSelect">
+      <option value="">-- Choose Exam --</option>
+      <option value="ssc">SSC CHSL / CGL - General</option>
+      <option value="english">English Grammar Test</option>
+      <option value="banking">Banking Awareness</option>
+    </select>
+    <button onclick="startTest()">Start Test</button>
+  </div>
 
-<div id="quizBox" style="display:none">
-<div id="qNo" style="font-weight:bold;font-size:18px"></div>
-<div id="question" style="font-size:20px;margin:15px 0"></div>
-<div id="options"></div>
-<button onclick="nextQ()">Next ➡️</button>
-<div id="explanation" style="margin-top:15px;color:green"></div>
-</div>
+  <div class="card" id="questionBox">
+    <div class="timer">Time Left: <span id="time">600</span>s</div>
+    <div id="qNo"></div>
+    <div class="question" id="question"></div>
+    <div class="options" id="options"></div>
+    <button onclick="nextQuestion()">Next Question</button>
+    <button onclick="submitTest()" style="background:#dc2626">Submit Test</button>
+  </div>
 
-<div id="resultBox" style="display:none"></div>
+  <div class="card" id="result">
+    <h2>Test Completed! 🎉</h2>
+    <p id="score"></p>
+    <button onclick="location.reload()">Retake Test</button>
+  </div>
 </div>
 
 <script>
-let questions=[],current=0,mode,score=0;
-const bank={
-ssc:[
-{q:"Bharat ki rajdhani kya hai?",o:["Delhi","Mumbai","Kolkata","Chennai"],a:"Delhi",e:"1911 me Calcutta se Delhi shift hui thi"},
-{q:"15% of 200 kya hoga?",o:["25","30","35","40"],a:"30",e:"200 * 15 / 100 = 30"}
-],
-upsssc_vdo:[
-{q:"Gram Pradhan kaun hota hai?",o:["Sarpanch","Pradhan","BDO","DM"],a:"Pradhan",e:"UP me gaon ka head Pradhan kehlata hai"},
-{q:"25 ka 20% kitna hota hai?",o:["4","5","6","10"],a:"5",e:"25 * 20 / 100 = 5"}
-]
+const questions = {
+  ssc: [
+    {q:"Which is the capital of India?", opt:["Mumbai","Delhi","Kolkata","Chennai"], ans:1},
+    {q:"The largest planet in our solar system is?", opt:["Earth","Mars","Jupiter","Saturn"], ans:2},
+    {q:"12 multiplied by 8 equals?", opt:["88","96","108","84"], ans:1},
+    {q:"Who is known as the Father of the Nation in India?", opt:["Jawaharlal Nehru","Mahatma Gandhi","Subhash Chandra Bose","Bhagat Singh"], ans:1},
+    {q:"Which river is known as the Ganga of South India?", opt:["Godavari","Krishna","Kaveri","Narmada"], ans:2}
+  ],
+  english: [
+    {q:"Choose the correct synonym of 'Abundant'.", opt:["Scarce","Plentiful","Limited","Rare"], ans:1},
+    {q:"Identify the error: She don't like coffee.", opt:["She","don't","like","No error"], ans:1},
+    {q:"Choose the correct sentence.", opt:["He is taller than me","He is taller then me","He is tallest than me","He is more taller than me"], ans:0},
+    {q:"What is the antonym of 'Difficult'?", opt:["Hard","Easy","Tough","Complex"], ans:1},
+    {q:"Fill in the blank: I _____ to school yesterday.", opt:["go","went","gone","going"], ans:1}
+  ],
+  banking: [
+    {q:"What does RBI stand for?", opt:["Reserve Bank of India","Regional Bank of India","Rural Bank of India","None of these"], ans:0},
+    {q:"One Lakh is equal to how many Rupees?", opt:["1,000","10,000","100,000","1,000,000"], ans:2},
+    {q:"Which is the central bank of India?", opt:["SBI","PNB","RBI","HDFC"], ans:2},
+    {q:"What is the full form of ATM?", opt:["Any Time Money","Automated Teller Machine","Automatic Transaction Machine","None"], ans:1},
+    {q:"Minimum balance account is also called?", opt:["Current Account","Savings Account","Fixed Deposit","Recurring Deposit"], ans:1}
+  ]
 };
-
-function startTest(m){
-mode=m;
-let ex=document.getElementById('examSelect').value;
-if(!ex){alert("Pehle Exam select karo");return}
-questions=[...bank[ex]];
-document.getElementById('setup').style.display='none';
-document.getElementById('quizBox').style.display='block';
-loadQ()
-}
-
-function loadQ(){
-let q=questions[current];
-document.getElementById('qNo').innerText=`Q${current+1} / ${questions.length}`;
-document.getElementById('question').innerText=q.q;
-let html="";
-q.o.forEach(opt=>{html+=`<label><input type="radio" name="opt" value="${opt}"> ${opt}</label>`});
-document.getElementById('options').innerHTML=html;
-document.getElementById('explanation').innerText=""
-}
-
-function nextQ(){
-current++;
-if(current<questions.length){loadQ()}else{
-document.getElementById('quizBox').style.display='none';
-document.getElementById('resultBox').style.display='block';
-document.getElementById('resultBox').innerHTML="<h2>🎉 Test Khatam!</h2><p>Aage hum isme result aur 100 Q add karenge</p>"
-}
+let currentExam = []; let currentQ = 0; let score = 0; let time = 600; let timer;
+function startTest(){let exam = document.getElementById('examSelect').value; if(exam==""){alert("Please select an exam first");return;} currentExam = questions[exam]; document.getElementById('startBox').style.display='none'; document.getElementById('questionBox').style.display='block'; loadQuestion(); timer = setInterval(()=>{time--; document.getElementById('time').innerText=time; if(time<=0){submitTest();}},1000);}
+function loadQuestion(){if(currentQ>=currentExam.length){submitTest();return;} let q = currentExam[currentQ]; document.getElementById('qNo').innerText = `Question ${currentQ+1} of ${currentExam.length}`; document.getElementById('question').innerText = q.q; let optHTML = ''; q.opt.forEach((o,i)=>{optHTML += `<label><input type="radio" name="opt" value="${i}"> ${o}</label>`;}); document.getElementById('options').innerHTML = optHTML;}
+function nextQuestion(){let selected = document.querySelector('input[name="opt"]:checked'); if(!selected){alert("Please select an option");return;} if(parseInt(selected.value) == currentExam[currentQ].ans){score++;} currentQ++; loadQuestion();}
+function submitTest(){clearInterval(timer); document.getElementById('questionBox').style.display='none'; document.getElementById('result').style.display='block'; document.getElementById('score').innerText = `Your Score: ${score} out of ${currentExam.length}`;}
 </script>
 </body>
 </html>
