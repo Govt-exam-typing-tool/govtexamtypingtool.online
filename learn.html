@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learn Typing - Govt Exam Typing Tool</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial}
+body{background:#f4f6f9}
+header{background:#004aad;padding:15px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap}
+.logo{display:flex;align-items:center;font-size:18px;font-weight:bold;color:#fff}
+.logo img{height:40px;margin-right:8px}.logo span{color:#ffd700}
+nav a{color:#fff;text-decoration:none;padding:8px 12px;border-radius:5px;font-weight:600;margin-left:8px}
+nav a:hover, nav a.active{background:#ffd700;color:#004aad}
+.container{max-width:900px;margin:20px auto;padding:20px}
+.card{background:#fff;padding:25px;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,0.1);margin-bottom:20px}
+h1{color:#004aad;margin-bottom:15px;font-size:24px}
+.tabs{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+.tab-btn{padding:10px 20px;border:2px solid #004aad;background:#fff;color:#004aad;border-radius:6px;cursor:pointer;font-weight:bold}
+.tab-btn.active{background:#004aad;color:#fff}
+.level-box{border:1px solid #ddd;border-radius:8px;margin-bottom:12px;overflow:hidden}
+.level-header{background:#004aad;color:#fff;padding:12px 15px;cursor:pointer;font-weight:bold;display:flex;justify-content:space-between}
+.level-header span{font-size:20px}
+.level-content{display:none;padding:15px;background:#f8faff;max-height:400px;overflow-y:auto}
+.level-content.active{display:block}
+.lesson-item{display:flex;justify-content:space-between;align-items:center;padding:12px;border:1px solid #e2e8f0;border-radius:6px;cursor:pointer;background:#fff;margin-bottom:8px;transition:0.2s}
+.lesson-item:hover{background:#e0f2fe;border-color:#004aad}
+.key{background:#004aad;color:#fff;padding:3px 8px;border-radius:4px;margin:0 2px;font-size:12px;font-weight:bold}
+#lessonBox{display:none}
+#lessonText{font-size:24px;padding:25px;border:2px dashed #004aad;border-radius:8px;background:#f8faff;min-height:80px;margin:15px 0;line-height:2;letter-spacing:1px}
+#lessonInput{width:100%;padding:15px;font-size:20px;border:2px solid #004aad;border-radius:8px;outline:none}
+.feedback{margin-top:12px;font-weight:bold;font-size:18px;min-height:25px}
+.btn{padding:10px 20px;background:#004aad;color:#fff;border:none;border-radius:6px;cursor:pointer;font-weight:bold;margin-top:10px;margin-right:10px}
+.btn:hover{background:#00337a}
+.btn-success{background:#16a34a}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><img src="govt-logo.png"><span>Govt Exam Typing Tool</span></div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="typing-test.html">Typing Test</a>
+    <a href="learn.html?type=english" class="active">Learn Typing</a>
+    <a href="mock.html">Mock Test</a>
+  </nav>
+</header>
+
+<div class="container">
+  <div class="card" id="lessonListBox">
+    <h1 id="pageTitle">📚 Select Lesson</h1>
+    <div class="tabs">
+      <button class="tab-btn" id="tab-english" onclick="switchTab('english')">English</button>
+      <button class="tab-btn" id="tab-mangal" onclick="switchTab('mangal')">Hindi Mangal</button>
+      <button class="tab-btn" id="tab-kruti" onclick="switchTab('kruti')">Hindi Kruti</button>
+    </div>
+    <div id="lessonList"></div>
+  </div>
+
+  <div class="card" id="lessonBox">
+    <h2 id="lessonTitle"></h2>
+    <div id="lessonText"></div>
+    <input type="text" id="lessonInput" placeholder="Start typing here..." autocomplete="off" oninput="checkLesson()">
+    <div class="feedback" id="feedback"></div>
+    <button class="btn" onclick="backToList()">⬅️ Back to Lessons</button>
+    <button class="btn btn-success" onclick="nextLesson()">Next Lesson ➡️</button>
+  </div>
+</div>
+
+<script>
+const urlParams = new URLSearchParams(window.location.search);
+let type = urlParams.get('type') || 'english';
+
+const data = {
+  english: {
+    title: "📚 Learn English Typing - 30 Lessons",
+    font: "'Segoe UI', Arial",
+    lessons: [
+      {level:"LEVEL 1: HOME ROW - FOUNDATION", items:[{title:"Lesson 1: asdf", keys:['a','s','d','f'], text:"a s d f a s d f as df sa fd asdf fdsa"},{title:"Lesson 2: jkl;", keys:['j','k','l',';'], text:"j k l ; j k l ; jk l; lj ;k jkl; ;lkj"},{title:"Lesson 3: asdf jkl;", keys:['a','s','d','f','j','k','l',';'], text:"a s d f j k l ; asdf jkl; d f j k s a l ;"}]},
+      {level:"LEVEL 2: TOP ROW", items:[{title:"Lesson 4: r u", keys:['r','u'], text:"r u r u r u ru ur rr uu"},{title:"Lesson 5: e i", keys:['e','i'], text:"e i e i e i ei ie ee ii"},{title:"Lesson 6: w y", keys:['w','y'], text:"w y w y w y wy yw ww yy"},{title:"Lesson 7: q p", keys:['q','p'], text:"q p q p q p qp pq qq pp"},{title:"Lesson 8: t o", keys:['t','o'], text:"t o t o t o to ot tt oo"},{title:"Lesson 9: Full Top Row", keys:[], text:"q w e r t y u i o p qwerty uiop"}]},
+      {level:"LEVEL 3: BOTTOM ROW", items:[{title:"Lesson 10: v m", keys:['v','m'], text:"v m v m v m vm mv vv mm"},{title:"Lesson 11: c n", keys:['c','n'], text:"c n c n c n cn nc cc nn"},{title:"Lesson 12: x b", keys:['x','b'], text:"x b x b x b xb bx xx bb"},{title:"Lesson 13: z", keys:['z'], text:"z z zz zzz"},{title:"Lesson 14: Full Bottom Row", keys:[], text:"z x c v b n m zxcv bnm"}]},
+      {level:"LEVEL 4: FULL KEYBOARD", items:[{title:"Lesson 15: All Letters", keys:[], text:"q w e r t y u i o p a s d f g h j k l z x c v b n m"}]},
+      {level:"LEVEL 5: WORDS", items:[{title:"Lesson 16: 3 Letter Words", keys:[], text:"the and for are but not you all can had her was"},{title:"Lesson 17: 4-5 Letter Words", keys:[], text:"work time year will would there their what when"},{title:"Lesson 18: Common Words Mix", keys:[], text:"government computer typing practice speed accuracy"}]},
+      {level:"LEVEL 6: SENTENCES", items:[{title:"Lesson 19: Simple", keys:[], text:"Practice makes a man perfect. I love to type."},{title:"Lesson 20: Medium", keys:[], text:"Typing is useful for government jobs. Daily practice improves speed."},{title:"Lesson 21: Long", keys:[], text:"Computer typing is essential for SSC and Banking exams."}]},
+      {level:"LEVEL 7: SPECIAL", items:[{title:"Lesson 22: Numbers", keys:[], text:"1 2 3 4 5 6 7 8 9 10 20 30 40 50"},{title:"Lesson 23: Symbols", keys:[], text:"., ; : ' \"!? ( ) - _ + = / * @ # $ %"}]},
+      {level:"LEVEL 8: EXAM + MASTERY", items:[{title:"Lesson 24: SSC Pattern", keys:[], text:"The government of India provides job opportunities through competitive examinations."},{title:"Lesson 25: Banking Pattern", keys:[], text:"Banking sector requires fast and accurate typing. 35 WPM needed."},{title:"Lesson 26: Final Test", keys:[], text:"You have completed all lessons. Practice daily for government exam."}]}
+    ]
+  },
+  mangal: {
+    title: "📚 Learn Hindi Typing - Mangal - 24 Lessons",
+    font: "Mangal",
+    lessons: [
+      {level:"LEVEL 1: BASIC AKSHAR", items:[{title:"पाठ 1: क ख ग घ", keys:['क','ख','ग','घ'], text:"क ख ग घ क ख ग घ"},{title:"पाठ 2: च छ ज झ", keys:['च','छ','ज','झ'], text:"च छ ज झ च छ ज झ"},{title:"पाठ 3: ट ठ ड ढ", keys:['ट','ठ','ड','ढ'], text:"ट ठ ड ढ ट ठ ड ढ"},{title:"पाठ 4: त थ द ध", keys:['त','थ','द','ध'], text:"त थ द ध त थ द ध"}]},
+      {level:"LEVEL 2: REMAINING", items:[{title:"पाठ 5: प फ ब भ", keys:['प','फ','ब','भ'], text:"प फ ब भ प फ ब भ"},{title:"पाठ 6: म य र ल", keys:['म','य','र','ल'], text:"म य र ल म य र ल"},{title:"पाठ 7: व श ष स", keys:['व','श','ष','स'], text:"व श ष स व श ष स"},{title:"पाठ 8: ह क्ष त्र ज्ञ", keys:['ह','क्ष','त्र','ज्ञ'], text:"ह क्ष त्र ज्ञ ह क्ष त्र ज्ञ"}]},
+      {level:"LEVEL 3: MATRAS", items:[{title:"पाठ 9: ा ि ी", keys:['ा','ि','ी'], text:"का कि की का कि की"},{title:"पाठ 10: ु ू े", keys:['ु','ू','े'], text:"कु कू के कु कू के"},{title:"पाठ 11: ै ो ौ", keys:['ै','ो','ौ'], text:"कै को कौ कै को कौ"},{title:"पाठ 12: ं ः ्", keys:['ं','ः','्'], text:"कं कः क् कं कः क्"}]},
+      {level:"LEVEL 4: WORDS + SENTENCES", items:[{title:"पाठ 13: 2 अक्षर शब्द", keys:[], text:"काम नाम राम घर"},{title:"पाठ 14: 3-4 अक्षर", keys:[], text:"भारत देश स्कूल कंप्यूटर"},{title:"पाठ 15: सरल वाक्य", keys:[], text:"मैं कंप्यूटर पर टाइप करता हूं।"},{title:"पाठ 16: मध्यम वाक्य", keys:[], text:"शिक्षा सबसे बड़ा धन है। रोज अभ्यास करें।"}]},
+      {level:"LEVEL 5: EXAM + MASTERY", items:[{title:"पाठ 17: कठिन वाक्य", keys:[], text:"सरकारी नौकरी के लिए टाइपिंग टेस्ट अनिवार्य है।"},{title:"पाठ 18: अंक + चिन्ह", keys:[], text:"1 2 3 4 5 6 7 8 9 0., ; : ' \"!? ( )"},{title:"पाठ 19: एसएससी पैटर्न", keys:[], text:"भारत एक महान देश है। यहां विभिन्न संस्कृति पाई जाती है।"},{title:"पाठ 20: बैंकिंग पैटर्न", keys:[], text:"बैंक में क्लर्क को डाटा एंट्री का काम करना पड़ता है।"},{title:"पाठ 21: अंतिम टेस्ट", keys:[], text:"बधाई हो। सभी पाठ पूरे हुए। रोज अभ्यास करें।"}]}
+    ]
+  },
+  kruti: {
+    title: "📚 Learn Hindi Typing - Kruti Dev - 24 Lessons",
+    font: "Kruti Dev 010",
+    lessons: [
+      {level:"LEVEL 1: BASIC", items:[{title:"ikB 1: d [ k x", keys:['d','[','k','x'], text:"d [ k x d [ k x"},{title:"ikB 2: M p N t", keys:['M','p','N','t'], text:"M p N t M p N t"},{title:"ikB 3: > ~ { |", keys:['>','~','{','|'], text:"> ~ { | > ~ { |"},{title:"ikB 4: s r u i", keys:['s','r','u','i'], text:"s r u i s r u i"}]},
+      {level:"LEVEL 2: REMAINING", items:[{title:"ikB 5: o a j h", keys:['o','a','j','h'], text:"o a j h o a j h"},{title:"ikB 6: e y c v", keys:['e','y','c','v'], text:"e y c v e y c v"},{title:"ikB 7: n f g _", keys:['n','f','g','_'], text:"n f g _ n f g _"},{title:"ikB 8: ^ & * (", keys:['^','&','*','('], text:"^ & * ( ^ & * ("}]},
+      {level:"LEVEL 3: MATRAS", items:[{title:"ikB 9: ek=kk k h b", keys:['k','h','b'], text:"dk fd dh dk fd dh"},{title:"ikB 10: ek=kk q w e", keys:['q','w','e'], text:"dq dw ds dq dw ds"},{title:"ikB 11: ek=kk E O q", keys:['E','O','q'], text:"dE dO dq dE dO dq"},{title:"ikB 12: va ½ ¾", keys:['v','½','¾'], text:"d¡ d½ d¾ d¡ d½ d¾"}]},
+      {level:"LEVEL 4: WORDS + SENTENCES", items:[{title:"ikB 13: 2 v{kj 'kCn", keys:[], text:"dkek uke jke?kj"},{title:"ikB 14: 3-4 v{kj", keys:[], text:"Hkkjr ns'k Ldwy daI;wVj"},{title:"ikB 15: ljy okD;", keys:[], text:"esa daI;wVj ij Vkfi dkrk gwa A"},{title:"ikB 16: eè;e okD;", keys:[], text:"f'k{kk lcls cM+k /ku gS A jkt vfH;kl djuk pkfg, A"}]},
+      {level:"LEVEL 5: EXAM + MASTERY", items:[{title:"ikB 17: dfBu okD;", keys:[], text:"ljdkjh ukSdjh ds fy, Vkfiax VsLV vfuok;Z gS A"},{title:"ikB 18: vad + fpg", keys:[], text:"1 2 3 4 5 6 7 8 9 0., ; : ' \"!? ( )"},{title:"ikB 19:,l,lh iSVuZ", keys:[], text:"Hkkjr,d egku ns'k gS A fofHkUu laLÑfr ikbZ tkrh gS A"},{title:"ikB 20: cSad iSVuZ", keys:[], text:"cSad esa DyZd dks MkVk baVzh dk dke djuk iM+rk gS A"},{title:"ikB 21: vafre VsLV", keys:[], text:"ck/kkbZ gks A lHkh ikB iwjs gSa A jkt vfH;kl djsa A"}]}
+    ]
+  }
+};
+
+let currentLesson = 0;
+let currentData = data[type];
+let currentLevel = 0;
+let currentItem = 0;
+
+function setActiveTab(){
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+type).classList.add('active');
+}
+
+function switchTab(t){
+  type = t;
+  currentData = data[type];
+  setActiveTab();
+  loadLessonList();
+}
+
+function loadLessonList(){
+  setActiveTab();
+  document.getElementById('pageTitle').innerText = currentData.title;
+  let list = document.getElementById('lessonList');
+  list.innerHTML = '';
+  currentData.lessons.forEach((levelObj, lIndex)=>{
+    let lessonsHTML = '';
+    levelObj.items.forEach((item, iIndex)=>{
+      let keysHTML = item.keys.length > 0? item.keys.map(k=>`<span class="key">${k}</span>`).join('') : '<span style="color:#666">Practice</span>';
+      lessonsHTML += `<div class="lesson-item" onclick="startLesson(${lIndex},${iIndex})"><b>${item.title}</b><div>${keysHTML}</div></div>`;
+    });
+    list.innerHTML += `
+      <div class="level-box">
+        <div class="level-header" onclick="toggleLevel(${lIndex})">${levelObj.level} <span>+</span></div>
+        <div class="level-content" id="level-${lIndex}">${lessonsHTML}</div>
+      </div>
+    `;
+  });
+  document.getElementById('level-0').classList.add('active');
+}
+
+function toggleLevel(i){
+  document.getElementById(`level-${i}`).classList.toggle('active');
+  let span = event.currentTarget.querySelector('span');
+  span.innerText = span.innerText == '+'? '-' : '+';
+}
+
+function startLesson(lIndex, iIndex){
+  currentLevel = lIndex; currentItem = iIndex;
+  let item = currentData.lessons[lIndex].items[iIndex];
+  document.getElementById('lessonListBox').style.display = 'none';
+  document.getElementById('lessonBox').style.display = 'block';
+  document.getElementById('lessonTitle').innerText = item.title;
+  document.getElementById('lessonText').innerText = item.text;
+  document.getElementById('lessonText').style.fontFamily = currentData.font;
+  document.getElementById('lessonInput').style.fontFamily = currentData.font;
+  document.getElementById('lessonInput').value = '';
+  document.getElementById('lessonInput').focus();
+  document.getElementById('feedback').innerText = '';
+}
+
+function backToList(){
+  document.getElementById('lessonListBox').style.display = 'block';
+  document.getElementById('lessonBox').style.display = 'none';
+}
+
+function nextLesson(){
+  let level = currentData.lessons[currentLevel];
+  if(currentItem < level.items.length - 1){
+    startLesson(currentLevel, currentItem + 1);
+  } else if(currentLevel < currentData.lessons.length - 1){
+    startLesson(currentLevel + 1, 0);
+  } else {
+    alert("🎉 All Lessons Completed!");
+    backToList();
+  }
+}
+
+function checkLesson(){
+  let typed = document.getElementById('lessonInput').value;
+  let target = currentData.lessons[currentLevel].items[currentItem].text;
+  if(typed === target){
+    document.getElementById('feedback').innerText = '✅ Perfect! Click Next Lesson';
+    document.getElementById('feedback').style.color = 'green';
+  }
+  else if(target.startsWith(typed)){
+    document.getElementById('feedback').innerText = '⌨️ Keep Typing...';
+    document.getElementById('feedback').style.color = '#004aad';
+  }
+  else{
+    document.getElementById('feedback').innerText = '❌ Mistake! Check spelling';
+    document.getElementById('feedback').style.color = 'red';
+  }
+}
+loadLessonList();
+</script>
+</body>
+</html>
