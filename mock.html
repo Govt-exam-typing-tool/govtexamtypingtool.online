@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mock Test - Govt Exam Typing Tool</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial}
-body{background:#f4f6f9;color:#333}
-header{background:#004aad;padding:15px 30px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10;flex-wrap:wrap}
-.logo{display:flex;align-items:center;font-size:20px;font-weight:bold;color:#fff}
-.logo img{height:45px;vertical-align:middle;margin-right:10px}
-.logo span{color:#ffd700}
-nav a{color:#fff;text-decoration:none;margin:0 10px;padding:8px 14px;border-radius:5px;font-weight:600}
+body{background:#f4f6f9}
+header{background:#004aad;padding:15px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap}
+.logo{display:flex;align-items:center;font-size:18px;font-weight:bold;color:#fff}
+.logo img{height:40px;margin-right:8px}.logo span{color:#ffd700}
+nav a{color:#fff;text-decoration:none;padding:8px 12px;border-radius:5px;font-weight:600;margin-left:8px}
 nav a:hover, nav a.active{background:#ffd700;color:#004aad}
 .container{max-width:900px;margin:20px auto;padding:20px}
 .card{background:#fff;padding:25px;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,0.1);margin-bottom:20px}
@@ -27,26 +25,24 @@ button:hover{background:#00337a}
 .timer{font-size:22px;color:#dc2626;font-weight:bold;text-align:right}
 #result{display:none;text-align:center}
 #result h2{color:#16a34a;font-size:28px}
+@media(max-width:600px){header{justify-content:center}}
 </style>
 </head>
 <body>
 
 <header>
-  <div class="logo">
-    <img src="govt-logo.png" alt="Govt Exam Typing Tool">
-    <span>Govt Exam Typing Tool</span>
-  </div>
+  <div class="logo"><img src="govt-logo.png"><span>Govt Exam Typing Tool</span></div>
   <nav>
     <a href="index.html">Typing Test</a>
+    <a href="learn.html">Learn Typing</a>
     <a href="mock.html" class="active">Mock Test</a>
-    <a href="#">Results</a>
-    <a href="#">Practice</a>
   </nav>
 </header>
 
 <div class="container">
   <div class="card" id="startBox">
     <h1>📚 Select Mock Test</h1>
+    <p style="margin-bottom:10px;color:#666">Note: Each question has 2 Minutes time limit</p>
     <select id="examSelect">
       <option value="">-- Choose Exam --</option>
       <option value="ssc">SSC CHSL / CGL - General</option>
@@ -57,7 +53,7 @@ button:hover{background:#00337a}
   </div>
 
   <div class="card" id="questionBox">
-    <div class="timer">Time Left: <span id="time">600</span>s</div>
+    <div class="timer">⏱️ Time Left: <span id="time">120</span>s</div>
     <div id="qNo"></div>
     <div class="question" id="question"></div>
     <div class="options" id="options"></div>
@@ -96,10 +92,30 @@ const questions = {
     {q:"Minimum balance account is also called?", opt:["Current Account","Savings Account","Fixed Deposit","Recurring Deposit"], ans:1}
   ]
 };
-let currentExam = []; let currentQ = 0; let score = 0; let time = 600; let timer;
-function startTest(){let exam = document.getElementById('examSelect').value; if(exam==""){alert("Please select an exam first");return;} currentExam = questions[exam]; document.getElementById('startBox').style.display='none'; document.getElementById('questionBox').style.display='block'; loadQuestion(); timer = setInterval(()=>{time--; document.getElementById('time').innerText=time; if(time<=0){submitTest();}},1000);}
-function loadQuestion(){if(currentQ>=currentExam.length){submitTest();return;} let q = currentExam[currentQ]; document.getElementById('qNo').innerText = `Question ${currentQ+1} of ${currentExam.length}`; document.getElementById('question').innerText = q.q; let optHTML = ''; q.opt.forEach((o,i)=>{optHTML += `<label><input type="radio" name="opt" value="${i}"> ${o}</label>`;}); document.getElementById('options').innerHTML = optHTML;}
-function nextQuestion(){let selected = document.querySelector('input[name="opt"]:checked'); if(!selected){alert("Please select an option");return;} if(parseInt(selected.value) == currentExam[currentQ].ans){score++;} currentQ++; loadQuestion();}
+
+const TIME_PER_QUESTION = 120;
+let currentExam = []; let currentQ = 0; let score = 0; let time = TIME_PER_QUESTION; let timer;
+
+function startTest(){
+  let exam = document.getElementById('examSelect').value;
+  if(exam==""){alert("Please select an exam first");return;}
+  currentExam = questions[exam];
+  document.getElementById('startBox').style.display='none';
+  document.getElementById('questionBox').style.display='block';
+  loadQuestion();
+}
+function loadQuestion(){
+  if(currentQ>=currentExam.length){submitTest();return;}
+  clearInterval(timer); time = TIME_PER_QUESTION;
+  document.getElementById('time').innerText=time;
+  let q = currentExam[currentQ];
+  document.getElementById('qNo').innerText = `Question ${currentQ+1} of ${currentExam.length}`;
+  document.getElementById('question').innerText = q.q;
+  let optHTML = ''; q.opt.forEach((o,i)=>{optHTML += `<label><input type="radio" name="opt" value="${i}"> ${o}</label>`;});
+  document.getElementById('options').innerHTML = optHTML;
+  timer = setInterval(()=>{time--; document.getElementById('time').innerText=time; if(time<=0){alert("Time's up for this question!"); nextQuestion();}},1000);
+}
+function nextQuestion(){clearInterval(timer); let selected = document.querySelector('input[name="opt"]:checked'); if(selected && parseInt(selected.value) == currentExam[currentQ].ans){score++;} currentQ++; loadQuestion();}
 function submitTest(){clearInterval(timer); document.getElementById('questionBox').style.display='none'; document.getElementById('result').style.display='block'; document.getElementById('score').innerText = `Your Score: ${score} out of ${currentExam.length}`;}
 </script>
 </body>
