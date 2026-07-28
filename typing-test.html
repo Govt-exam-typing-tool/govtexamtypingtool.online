@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Typing Test - Govt Exam Typing Tool</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial}
+body{background:#f4f6f9;color:#333}
+header{background:#004aad;padding:15px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap}
+.logo{display:flex;align-items:center;font-size:18px;font-weight:bold;color:#fff}
+.logo img{height:40px;width:40px;object-fit:contain;margin-right:8px}
+.logo span{color:#ffd700}
+nav a{color:#fff;text-decoration:none;padding:8px 12px;border-radius:5px;font-weight:600;margin-left:8px}
+nav a:hover, nav a.active{background:#ffd700;color:#004aad}
+.container{max-width:900px;margin:20px auto;padding:20px}
+.typing-box{background:#fff;padding:25px;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,0.1)}
+#para{font-size:20px;line-height:2;border:1px solid #ddd;padding:20px;border-radius:8px;background:#f8faff;min-height:120px;word-wrap:break-word}
+#para span.correct{color:#16a34a}#para span.wrong{color:#dc2626;text-decoration:underline}#para span.current{background:#bfdbfe;border-radius:2px}
+#input{width:100%;height:120px;margin-top:15px;padding:15px;font-size:20px;border:2px solid #004aad;border-radius:8px;outline:none;resize:none}
+.top-controls{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;flex-wrap:wrap;gap:10px}
+.btn, select, input[type=number]{padding:10px 18px;background:#004aad;color:#fff;border:none;border-radius:6px;cursor:pointer;font-weight:bold;margin-right:10px;font-size:15px}
+.btn:hover{background:#00337a}
+.btn-success{background:#16a34a}
+.btn-warning{background:#f59e0b}
+select, input[type=number]{background:#fff;color:#000;border:2px solid #004aad}
+#customTimeInput{width:120px;display:none}
+#resultBox{display:none;text-align:center;padding:30px}
+#resultBox h2{color:#004aad;font-size:28px;margin-bottom:20px}
+.result-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px;margin-bottom:20px}
+.res-card{background:#f8faff;padding:15px;border-radius:8px;border:2px solid #004aad}
+.res-card h4{color:#666;font-size:14px;margin-bottom:5px}
+.res-card p{font-size:24px;font-weight:bold;color:#004aad}
+.timer{font-size:18px;font-weight:bold;color:#dc2626;padding:8px 15px;background:#fee2e2;border-radius:6px}
+@media(max-width:768px){.result-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><img src="govt-logo.png"><span>Govt Exam Typing Tool</span></div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="typing-test.html" class="active">Typing Test</a>
+    <a href="learn.html?type=english">Learn Typing</a>
+    <a href="mock.html">Mock Test</a>
+  </nav>
+</header>
+
+<div class="container">
+  <div class="typing-box">
+    <div class="top-controls">
+      <h2 id="title">English Typing Test</h2>
+      <div><span class="timer" id="timer">Time: 1:00</span></div>
+      <div>
+        <select id="timeSelect" onchange="setTime()">
+          <option value="60" selected>1 Minute</option>
+          <option value="120">2 Minutes</option>
+          <option value="300">5 Minutes</option>
+          <option value="600">10 Minutes</option>
+          <option value="custom">Custom</option>
+        </select>
+        <input type="number" id="customTimeInput" placeholder="Minutes" min="1" max="30">
+        <select id="langSelect" onchange="changeLang()">
+          <option value="en">English</option>
+          <option value="hi">Hindi</option>
+        </select>
+        <select id="fontSelect" onchange="changeFont()" style="display:none">
+          <option value="Mangal">Mangal</option>
+          <option value="Kruti Dev 010">Kruti Dev 010</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="testArea">
+      <div id="para"></div>
+      <textarea id="input" placeholder="Click here and start typing..." autocomplete="off"></textarea>
+      <div style="margin-top:15px">
+        <button class="btn btn-success" onclick="submitTest()">✅ Submit Test</button>
+        <button class="btn btn-warning" onclick="changeTest()">🔄 Change Test</button>
+        <button class="btn" onclick="resetTest()">🔄 Restart</button>
+      </div>
+    </div>
+
+    <div id="resultBox">
+      <h2>Test Completed! 🎉</h2>
+      <div class="result-grid">
+        <div class="res-card"><h4>Speed</h4><p id="resWpm">0 WPM</p></div>
+        <div class="res-card"><h4>Accuracy</h4><p id="resAcc">100%</p></div>
+        <div class="res-card"><h4>Time Taken</h4><p id="resTime">0s</p></div>
+        <div class="res-card"><h4>Errors</h4><p id="resErrors">0</p></div>
+      </div>
+      <button class="btn btn-success" onclick="changeTest()">Next Test</button>
+      <button class="btn" onclick="resetTest()">Retake Test</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const englishParagraphs = [
+  "Computer typing is an essential skill for all government jobs. Practice daily to improve your speed and accuracy for SSC, Banking and other competitive exams.",
+  "The quick brown fox jumps over the lazy dog. This pangram contains every letter of the English alphabet. Regular practice improves finger movement and speed.",
+  "Time management and accuracy are crucial in typing tests. Focus on correct typing first, speed will automatically increase with regular practice and dedication.",
+  "Government departments require clerks to have minimum 35 WPM with 95 percent accuracy. This skill can be developed through daily practice of 30 minutes.",
+  "In the digital era, almost all office work is done on computers. Typing speed directly affects your productivity and job performance in modern workplace.",
+  "A good typist can type 40 to 60 words per minute with high accuracy. This requires proper posture and correct finger placement on keyboard.",
+  "SSC and Banking exams include typing tests as qualifying criteria. Practice with official patterns to get familiar with the exam environment and pressure.",
+  "Effective typing technique involves using all 10 fingers without looking at keys. Home row keys are the foundation of fast and accurate typing.",
+  "Online typing tests evaluate both speed and accuracy. One mistake can reduce your accuracy percentage drastically. So type carefully.",
+  "Success in typing comes from consistent daily practice. Set a target and track your progress weekly to achieve 40 WPM for government jobs."
+];
+
+const hindiParagraphs = [
+  "कंप्यूटर टाइपिंग सभी सरकारी नौकरियों के लिए एक आवश्यक कौशल है। एसएससी, बैंकिंग के लिए रोजाना अभ्यास करें और अपनी गति बढ़ाएं।",
+  "आज के डिजिटल युग में कंप्यूटर का ज्ञान बहुत जरूरी है। सरकारी कार्यालयों में सभी काम कंप्यूटर पर किए जाते हैं इसलिए टाइपिंग आना चाहिए।",
+  "सफलता के लिए निरंतर प्रयास आवश्यक है। यदि आप प्रतिदिन 20 मिनट अभ्यास करते हैं तो आप 40 शब्द प्रति मिनट तक पहुंच जाएंगे।",
+  "सरकारी विभागों में क्लर्क के लिए न्यूनतम 30 शब्द प्रति मिनट की गति आवश्यक है। इसके साथ 90 प्रतिशत शुद्धता भी जरूरी है।",
+  "टाइपिंग टेस्ट में समय प्रबंधन बहुत महत्वपूर्ण है। पहले शुद्धता पर ध्यान दें, गति अपने आप बढ़ जाएगी अभ्यास से।",
+  "हिंदी टाइपिंग के लिए मंगल और कृतिदेव दोनों फॉन्ट का ज्ञान होना चाहिए। एसएससी में मंगल फॉन्ट का उपयोग होता है।",
+  "टाइपिंग के दौरान सही मुद्रा बनाए रखना जरूरी है। पीठ सीधी रखें और स्क्रीन से उचित दूरी बनाए रखें।",
+  "प्रतियोगी परीक्षाओं में टाइपिंग टेस्ट क्वालीफाइंग होता है। इसमें पास होना अनिवार्य है वरना आप बाहर हो जाएंगे।",
+  "शुरुआत में धीमी गति से सटीक टाइपिंग करें। धीरे-धीरे गति बढ़ाएं। गलत टाइपिंग से बचें और ध्यान लगाएं।",
+  "नियमित अभ्यास से आप एक कुशल टाइपिस्ट बन सकते हैं। लक्ष्य निर्धारित करें और अपनी प्रगति को ट्रैक करते रहें।"
+];
+
+let lang='en';
+let totalTime=60;
+let time=60;
+let timer, started=false;
+let currentParaIndex = 0;
+let paraText = englishParagraphs[0];
+let correctChars=0, totalTyped=0, errors=0;
+
+function updateTimer(){
+  let minutes = Math.floor(time/60);
+  let seconds = time%60;
+  document.getElementById('timer').innerText = `Time: ${minutes}:${seconds.toString().padStart(2,'0')}`;
+}
+
+function loadPara(){
+  document.getElementById('para').innerHTML = paraText.split('').map(char => `<span>${char}</span>`).join('');
+  updateTimer();
+}
+
+function setTime(){
+  let val = document.getElementById('timeSelect').value;
+  if(val === 'custom'){
+    document.getElementById('customTimeInput').style.display = 'inline-block';
+    let minutes = parseInt(document.getElementById('customTimeInput').value) || 1;
+    totalTime = minutes * 60;
+  } else {
+    document.getElementById('customTimeInput').style.display = 'none';
+    totalTime = parseInt(val);
+  }
+  time = totalTime;
+  resetTest();
+}
+
+document.getElementById('customTimeInput').addEventListener('change', setTime);
+
+function changeLang(){
+  lang = document.getElementById('langSelect').value;
+  document.getElementById('fontSelect').style.display = lang=='hi'?'inline-block':'none';
+  document.getElementById('title').innerText = lang=='hi'?'हिंदी टाइपिंग टेस्ट':'English Typing Test';
+  currentParaIndex = 0;
+  let arr = lang=='en'?englishParagraphs:hindiParagraphs;
+  paraText = arr[currentParaIndex];
+  resetTest();
+}
+
+function changeFont(){
+  let font = document.getElementById('fontSelect').value;
+  document.getElementById('para').style.fontFamily = font;
+  document.getElementById('input').style.fontFamily = font;
+}
+
+function resetTest(){
+  clearInterval(timer);
+  time=totalTime;
+  started=false;
+  correctChars=0;
+  totalTyped=0;
+  errors=0;
+  document.getElementById('input').value='';
+  document.getElementById('input').disabled=false;
+  document.getElementById('testArea').style.display='block';
+  document.getElementById('resultBox').style.display='none';
+  loadPara();
+}
+
+function changeTest(){
+  let arr = lang=='en'?englishParagraphs:hindiParagraphs;
+  currentParaIndex = (currentParaIndex + 1) % arr.length;
+  paraText = arr[currentParaIndex];
+  resetTest();
+}
+
+function submitTest(){
+  if(!started) {
+    alert("Please start typing first");
+    return;
+  }
+  showResult();
+}
+
+function showResult(){
+  clearInterval(timer);
+  document.getElementById('input').disabled=true;
+  document.getElementById('testArea').style.display='none';
+  document.getElementById('resultBox').style.display='block';
+  let timeSpent = totalTime-time;
+  let wpm = Math.round((correctChars/5)/(timeSpent/60)) || 0;
+  let acc = totalTyped>0? Math.round((correctChars/totalTyped)*100) : 100;
+  document.getElementById('resWpm').innerText = wpm + ' WPM';
+  document.getElementById('resAcc').innerText = acc + '%';
+  document.getElementById('resTime').innerText = timeSpent + 's';
+  document.getElementById('resErrors').innerText = errors;
+}
+
+loadPara();
+
+document.getElementById('input').addEventListener('input', (e)=>{
+if(!started){
+  started=true;
+  timer=setInterval(()=>{
+    time--;
+    updateTimer();
+    if(time<=0){showResult();}
+  },1000)
+}
+
+let typed = e.target.value;
+let spans = document.querySelectorAll('#para span');
+correctChars=0;
+errors=0;
+totalTyped=typed.length;
+
+spans.forEach((span,i)=>{
+  let char = typed[i];
+  span.className = '';
+  if(i==typed.length) span.className='current';
+  else if(char==span.innerText){span.className='correct';correctChars++}
+  else if(char!=null){span.className='wrong'; errors++}
+});
+
+if(typed.length >= paraText.length && time > 0){
+  showResult();
+}
+});
+</script>
+</body>
+</html>
