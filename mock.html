@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mock Test - Govt Exams</title>
+<style>
+body{font-family:'Segoe UI',sans-serif;background:#f4f7f9;margin:0;padding:20px}
+.container{max-width:900px;margin:20px auto;background:#fff;padding:20px;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,0.1)}
+nav a{margin:5px;padding:10px 15px;background:#1a73e8;color:#fff;text-decoration:none;border-radius:5px;display:inline-block;font-weight:bold}
+nav a:hover{background:#1557b0}
+h1{color:#1a73e8;text-align:center}
+select,button{background:#1a73e8;color:#fff;border:none;padding:12px 20px;border-radius:5px;cursor:pointer;font-size:16px;margin:5px}
+button:hover{background:#1557b0}
+#quizBox{background:#f9f9f9;padding:15px;border-radius:8px;margin-top:20px}
+label{display:block;padding:10px;margin:8px 0;background:#fff;border:1px solid #ddd;border-radius:5px;cursor:pointer}
+label:hover{background:#e8f0fe}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html">⌨️ Typing Test</a>
+  <a href="mock.html">📚 Mock Test</a>
+</nav>
+<div class="container">
+<h1>📚 Govt Exam Mock Test</h1>
+<div id="setup">
+<h3>Exam Select karo:</h3>
+<select id="examSelect">
+<option value="">-- Exam Select --</option>
+<option value="ssc">SSC CHSL - Demo 2Q</option>
+<option value="upsssc_vdo">UPSSSC VDO - Demo 2Q</option>
+</select><br><br>
+<button onclick="startTest('exam')">📝 Exam Mode</button>
+<button onclick="startTest('practice')">📖 Practice Mode</button>
+</div>
+
+<div id="quizBox" style="display:none">
+<div id="qNo" style="font-weight:bold;font-size:18px"></div>
+<div id="question" style="font-size:20px;margin:15px 0"></div>
+<div id="options"></div>
+<button onclick="nextQ()">Next ➡️</button>
+<div id="explanation" style="margin-top:15px;color:green"></div>
+</div>
+
+<div id="resultBox" style="display:none"></div>
+</div>
+
+<script>
+let questions=[],current=0,mode,score=0;
+const bank={
+ssc:[
+{q:"Bharat ki rajdhani kya hai?",o:["Delhi","Mumbai","Kolkata","Chennai"],a:"Delhi",e:"1911 me Calcutta se Delhi shift hui thi"},
+{q:"15% of 200 kya hoga?",o:["25","30","35","40"],a:"30",e:"200 * 15 / 100 = 30"}
+],
+upsssc_vdo:[
+{q:"Gram Pradhan kaun hota hai?",o:["Sarpanch","Pradhan","BDO","DM"],a:"Pradhan",e:"UP me gaon ka head Pradhan kehlata hai"},
+{q:"25 ka 20% kitna hota hai?",o:["4","5","6","10"],a:"5",e:"25 * 20 / 100 = 5"}
+]
+};
+
+function startTest(m){
+mode=m;
+let ex=document.getElementById('examSelect').value;
+if(!ex){alert("Pehle Exam select karo");return}
+questions=[...bank[ex]];
+document.getElementById('setup').style.display='none';
+document.getElementById('quizBox').style.display='block';
+loadQ()
+}
+
+function loadQ(){
+let q=questions[current];
+document.getElementById('qNo').innerText=`Q${current+1} / ${questions.length}`;
+document.getElementById('question').innerText=q.q;
+let html="";
+q.o.forEach(opt=>{html+=`<label><input type="radio" name="opt" value="${opt}"> ${opt}</label>`});
+document.getElementById('options').innerHTML=html;
+document.getElementById('explanation').innerText=""
+}
+
+function nextQ(){
+current++;
+if(current<questions.length){loadQ()}else{
+document.getElementById('quizBox').style.display='none';
+document.getElementById('resultBox').style.display='block';
+document.getElementById('resultBox').innerHTML="<h2>🎉 Test Khatam!</h2><p>Aage hum isme result aur 100 Q add karenge</p>"
+}
+</script>
+</body>
+</html>
