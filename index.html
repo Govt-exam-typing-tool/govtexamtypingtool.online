@@ -7,11 +7,12 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial}
 body{background:#f4f6f9;color:#333}
-header{background:#004aad;padding:15px 30px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10;flex-wrap:wrap}
-.logo{display:flex;align-items:center;font-size:20px;font-weight:bold;color:#fff}
-.logo img{height:45px;vertical-align:middle;margin-right:10px}
+header{background:#004aad;padding:15px 20px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10;flex-wrap:wrap}
+.logo{display:flex;align-items:center;font-size:18px;font-weight:bold;color:#fff}
+.logo img{height:40px;width:40px;object-fit:contain;vertical-align:middle;margin-right:8px}
 .logo span{color:#ffd700}
-nav a{color:#fff;text-decoration:none;margin:0 10px;padding:8px 14px;border-radius:5px;font-weight:600}
+nav{display:flex;gap:8px;flex-wrap:wrap}
+nav a{color:#fff;text-decoration:none;padding:8px 12px;border-radius:5px;font-weight:600;font-size:14px;background:transparent}
 nav a:hover, nav a.active{background:#ffd700;color:#004aad}
 .container{max-width:1100px;margin:20px auto;padding:20px}
 .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-bottom:20px}
@@ -19,7 +20,7 @@ nav a:hover, nav a.active{background:#ffd700;color:#004aad}
 .card h4{color:#666;font-size:14px}
 .card p{font-size:32px;font-weight:bold;color:#004aad;margin-top:5px}
 .typing-box{background:#fff;padding:25px;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,0.1)}
-#para{font-size:20px;line-height:2;border:1px dashed #004aad;padding:20px;border-radius:8px;background:#f8faff;letter-spacing:0.5px}
+#para{font-size:20px;line-height:2;border:1px dashed #004aad;padding:20px;border-radius:8px;background:#f8faff;letter-spacing:0.5px;min-height:150px}
 #para span.correct{color:#16a34a}
 #para span.wrong{color:#dc2626;background:#fee2e2}
 #para span.current{border-bottom:2px solid #004aad}
@@ -27,16 +28,15 @@ nav a:hover, nav a.active{background:#ffd700;color:#004aad}
 .btns{margin-top:15px}
 .btn, select{padding:10px 18px;background:#004aad;color:#fff;border:none;border-radius:6px;cursor:pointer;font-weight:bold;margin-right:10px;font-size:15px}
 .btn:hover{background:#00337a}
-.lang-btn{background:#ffd700;color:#000}
 select{background:#fff;color:#000;border:2px solid #004aad}
-@media(max-width:768px){.stats-row{grid-template-columns:repeat(2,1fr)}nav{margin-top:10px}}
+@media(max-width:768px){.stats-row{grid-template-columns:repeat(2,1fr)}header{justify-content:center}.logo{margin-bottom:10px}nav{justify-content:center;width:100%}}
 </style>
 </head>
 <body>
 
 <header>
   <div class="logo">
-    <img src="govt-logo.png" alt="Govt Exam Typing Tool">
+    <img src="govt-logo.png" alt="Logo">
     <span>Govt Exam Typing Tool</span>
   </div>
   <nav>
@@ -74,7 +74,7 @@ select{background:#fff;color:#000;border:2px solid #004aad}
     <textarea id="input" placeholder="Click here and start typing..."></textarea>
 
     <div class="btns">
-      <button class="btn" onclick="location.reload()">🔄 Restart</button>
+      <button class="btn" onclick="resetTest()">🔄 Restart</button>
       <button class="btn" onclick="newPara()">📝 New Paragraph</button>
     </div>
   </div>
@@ -82,30 +82,83 @@ select{background:#fff;color:#000;border:2px solid #004aad}
 
 <script>
 const englishParagraphs = [
-  "Typing speed is very important for government exams. In SSC, Banking, and Clerk exams, you need 25 to 35 WPM. Regular practice can help you reach 50 WPM with good accuracy.",
-  "The quick brown fox jumps over the lazy dog. This sentence contains all letters of the English alphabet. Practice makes a person perfect. Focus on accuracy first, speed will follow.",
-  "Effective communication is the key to success in any profession. Government jobs require both speed and precision in typing. Daily practice of 20 minutes can improve your skills."
+  "Computer typing is an essential skill for all government jobs. Practice daily to improve your speed and accuracy for SSC, Banking and other competitive exams.",
+  "The quick brown fox jumps over the lazy dog. This pangram contains every letter of the English alphabet. Consistent practice is the key to achieving high WPM.",
+  "Time management and accuracy are crucial in typing tests. Focus on correct typing first, speed will automatically increase with regular practice and dedication."
 ];
 const hindiParagraphs = [
-  "सरकारी नौकरियों के लिए टाइपिंग की गति बहुत महत्वपूर्ण है। एसएससी, बैंकिंग और क्लर्क की परीक्षाओं में 25 से 35 डब्ल्यूपीएम की आवश्यकता होती है। नियमित अभ्यास से आप 50 डब्ल्यूपीएम तक पहुंच सकते हैं।",
-  "कंप्यूटर का ज्ञान आज के समय में बहुत आवश्यक हो गया है। सरकारी कार्यालयों में अधिकांश काम कंप्यूटर पर ही होता है। इसलिए टाइपिंग में कुशल होना जरूरी है।",
-  "सफलता के लिए कड़ी मेहनत और लगन जरूरी है। यदि आप रोजाना अभ्यास करेंगे तो निश्चित रूप से आप अपने लक्ष्य को प्राप्त कर लेंगे।"
+  "कंप्यूटर टाइपिंग सभी सरकारी नौकरियों के लिए एक आवश्यक कौशल है। एसएससी, बैंकिंग और अन्य प्रतियोगी परीक्षाओं के लिए अपनी गति और सटीकता में सुधार करने के लिए रोजाना अभ्यास करें।",
+  "आज के डिजिटल युग में कंप्यूटर का ज्ञान बहुत जरूरी है। सरकारी कार्यालयों में लगभग सभी काम कंप्यूटर पर किए जाते हैं। इसलिए टाइपिंग में दक्ष होना बहुत महत्वपूर्ण है।",
+  "सफलता के लिए निरंतर प्रयास और समर्पण आवश्यक है। यदि आप प्रतिदिन 20 मिनट अभ्यास करते हैं तो आप निश्चित रूप से 40 से 50 डब्ल्यूपीएम तक पहुंच जाएंगे।"
 ];
-let lang='en'; let paraText = englishParagraphs[0]; let time=60, timer, started=false, correctChars=0;
 
-function loadPara(){document.getElementById('para').innerHTML = paraText.split('').map(char => `<span>${char}</span>`).join('');}
+let lang='en';
+let currentParaIndex = 0;
+let paraText = englishParagraphs[0];
+let time=60, timer, started=false, correctChars=0;
+
+function loadPara(){
+  document.getElementById('para').innerHTML = paraText.split('').map(char => `<span>${char}</span>`).join('');
+}
+
 function changeLang(){
   lang = document.getElementById('langSelect').value;
+
+  // Font dropdown show/hide
   document.getElementById('fontSelect').style.display = lang=='hi'?'inline-block':'none';
-  document.getElementById('title').innerText = lang=='hi'?'टाइपिंग टेस्ट - 60 सेकंड':'Typing Test - 60 Seconds';
-  document.getElementById('input').placeholder = lang=='hi'?'यहां टाइप करना शुरू करें...':'Click here and start typing...';
-  let arr = lang=='en'?englishParagraphs:hindiParagraphs; paraText = arr[Math.floor(Math.random()*arr.length)]; location.reload();
+
+  // Title and placeholder change
+  if(lang=='hi'){
+    document.getElementById('title').innerText = 'टाइपिंग टेस्ट - 60 सेकंड';
+    document.getElementById('input').placeholder = 'यहां टाइप करना शुरू करें...';
+  } else {
+    document.getElementById('title').innerText = 'Typing Test - 60 Seconds';
+    document.getElementById('input').placeholder = 'Click here and start typing...';
+  }
+
+  // New paragraph load for selected language
+  currentParaIndex = 0;
+  let arr = lang=='en'?englishParagraphs:hindiParagraphs;
+  paraText = arr[currentParaIndex];
+  resetTest(); // NO RELOAD
 }
-function changeFont(){let font = document.getElementById('fontSelect').value; document.getElementById('para').style.fontFamily = font; document.getElementById('input').style.fontFamily = font;}
-function newPara(){let arr = lang=='en'?englishParagraphs:hindiParagraphs; paraText = arr[Math.floor(Math.random()*arr.length)]; location.reload();}
+
+function changeFont(){
+  let font = document.getElementById('fontSelect').value;
+  document.getElementById('para').style.fontFamily = font;
+  document.getElementById('input').style.fontFamily = font;
+}
+
+function newPara(){
+  let arr = lang=='en'?englishParagraphs:hindiParagraphs;
+  currentParaIndex = (currentParaIndex + 1) % arr.length;
+  paraText = arr[currentParaIndex];
+  resetTest();
+}
+
+function resetTest(){
+  clearInterval(timer);
+  time=60; started=false; correctChars=0;
+  document.getElementById('time').innerText=60;
+  document.getElementById('wpm').innerText=0;
+  document.getElementById('cpm').innerText=0;
+  document.getElementById('acc').innerText='100%';
+  document.getElementById('input').value='';
+  document.getElementById('input').disabled=false;
+  loadPara();
+}
+
 loadPara();
+
 document.getElementById('input').addEventListener('input', (e)=>{
-if(!started){started=true; timer=setInterval(()=>{time--; document.getElementById('time').innerText=time; if(time==0){clearInterval(timer);document.getElementById('input').disabled=true;}},1000)}
+if(!started){
+  started=true;
+  timer=setInterval(()=>{
+    time--;
+    document.getElementById('time').innerText=time;
+    if(time==0){clearInterval(timer);document.getElementById('input').disabled=true;}
+  },1000)
+}
 let typed = e.target.value; let spans = document.querySelectorAll('#para span'); correctChars=0;
 spans.forEach((span,i)=>{let char = typed[i]; span.className = ''; if(i==typed.length) span.className='current'; else if(char==span.innerText){span.className='correct';correctChars++} else if(char!=null){span.className='wrong'}})
 let timeSpent = 60-time || 1; let wpm = Math.round((correctChars/5)/(timeSpent/60)); let cpm = Math.round(correctChars/(timeSpent/60)); let acc = typed.length>0? Math.round((correctChars/typed.length)*100) : 100;
