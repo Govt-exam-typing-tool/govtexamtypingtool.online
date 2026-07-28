@@ -3,32 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Govt Exam Typing Tool</title>
+<title>Govt Exam Typing Tool - Free Online Typing</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial}
 body{background:#f4f6f9;color:#333}
-header{background:#004aad;padding:15px 20px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10;flex-wrap:wrap}
+header{background:#004aad;padding:15px 20px;display:flex;justify-content:space-between;align-items:center}
 .logo{display:flex;align-items:center;font-size:18px;font-weight:bold;color:#fff}
-.logo img{height:40px;width:40px;object-fit:contain;vertical-align:middle;margin-right:8px}
+.logo img{height:40px;margin-right:8px}
 .logo span{color:#ffd700}
-nav{display:flex;gap:8px;flex-wrap:wrap}
-nav a{color:#fff;text-decoration:none;padding:8px 12px;border-radius:5px;font-weight:600;font-size:14px}
+nav a{color:#fff;text-decoration:none;padding:8px 12px;border-radius:5px;font-weight:600;margin-left:8px}
 nav a:hover, nav a.active{background:#ffd700;color:#004aad}
-.container{max-width:1100px;margin:20px auto;padding:20px}
-.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-bottom:20px}
-.card{background:#fff;padding:18px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.1);text-align:center}
-.card h4{color:#666;font-size:14px}
-.card p{font-size:32px;font-weight:bold;color:#004aad;margin-top:5px}
-.typing-box{background:#fff;padding:25px;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,0.1)}
-#para{font-size:20px;line-height:2;border:1px dashed #004aad;padding:20px;border-radius:8px;background:#f8faff;min-height:150px}
-#para span.correct{color:#16a34a}#para span.wrong{color:#dc2626;background:#fee2e2}#para span.current{border-bottom:2px solid #004aad}
-#input{width:100%;height:160px;margin-top:15px;padding:15px;font-size:20px;border:2px solid #004aad;border-radius:8px;outline:none}
-.btns{margin-top:15px}
-.btn, select, input[type=number]{padding:10px 18px;background:#004aad;color:#fff;border:none;border-radius:6px;cursor:pointer;font-weight:bold;margin-right:10px;font-size:15px}
-.btn:hover{background:#00337a}
-select, input[type=number]{background:#fff;color:#000;border:2px solid #004aad}
-#customTimeInput{width:120px;display:none}
-@media(max-width:768px){.stats-row{grid-template-columns:repeat(2,1fr)}header{justify-content:center}.logo{margin-bottom:10px}nav{justify-content:center;width:100%}}
+.hero{background:linear-gradient(135deg, #ff8c00, #004aad);color:#fff;text-align:center;padding:50px 20px}
+.hero h1{font-size:32px;margin-bottom:15px}
+.hero p{font-size:16px;max-width:800px;margin:0 auto;line-height:1.6}
+.container{max-width:1100px;margin:30px auto;padding:20px}
+.tool-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.tool-card{background:#fff;padding:25px;text-align:center;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.1);cursor:pointer;text-decoration:none;color:#333;transition:0.3s}
+.tool-card:hover{transform:translateY(-5px);box-shadow:0 5px 15px rgba(0,0,0,0.2)}
+.tool-card.icon{font-size:40px;margin-bottom:10px}
+.tool-card h3{font-size:16px;color:#004aad}
+.footer{background:#004aad;color:#fff;text-align:center;padding:20px;margin-top:40px}
+@media(max-width:900px){.tool-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:500px){.tool-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -39,106 +35,49 @@ select, input[type=number]{background:#fff;color:#000;border:2px solid #004aad}
     <span>Govt Exam Typing Tool</span>
   </div>
   <nav>
-    <a href="index.html" class="active">Typing Test</a>
-    <a href="learn.html">Learn Typing</a>
+    <a href="index.html" class="active">Home</a>
+    <a href="typing-test.html">Typing Test</a>
     <a href="mock.html">Mock Test</a>
   </nav>
 </header>
 
+<section class="hero">
+  <h1>Every tool related to all Typing needs in one place</h1>
+  <p>Practice English, Hindi Mangal and Kruti Dev typing with step by step lessons. 100% Free for SSC, Banking & All Govt Exams.</p>
+</section>
+
 <div class="container">
-  <div class="stats-row">
-    <div class="card"><h4>⏱️ TIME</h4><p id="time">60</p></div>
-    <div class="card"><h4>⚡ WPM</h4><p id="wpm">0</p></div>
-    <div class="card"><h4>🎯 ACCURACY</h4><p id="acc">100%</p></div>
-    <div class="card"><h4>⌨️ CPM</h4><p id="cpm">0</p></div>
-  </div>
-
-  <div class="typing-box">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;flex-wrap:wrap;gap:10px">
-      <h2 id="title">Typing Test - 1 Minute</h2>
-      <div style="display:flex;gap:8px;flex-wrap:wrap">
-        <select id="timeSelect" onchange="setTime()">
-          <option value="30">30 Seconds</option>
-          <option value="60" selected>1 Minute</option>
-          <option value="120">2 Minutes</option>
-          <option value="300">5 Minutes</option>
-          <option value="custom">Custom Minutes</option>
-        </select>
-        <input type="number" id="customTimeInput" placeholder="Enter Minutes" min="1" max="30">
-        <select id="langSelect" onchange="changeLang()">
-          <option value="en">English</option>
-          <option value="hi">Hindi</option>
-        </select>
-        <select id="fontSelect" onchange="changeFont()" style="display:none">
-          <option value="Mangal">Mangal Font</option>
-          <option value="Kruti Dev 010">Kruti Dev 010</option>
-        </select>
-      </div>
-    </div>
-
-    <div id="para"></div>
-    <textarea id="input" placeholder="Click here and start typing..."></textarea>
-
-    <div class="btns">
-      <button class="btn" onclick="resetTest()">🔄 Restart</button>
-      <button class="btn" onclick="newPara()">📝 New Paragraph</button>
-    </div>
+  <div class="tool-grid">
+    <a href="typing-test.html" class="tool-card">
+      <div class="icon">⏱️</div>
+      <h3>Typing Test</h3>
+    </a>
+    <a href="learn.html?type=english" class="tool-card">
+      <div class="icon">📚</div>
+      <h3>Learn English Typing</h3>
+    </a>
+    <a href="learn.html?type=mangal" class="tool-card">
+      <div class="icon">🇮🇳</div>
+      <h3>Learn Hindi Mangal</h3>
+    </a>
+    <a href="learn.html?type=kruti" class="tool-card">
+      <div class="icon">✍️</div>
+      <h3>Learn Hindi Kruti Dev</h3>
+    </a>
+    <a href="mock.html" class="tool-card">
+      <div class="icon">📝</div>
+      <h3>Mock Test</h3>
+    </a>
+    <a href="#" class="tool-card">
+      <div class="icon">⌨️</div>
+      <h3>Online Keyboard</h3>
+    </a>
   </div>
 </div>
 
-<script>
-const englishParagraphs = [
-  "Computer typing is an essential skill for all government jobs. Practice daily to improve your speed and accuracy for SSC, Banking and other competitive exams.",
-  "The quick brown fox jumps over the lazy dog. This pangram contains every letter of the English alphabet. Consistent practice is the key to achieving high WPM.",
-  "Time management and accuracy are crucial in typing tests. Focus on correct typing first, speed will automatically increase with regular practice and dedication."
-];
-const hindiParagraphs = [
-  "कंप्यूटर टाइपिंग सभी सरकारी नौकरियों के लिए एक आवश्यक कौशल है। एसएससी, बैंकिंग और अन्य प्रतियोगी परीक्षाओं के लिए अपनी गति और सटीकता में सुधार करने के लिए रोजाना अभ्यास करें।",
-  "आज के डिजिटल युग में कंप्यूटर का ज्ञान बहुत जरूरी है। सरकारी कार्यालयों में लगभग सभी काम कंप्यूटर पर किए जाते हैं। इसलिए टाइपिंग में दक्ष होना बहुत महत्वपूर्ण है।",
-  "सफलता के लिए निरंतर प्रयास और समर्पण आवश्यक है। यदि आप प्रतिदिन 20 मिनट अभ्यास करते हैं तो आप निश्चित रूप से 40 से 50 डब्ल्यूपीएम तक पहुंच जाएंगे।"
-];
+<footer class="footer">
+  <p>© 2026 Govt Exam Typing Tool | Made for SSC, Banking & All Govt Exams</p>
+</footer>
 
-let lang='en'; let totalTime=60; let time=60; let timer, started=false, correctChars=0; let currentParaIndex = 0; let paraText = englishParagraphs[0];
-
-function loadPara(){document.getElementById('para').innerHTML = paraText.split('').map(char => `<span>${char}</span>`).join('');}
-
-function setTime(){
-  let val = document.getElementById('timeSelect').value;
-  if(val === 'custom'){
-    document.getElementById('customTimeInput').style.display = 'inline-block';
-    let minutes = parseInt(document.getElementById('customTimeInput').value) || 1;
-    totalTime = minutes * 60;
-  } else {
-    document.getElementById('customTimeInput').style.display = 'none';
-    totalTime = parseInt(val);
-  }
-  time = totalTime;
-  let displayMin = Math.floor(totalTime/60);
-  document.getElementById('title').innerText = lang=='hi'?`टाइपिंग टेस्ट - ${displayMin} मिनट`:`Typing Test - ${displayMin} Minute${displayMin>1?'s':''}`;
-  resetTest();
-}
-document.getElementById('customTimeInput').addEventListener('change', setTime);
-
-function changeLang(){
-  lang = document.getElementById('langSelect').value;
-  document.getElementById('fontSelect').style.display = lang=='hi'?'inline-block':'none';
-  let displayMin = Math.floor(totalTime/60);
-  document.getElementById('title').innerText = lang=='hi'?`टाइपिंग टेस्ट - ${displayMin} मिनट`:`Typing Test - ${displayMin} Minute${displayMin>1?'s':''}`;
-  document.getElementById('input').placeholder = lang=='hi'?'यहां टाइप करना शुरू करें...':'Click here and start typing...';
-  currentParaIndex = 0; let arr = lang=='en'?englishParagraphs:hindiParagraphs; paraText = arr[currentParaIndex]; resetTest();
-}
-function changeFont(){let font = document.getElementById('fontSelect').value; document.getElementById('para').style.fontFamily = font; document.getElementById('input').style.fontFamily = font;}
-function newPara(){let arr = lang=='en'?englishParagraphs:hindiParagraphs; currentParaIndex = (currentParaIndex + 1) % arr.length; paraText = arr[currentParaIndex]; resetTest();}
-function resetTest(){clearInterval(timer); time=totalTime; started=false; correctChars=0; document.getElementById('time').innerText=time; document.getElementById('wpm').innerText=0; document.getElementById('cpm').innerText=0; document.getElementById('acc').innerText='100%'; document.getElementById('input').value=''; document.getElementById('input').disabled=false; loadPara();}
-loadPara();
-
-document.getElementById('input').addEventListener('input', (e)=>{
-if(!started){started=true; timer=setInterval(()=>{time--; document.getElementById('time').innerText=time; if(time==0){clearInterval(timer);document.getElementById('input').disabled=true;}},1000)}
-let typed = e.target.value; let spans = document.querySelectorAll('#para span'); correctChars=0;
-spans.forEach((span,i)=>{let char = typed[i]; span.className = ''; if(i==typed.length) span.className='current'; else if(char==span.innerText){span.className='correct';correctChars++} else if(char!=null){span.className='wrong'}})
-let timeSpent = totalTime-time || 1; let wpm = Math.round((correctChars/5)/(timeSpent/60)); let cpm = Math.round(correctChars/(timeSpent/60)); let acc = typed.length>0? Math.round((correctChars/typed.length)*100) : 100;
-document.getElementById('wpm').innerText = wpm; document.getElementById('cpm').innerText = cpm; document.getElementById('acc').innerText = acc+'%';
-});
-</script>
 </body>
 </html>
