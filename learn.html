@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learn Typing - Govt Exam Typing Tool</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial}
+body{background:#f4f6f9}
+header{background:#004aad;padding:15px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap}
+.logo{display:flex;align-items:center;font-size:18px;font-weight:bold;color:#fff}
+.logo img{height:40px;margin-right:8px}.logo span{color:#ffd700}
+nav a{color:#fff;text-decoration:none;padding:8px 12px;border-radius:5px;font-weight:600;margin-left:8px}
+nav a:hover, nav a.active{background:#ffd700;color:#004aad}
+.container{max-width:900px;margin:20px auto;padding:20px}
+.card{background:#fff;padding:25px;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,0.1);margin-bottom:20px}
+h1{color:#004aad;margin-bottom:15px;font-size:24px}
+.lesson-list{display:grid;gap:12px}
+.lesson-item{display:flex;justify-content:space-between;align-items:center;padding:15px;border:2px solid #e2e8f0;border-radius:8px;cursor:pointer;background:#fff;transition:0.2s}
+.lesson-item:hover{background:#f0f7ff;border-color:#004aad;transform:translateX(5px)}
+.key{background:#004aad;color:#fff;padding:4px 10px;border-radius:4px;margin:0 3px;font-size:13px;font-weight:bold}
+#lessonBox{display:none}
+#lessonText{font-size:24px;padding:25px;border:2px dashed #004aad;border-radius:8px;background:#f8faff;min-height:80px;margin:15px 0;line-height:2;letter-spacing:1px}
+#lessonInput{width:100%;padding:15px;font-size:20px;border:2px solid #004aad;border-radius:8px;outline:none}
+#lessonInput:focus{border-color:#ff8c00}
+.feedback{margin-top:12px;font-weight:bold;font-size:18px;min-height:25px}
+.btn{padding:10px 20px;background:#004aad;color:#fff;border:none;border-radius:6px;cursor:pointer;font-weight:bold;margin-top:10px;margin-right:10px}
+.btn:hover{background:#00337a}
+.btn-success{background:#16a34a}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><img src="govt-logo.png"><span>Govt Exam Typing Tool</span></div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="typing-test.html">Typing Test</a>
+    <a href="learn.html?type=english" class="active">Learn Typing</a>
+    <a href="mock.html">Mock Test</a>
+  </nav>
+</header>
+
+<div class="container">
+  <div class="card" id="lessonListBox">
+    <h1 id="pageTitle">📚 Select Lesson</h1>
+    <div class="lesson-list" id="lessonList"></div>
+  </div>
+
+  <div class="card" id="lessonBox">
+    <h2 id="lessonTitle"></h2>
+    <div id="lessonText"></div>
+    <input type="text" id="lessonInput" placeholder="Start typing here..." autocomplete="off" oninput="checkLesson()">
+    <div class="feedback" id="feedback"></div>
+    <button class="btn" onclick="backToList()">⬅️ Back to Lessons</button>
+    <button class="btn btn-success" onclick="nextLesson()">Next Lesson ➡️</button>
+  </div>
+</div>
+
+<script>
+const urlParams = new URLSearchParams(window.location.search);
+const type = urlParams.get('type') || 'english';
+
+const data = {
+  english: {
+    title: "📚 Learn English Typing",
+    font: "'Segoe UI', Arial",
+    lessons: [
+      {title:"Lesson 1: Home Row f j", keys:['f','j'], text:"f j f f j j f j f j f j"},
+      {title:"Lesson 2: Home Row d k", keys:['d','k'], text:"d k d d k k d k d k d k"},
+      {title:"Lesson 3: Home Row s l", keys:['s','l'], text:"s l s l s l s l s l"},
+      {title:"Lesson 4: Home Row a ;", keys:['a',';'], text:"a ; a ; a ; a ; a ;"},
+      {title:"Lesson 5: Full Home Row", keys:['a','s','d','f','j','k','l',';'], text:"a s d f j k l ; a s d f j k l ;"},
+      {title:"Lesson 6: Practice Words", keys:[], text:"the quick brown fox jumps over the lazy dog"},
+      {title:"Lesson 7: Full Sentence", keys:[], text:"Practice makes a man perfect. Typing is a very important skill for government jobs."}
+    ]
+  },
+  mangal: {
+    title: "📚 Learn Hindi Typing - Mangal Font",
+    font: "Mangal",
+    lessons: [
+      {title:"पाठ 1: क ख ग घ", keys:['क','ख','ग','घ'], text:"क ख ग घ क ख ग घ क ख ग घ"},
+      {title:"पाठ 2: शब्द अभ्यास", keys:[], text:"भारत देश महान है"},
+      {title:"पाठ 3: वाक्य अभ्यास", keys:[], text:"कंप्यूटर टाइपिंग सीखना बहुत आसान है"},
+      {title:"पाठ 4: सरकारी नौकरी", keys:[], text:"एससी और बैंकिंग परीक्षा के लिए टाइपिंग आवश्यक है"}
+    ]
+  },
+  kruti: {
+    title: "📚 Learn Hindi Typing - Kruti Dev 010",
+    font: "Kruti Dev 010",
+    lessons: [
+      {title:"ikB 1: d [ k x", keys:['d','[','k','x'], text:"d [ k x d [ k x d [ k x"},
+      {title:"ikB 2: 'kCn vfH;kl", keys:[], text:"Hkkjr ns'k egku gS"},
+      {title:"ikB 3: okD; vfH;kl", keys:[], text:"daI;wVj Vkfiax lh[kuk cgqr vkasan gS"},
+      {title:"ikB 4: ljdkjh ukSdjh", keys:[], text:",l,l,lh vkSj cSad fdlh ikfj{kk ds fy, Vkfiax vko';d gS"}
+    ]
+  }
+};
+
+let currentLesson = 0;
+let currentData = data[type];
+
+function loadLessonList(){
+  document.getElementById('pageTitle').innerText = currentData.title;
+  let list = document.getElementById('lessonList');
+  list.innerHTML = '';
+  currentData.lessons.forEach((l,i)=>{
+    let keysHTML = l.keys.length > 0? l.keys.map(k=>`<span class="key">${k}</span>`).join('') : '<span style="color:#666">Practice</span>';
+    list.innerHTML += `<div class="lesson-item" onclick="startLesson(${i})"><b>${l.title}</b><div>${keysHTML}</div></div>`;
+  });
+}
+function startLesson(i){
+  currentLesson = i;
+  let l = currentData.lessons[i];
+  document.getElementById('lessonListBox').style.display = 'none';
+  document.getElementById('lessonBox').style.display = 'block';
+  document.getElementById('lessonTitle').innerText = l.title;
+  document.getElementById('lessonText').innerText = l.text;
+  document.getElementById('lessonText').style.fontFamily = currentData.font;
+  document.getElementById('lessonInput').style.fontFamily = currentData.font;
+  document.getElementById('lessonInput').value = '';
+  document.getElementById('lessonInput').focus();
+  document.getElementById('feedback').innerText = '';
+}
+function backToList(){
+  document.getElementById('lessonListBox').style.display = 'block';
+  document.getElementById('lessonBox').style.display = 'none';
+}
+function nextLesson(){
+  if(currentLesson < currentData.lessons.length - 1){
+    startLesson(currentLesson + 1);
+  } else {
+    alert("🎉 Congratulations! All lessons completed.");
+    backToList();
+  }
+}
+function checkLesson(){
+  let typed = document.getElementById('lessonInput').value;
+  let target = currentData.lessons[currentLesson].text;
+  if(typed === target){
+    document.getElementById('feedback').innerText = '✅ Perfect! Well Done. Click Next Lesson';
+    document.getElementById('feedback').style.color = 'green';
+  }
+  else if(target.startsWith(typed)){
+    document.getElementById('feedback').innerText = '⌨️ Keep Typing...';
+    document.getElementById('feedback').style.color = '#004aad';
+  }
+  else{
+    document.getElementById('feedback').innerText = '❌ Mistake! Check spelling';
+    document.getElementById('feedback').style.color = 'red';
+  }
+}
+loadLessonList();
+</script>
+</body>
+</html>
