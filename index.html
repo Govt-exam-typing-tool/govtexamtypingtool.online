@@ -12,7 +12,7 @@ header{background:#004aad;padding:15px 20px;display:flex;justify-content:space-b
 .logo img{height:40px;width:40px;object-fit:contain;vertical-align:middle;margin-right:8px}
 .logo span{color:#ffd700}
 nav{display:flex;gap:8px;flex-wrap:wrap}
-nav a{color:#fff;text-decoration:none;padding:8px 12px;border-radius:5px;font-weight:600;font-size:14px;background:transparent}
+nav a{color:#fff;text-decoration:none;padding:8px 12px;border-radius:5px;font-weight:600;font-size:14px}
 nav a:hover, nav a.active{background:#ffd700;color:#004aad}
 .container{max-width:1100px;margin:20px auto;padding:20px}
 .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-bottom:20px}
@@ -20,15 +20,14 @@ nav a:hover, nav a.active{background:#ffd700;color:#004aad}
 .card h4{color:#666;font-size:14px}
 .card p{font-size:32px;font-weight:bold;color:#004aad;margin-top:5px}
 .typing-box{background:#fff;padding:25px;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,0.1)}
-#para{font-size:20px;line-height:2;border:1px dashed #004aad;padding:20px;border-radius:8px;background:#f8faff;letter-spacing:0.5px;min-height:150px}
-#para span.correct{color:#16a34a}
-#para span.wrong{color:#dc2626;background:#fee2e2}
-#para span.current{border-bottom:2px solid #004aad}
+#para{font-size:20px;line-height:2;border:1px dashed #004aad;padding:20px;border-radius:8px;background:#f8faff;min-height:150px}
+#para span.correct{color:#16a34a}#para span.wrong{color:#dc2626;background:#fee2e2}#para span.current{border-bottom:2px solid #004aad}
 #input{width:100%;height:160px;margin-top:15px;padding:15px;font-size:20px;border:2px solid #004aad;border-radius:8px;outline:none}
 .btns{margin-top:15px}
-.btn, select{padding:10px 18px;background:#004aad;color:#fff;border:none;border-radius:6px;cursor:pointer;font-weight:bold;margin-right:10px;font-size:15px}
+.btn, select, input[type=number]{padding:10px 18px;background:#004aad;color:#fff;border:none;border-radius:6px;cursor:pointer;font-weight:bold;margin-right:10px;font-size:15px}
 .btn:hover{background:#00337a}
-select{background:#fff;color:#000;border:2px solid #004aad}
+select, input[type=number]{background:#fff;color:#000;border:2px solid #004aad}
+#customTimeInput{width:120px;display:none}
 @media(max-width:768px){.stats-row{grid-template-columns:repeat(2,1fr)}header{justify-content:center}.logo{margin-bottom:10px}nav{justify-content:center;width:100%}}
 </style>
 </head>
@@ -41,9 +40,8 @@ select{background:#fff;color:#000;border:2px solid #004aad}
   </div>
   <nav>
     <a href="index.html" class="active">Typing Test</a>
+    <a href="learn.html">Learn Typing</a>
     <a href="mock.html">Mock Test</a>
-    <a href="#">Results</a>
-    <a href="#">Practice</a>
   </nav>
 </header>
 
@@ -57,8 +55,16 @@ select{background:#fff;color:#000;border:2px solid #004aad}
 
   <div class="typing-box">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;flex-wrap:wrap;gap:10px">
-      <h2 id="title">Typing Test - 60 Seconds</h2>
-      <div>
+      <h2 id="title">Typing Test - 1 Minute</h2>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <select id="timeSelect" onchange="setTime()">
+          <option value="30">30 Seconds</option>
+          <option value="60" selected>1 Minute</option>
+          <option value="120">2 Minutes</option>
+          <option value="300">5 Minutes</option>
+          <option value="custom">Custom Minutes</option>
+        </select>
+        <input type="number" id="customTimeInput" placeholder="Enter Minutes" min="1" max="30">
         <select id="langSelect" onchange="changeLang()">
           <option value="en">English</option>
           <option value="hi">Hindi</option>
@@ -92,76 +98,45 @@ const hindiParagraphs = [
   "सफलता के लिए निरंतर प्रयास और समर्पण आवश्यक है। यदि आप प्रतिदिन 20 मिनट अभ्यास करते हैं तो आप निश्चित रूप से 40 से 50 डब्ल्यूपीएम तक पहुंच जाएंगे।"
 ];
 
-let lang='en';
-let currentParaIndex = 0;
-let paraText = englishParagraphs[0];
-let time=60, timer, started=false, correctChars=0;
+let lang='en'; let totalTime=60; let time=60; let timer, started=false, correctChars=0; let currentParaIndex = 0; let paraText = englishParagraphs[0];
 
-function loadPara(){
-  document.getElementById('para').innerHTML = paraText.split('').map(char => `<span>${char}</span>`).join('');
+function loadPara(){document.getElementById('para').innerHTML = paraText.split('').map(char => `<span>${char}</span>`).join('');}
+
+function setTime(){
+  let val = document.getElementById('timeSelect').value;
+  if(val === 'custom'){
+    document.getElementById('customTimeInput').style.display = 'inline-block';
+    let minutes = parseInt(document.getElementById('customTimeInput').value) || 1;
+    totalTime = minutes * 60;
+  } else {
+    document.getElementById('customTimeInput').style.display = 'none';
+    totalTime = parseInt(val);
+  }
+  time = totalTime;
+  let displayMin = Math.floor(totalTime/60);
+  document.getElementById('title').innerText = lang=='hi'?`टाइपिंग टेस्ट - ${displayMin} मिनट`:`Typing Test - ${displayMin} Minute${displayMin>1?'s':''}`;
+  resetTest();
 }
+document.getElementById('customTimeInput').addEventListener('change', setTime);
 
 function changeLang(){
   lang = document.getElementById('langSelect').value;
-
-  // Font dropdown show/hide
   document.getElementById('fontSelect').style.display = lang=='hi'?'inline-block':'none';
-
-  // Title and placeholder change
-  if(lang=='hi'){
-    document.getElementById('title').innerText = 'टाइपिंग टेस्ट - 60 सेकंड';
-    document.getElementById('input').placeholder = 'यहां टाइप करना शुरू करें...';
-  } else {
-    document.getElementById('title').innerText = 'Typing Test - 60 Seconds';
-    document.getElementById('input').placeholder = 'Click here and start typing...';
-  }
-
-  // New paragraph load for selected language
-  currentParaIndex = 0;
-  let arr = lang=='en'?englishParagraphs:hindiParagraphs;
-  paraText = arr[currentParaIndex];
-  resetTest(); // NO RELOAD
+  let displayMin = Math.floor(totalTime/60);
+  document.getElementById('title').innerText = lang=='hi'?`टाइपिंग टेस्ट - ${displayMin} मिनट`:`Typing Test - ${displayMin} Minute${displayMin>1?'s':''}`;
+  document.getElementById('input').placeholder = lang=='hi'?'यहां टाइप करना शुरू करें...':'Click here and start typing...';
+  currentParaIndex = 0; let arr = lang=='en'?englishParagraphs:hindiParagraphs; paraText = arr[currentParaIndex]; resetTest();
 }
-
-function changeFont(){
-  let font = document.getElementById('fontSelect').value;
-  document.getElementById('para').style.fontFamily = font;
-  document.getElementById('input').style.fontFamily = font;
-}
-
-function newPara(){
-  let arr = lang=='en'?englishParagraphs:hindiParagraphs;
-  currentParaIndex = (currentParaIndex + 1) % arr.length;
-  paraText = arr[currentParaIndex];
-  resetTest();
-}
-
-function resetTest(){
-  clearInterval(timer);
-  time=60; started=false; correctChars=0;
-  document.getElementById('time').innerText=60;
-  document.getElementById('wpm').innerText=0;
-  document.getElementById('cpm').innerText=0;
-  document.getElementById('acc').innerText='100%';
-  document.getElementById('input').value='';
-  document.getElementById('input').disabled=false;
-  loadPara();
-}
-
+function changeFont(){let font = document.getElementById('fontSelect').value; document.getElementById('para').style.fontFamily = font; document.getElementById('input').style.fontFamily = font;}
+function newPara(){let arr = lang=='en'?englishParagraphs:hindiParagraphs; currentParaIndex = (currentParaIndex + 1) % arr.length; paraText = arr[currentParaIndex]; resetTest();}
+function resetTest(){clearInterval(timer); time=totalTime; started=false; correctChars=0; document.getElementById('time').innerText=time; document.getElementById('wpm').innerText=0; document.getElementById('cpm').innerText=0; document.getElementById('acc').innerText='100%'; document.getElementById('input').value=''; document.getElementById('input').disabled=false; loadPara();}
 loadPara();
 
 document.getElementById('input').addEventListener('input', (e)=>{
-if(!started){
-  started=true;
-  timer=setInterval(()=>{
-    time--;
-    document.getElementById('time').innerText=time;
-    if(time==0){clearInterval(timer);document.getElementById('input').disabled=true;}
-  },1000)
-}
+if(!started){started=true; timer=setInterval(()=>{time--; document.getElementById('time').innerText=time; if(time==0){clearInterval(timer);document.getElementById('input').disabled=true;}},1000)}
 let typed = e.target.value; let spans = document.querySelectorAll('#para span'); correctChars=0;
 spans.forEach((span,i)=>{let char = typed[i]; span.className = ''; if(i==typed.length) span.className='current'; else if(char==span.innerText){span.className='correct';correctChars++} else if(char!=null){span.className='wrong'}})
-let timeSpent = 60-time || 1; let wpm = Math.round((correctChars/5)/(timeSpent/60)); let cpm = Math.round(correctChars/(timeSpent/60)); let acc = typed.length>0? Math.round((correctChars/typed.length)*100) : 100;
+let timeSpent = totalTime-time || 1; let wpm = Math.round((correctChars/5)/(timeSpent/60)); let cpm = Math.round(correctChars/(timeSpent/60)); let acc = typed.length>0? Math.round((correctChars/typed.length)*100) : 100;
 document.getElementById('wpm').innerText = wpm; document.getElementById('cpm').innerText = cpm; document.getElementById('acc').innerText = acc+'%';
 });
 </script>
