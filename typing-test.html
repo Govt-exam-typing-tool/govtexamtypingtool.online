@@ -9,51 +9,68 @@
 
 
 <title>
-Govt Exam Typing Tool | English & Hindi Mangal Typing Test
+Govt Exam Typing Tool | English Typing Test
 </title>
 
 
-<meta name="description" content="Free online typing test for SSC, Railway, Bank and High Court RO ARO exams with English and Hindi Mangal typing practice.">
+<meta name="description" content="Free English typing practice for SSC Railway Bank High Court exams.">
 
 
 <style>
 
+
 *{
+
 margin:0;
 padding:0;
 box-sizing:border-box;
 font-family:'Segoe UI',Arial,sans-serif;
+
 }
+
 
 
 body{
+
 background:#f4f7fb;
+
 color:#333;
+
 }
+
+
 
 
 
 /* HEADER */
 
+
 header{
 
 background:#004aad;
+
 padding:15px 20px;
 
 display:flex;
+
 justify-content:space-between;
+
 align-items:center;
+
 flex-wrap:wrap;
 
 }
 
 
+
 .logo{
 
 display:flex;
+
 align-items:center;
 
 font-size:18px;
+
 font-weight:bold;
 
 color:white;
@@ -61,9 +78,11 @@ color:white;
 }
 
 
+
 .logo img{
 
 height:45px;
+
 width:45px;
 
 border-radius:50%;
@@ -75,11 +94,14 @@ background:white;
 }
 
 
+
 .logo span{
 
 color:#ffd700;
 
 }
+
+
 
 
 
@@ -91,15 +113,14 @@ text-decoration:none;
 
 padding:8px 12px;
 
-border-radius:5px;
-
-font-weight:600;
-
 margin-left:5px;
 
-font-size:14px;
+border-radius:5px;
+
+font-weight:bold;
 
 }
+
 
 
 nav a:hover,
@@ -113,7 +134,12 @@ color:#004aad;
 
 
 
+
+
+
+
 /* MAIN */
+
 
 .container{
 
@@ -141,19 +167,27 @@ box-shadow:0 3px 12px rgba(0,0,0,.1);
 
 
 
-/* TITLE */
+
+
 
 h1{
 
 color:#004aad;
 
-margin-bottom:15px;
+margin-bottom:20px;
 
 }
 
 
 
-/* EXAM SELECT */
+
+
+
+
+
+
+/* EXAM BUTTON */
+
 
 .exam-box{
 
@@ -166,6 +200,7 @@ gap:15px;
 margin-bottom:20px;
 
 }
+
 
 
 .exam-btn{
@@ -199,7 +234,13 @@ color:white;
 
 
 
+
+
+
+
+
 /* STATS */
+
 
 .stats{
 
@@ -217,7 +258,11 @@ margin-bottom:20px;
 
 .stat{
 
-background:linear-gradient(135deg,#004aad,#007bff);
+background:linear-gradient(
+135deg,
+#004aad,
+#007bff
+);
 
 color:white;
 
@@ -230,6 +275,7 @@ text-align:center;
 }
 
 
+
 .stat small{
 
 display:block;
@@ -239,13 +285,20 @@ display:block;
 
 .stat b{
 
-font-size:24px;
+font-size:25px;
 
 }
 
 
 
+
+
+
+
+
+
 /* MODE */
+
 
 .mode-tabs{
 
@@ -291,6 +344,12 @@ color:white;
 
 
 
+
+
+
+
+
+
 /* LANGUAGE */
 
 
@@ -300,7 +359,7 @@ display:flex;
 
 gap:10px;
 
-margin-bottom:15px;
+margin-bottom:20px;
 
 }
 
@@ -338,7 +397,13 @@ color:white;
 
 
 
-/* CONTROL */
+
+
+
+
+
+
+/* CONTROLS */
 
 
 .controls{
@@ -381,6 +446,7 @@ cursor:pointer;
 }
 
 
+
 .btn-success{
 
 background:#16a34a;
@@ -388,6 +454,7 @@ background:#16a34a;
 border-color:#16a34a;
 
 }
+
 
 
 .btn-danger{
@@ -400,7 +467,13 @@ border-color:#dc2626;
 
 
 
-/* PASSAGE AREA */
+
+
+
+
+
+
+/* PASSAGE WINDOW */
 
 
 .passage-box{
@@ -419,11 +492,12 @@ margin-bottom:20px;
 
 
 
+
 .passage-title{
 
-color:#004aad;
-
 font-weight:bold;
+
+color:#004aad;
 
 margin-bottom:10px;
 
@@ -431,7 +505,14 @@ margin-bottom:10px;
 
 
 
+
+
 #passage{
+
+
+height:180px;
+
+overflow:hidden;
 
 font-size:22px;
 
@@ -439,11 +520,19 @@ line-height:1.8;
 
 word-spacing:5px;
 
-color:#64748b;
-
 white-space:pre-wrap;
 
+padding:10px;
+
+color:#64748b;
+
 }
+
+
+
+
+
+
 
 
 
@@ -454,6 +543,7 @@ color:#16a34a;
 }
 
 
+
 .wrong{
 
 color:#dc2626;
@@ -461,6 +551,7 @@ color:#dc2626;
 background:#fee2e2;
 
 }
+
 
 
 .current{
@@ -474,12 +565,17 @@ color:white;
 
 
 
-/* TYPE AREA */
+
+
+
+
+
+/* TYPING BOX */
 
 
 .typing-box{
 
-background:#fff;
+background:white;
 
 border:3px dashed #004aad;
 
@@ -488,6 +584,8 @@ padding:20px;
 border-radius:10px;
 
 }
+
+
 
 
 
@@ -513,7 +611,12 @@ outline:none;
 
 
 
-/* ADD TEXT */
+
+
+
+
+
+/* CUSTOM */
 
 
 #customSection{
@@ -534,17 +637,17 @@ height:150px;
 
 padding:15px;
 
+font-size:18px;
+
 border:2px solid #004aad;
 
 border-radius:8px;
-
-font-size:18px;
 
 }
 
 
 
-/* FOOTER */
+
 
 
 footer{
@@ -555,24 +658,25 @@ background:#004aad;
 
 color:white;
 
-text-align:center;
-
 padding:20px;
 
-font-size:14px;
+text-align:center;
 
 }
+
 
 
 
 @media(max-width:800px){
 
-.exam-box,
-.stats{
+
+.stats,
+.exam-box{
 
 grid-template-columns:repeat(2,1fr);
 
 }
+
 
 
 .mode-tabs,
@@ -585,9 +689,13 @@ flex-direction:column;
 
 }
 
+
+
 </style>
 
+
 </head>
+
 
 
 <body>
@@ -595,41 +703,54 @@ flex-direction:column;
 
 <header>
 
+
 <div class="logo">
 
-<img src="logo.png" alt="Govt Exam Typing Tool">
+<img src="logo.png">
 
-<span>Govt Exam Typing Tool</span>
+
+<span>
+Govt Exam Typing Tool
+</span>
+
 
 </div>
 
 
+
 <nav>
+
 
 <a href="index.html">
 Home
 </a>
 
-<a href="typing-test.html" class="active">
+
+<a class="active">
 Typing Test
 </a>
+
 
 <a href="learn-english.html">
 English
 </a>
 
+
 <a href="learn-hindi.html">
 Hindi Mangal
 </a>
+
 
 <a href="mock.html">
 Mock
 </a>
 
+
 </nav>
 
 
 </header>
+
 
 
 
@@ -645,6 +766,7 @@ Mock
 </h1>
 
 
+<!-- आगे Part 2/3 में continue होगा -->
 
 <!-- EXAM SELECTION -->
 
@@ -653,36 +775,55 @@ Mock
 
 
 <button class="exam-btn active">
+
 SSC
+
 </button>
 
 
+
 <button class="exam-btn">
+
 Railway
+
 </button>
 
 
+
 <button class="exam-btn">
+
 Bank
+
 </button>
 
 
+
 <button class="exam-btn">
+
 High Court RO/ARO
+
 </button>
 
 
+
 <button class="exam-btn">
+
 Practice
+
 </button>
 
 
+
 <button class="exam-btn">
+
 Custom
+
 </button>
 
 
 </div>
+
+
 
 
 
@@ -703,6 +844,7 @@ Speed
 <b id="wpm">
 0
 </b>
+
 WPM
 
 </div>
@@ -718,6 +860,7 @@ Accuracy
 <b id="accuracy">
 100
 </b>
+
 %
 
 </div>
@@ -739,7 +882,6 @@ Time
 
 
 
-
 <div class="stat">
 
 <small>
@@ -753,7 +895,10 @@ Errors
 </div>
 
 
+
 </div>
+
+
 
 
 
@@ -774,6 +919,7 @@ Errors
 </button>
 
 
+
 <button class="mode-btn" id="examMode">
 
 📝 Exam Mode
@@ -781,37 +927,13 @@ Errors
 </button>
 
 
+
 <button class="mode-btn" id="customMode">
 
-📄 Add Your Text
+📄 Add Text
 
 </button>
 
-
-</div>
-
-
-
-
-
-
-
-<div id="customSection">
-
-
-<textarea id="customText"
-placeholder="Paste your typing paragraph here...">
-</textarea>
-
-
-<br>
-
-
-<button class="btn btn-success" id="startCustom">
-
-Start Custom Test
-
-</button>
 
 
 </div>
@@ -837,14 +959,19 @@ English
 </button>
 
 
+
 <button class="lang-btn" id="hindiLang">
 
-हिन्दी Mangal
+Hindi Mangal
 
 </button>
 
 
+
 </div>
+
+
+
 
 
 
@@ -861,61 +988,42 @@ English
 
 
 <option value="60">
+
 1 Minute
+
 </option>
 
 
 <option value="300" selected>
+
 5 Minutes
+
 </option>
 
 
 <option value="600">
+
 10 Minutes
+
 </option>
 
 
 <option value="900">
+
 15 Minutes
-</option>
 
-
-<option value="1200">
-20 Minutes
 </option>
 
 
 <option value="1800">
+
 30 Minutes
+
 </option>
 
 
 </select>
 
-
-
-
-
-
-<select id="examTime">
-
-
-<option>
-Exam Passage
-</option>
-
-
-<option>
-High Court RO/ARO
-</option>
-
-
-<option>
-SSC Pattern
-</option>
-
-
-</select>
 
 
 
@@ -923,6 +1031,41 @@ SSC Pattern
 <button class="btn btn-danger" id="restart">
 
 🔄 Restart
+
+</button>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- CUSTOM -->
+
+
+<div id="customSection">
+
+
+<textarea 
+id="customText"
+placeholder="Paste your paragraph here..."
+></textarea>
+
+
+
+<br><br>
+
+
+
+<button class="btn btn-success" id="startCustom">
+
+Start Custom Test
 
 </button>
 
@@ -965,7 +1108,8 @@ SSC Pattern
 
 
 
-<!-- TYPING -->
+
+<!-- TYPING AREA -->
 
 
 <div class="typing-box">
@@ -978,25 +1122,29 @@ Type Here 👇
 </h3>
 
 
-<textarea 
+
+<textarea
+
 id="typingInput"
+
 placeholder="Start typing here..."
-spellcheck="false">
 
-</textarea>
+spellcheck="false"
 
-
-
-</div>
-
-
-
+></textarea>
 
 
 </div>
 
 
+
+
+
 </div>
+
+</div>
+
+
 
 
 
@@ -1006,114 +1154,299 @@ spellcheck="false">
 <script>
 
 
-const passages = {
+
+
+
+/* ===============================
+   PASSAGE DATA
+================================ */
+
+
+const passages={
+
 
 
 english:[
 
 
+
 `
-The government of India conducts various competitive examinations every year for recruitment of candidates in different departments. Computer knowledge and typing skill have become an important part of many government examinations.
+The government of India conducts various competitive examinations every year for recruitment of candidates in different departments.
 
-Candidates preparing for SSC, Railway, Banking and High Court recruitment examinations must improve their typing speed with accuracy. Regular practice helps students to increase confidence and perform better in the final typing test.
+Computer knowledge and typing skill have become an important part of many government examinations.
 
-Typing is not only about speed but also about correct spelling, proper spacing and minimum mistakes. A candidate should practice daily to achieve the required words per minute speed.
+Candidates preparing for SSC Railway Banking and High Court recruitment examinations must improve their typing speed with accuracy.
 
-The role of technology is increasing rapidly in modern offices. Every department requires employees who can work efficiently on computers and complete official tasks within the given time.
+Regular practice helps students to increase confidence and perform better in the final typing test.
+
+Typing is not only about speed but also about correct spelling proper spacing and minimum mistakes.
+
+A candidate should practice daily to achieve the required words per minute speed.
+
+The role of technology is increasing rapidly in modern offices.
+
+Every department requires employees who can work efficiently on computers and complete official tasks within the given time.
 `,
 
 
-`
-Computer education plays an important role in today's world. Government offices use computers for maintaining records, preparing documents and managing information.
 
-A good typing speed saves time and increases productivity. Students preparing for competitive exams should develop accuracy along with speed.
-
-Hard work, discipline and continuous practice are the keys to success in any examination.
 `
+Computer education plays an important role in today's world.
+
+Government offices use computers for maintaining records preparing documents and managing information.
+
+A good typing speed saves time and increases productivity.
+
+Students preparing for competitive exams should develop accuracy along with speed.
+
+Hard work discipline and continuous practice are the keys to success in any examination.
+`
+
 
 
 ],
 
 
 
+
 hindi:[
 
 
-`
-भारत सरकार विभिन्न विभागों में भर्ती के लिए प्रत्येक वर्ष प्रतियोगी परीक्षाओं का आयोजन करती है। आज के समय में कंप्यूटर ज्ञान और टाइपिंग कौशल सरकारी नौकरी की तैयारी करने वाले विद्यार्थियों के लिए बहुत महत्वपूर्ण है।
-
-एसएससी रेलवे बैंक और हाई कोर्ट जैसी परीक्षाओं में टाइपिंग टेस्ट का विशेष महत्व होता है। नियमित अभ्यास करने से गति और शुद्धता दोनों में सुधार होता है।
-
-टाइपिंग केवल तेज लिखने का नाम नहीं है बल्कि सही शब्द लिखना और कम गलतियां करना भी जरूरी है।
 
 `
-]
+भारत सरकार विभिन्न विभागों में भर्ती के लिए प्रत्येक वर्ष प्रतियोगी परीक्षाओं का आयोजन करती है।
+
+आज के समय में कंप्यूटर ज्ञान और टाइपिंग कौशल सरकारी नौकरी की तैयारी करने वाले विद्यार्थियों के लिए बहुत महत्वपूर्ण है।
+
+एसएससी रेलवे बैंक और हाई कोर्ट जैसी परीक्षाओं में टाइपिंग टेस्ट का विशेष महत्व होता है।
+
+नियमित अभ्यास करने से गति और शुद्धता दोनों में सुधार होता है।
+`
 
 
-};
+
+];
+
+
 
 
 
 let currentLanguage="english";
 
-let currentPassage=passages.english[0];
 
-let timeLeft=300;
+let currentPassage=
+passages.english[0];
+
+
+
+let currentIndex=0;
+
 
 let timer=null;
 
+
 let started=false;
 
+
+let timeLeft=300;
+
+
 let errors=0;
+
 
 let typedCharacters=0;
 
 
 
-document.getElementById("passage").innerText=currentPassage;
+
+
+renderPassage();
+
+
+
+
+
+/* ===============================
+   PASSAGE WINDOW RENDER
+================================ */
+
+
+
+function renderPassage(){
+
+
+let start=currentIndex-80;
+
+
+
+if(start<0)
+
+start=0;
+
+
+
+let end=start+300;
+
+
+
+let visible=
+currentPassage.substring(
+start,
+end
+);
+
+
+
+let html="";
+
+
+
+for(let i=0;i<visible.length;i++){
+
+
+let real=start+i;
+
+
+
+if(real===currentIndex){
+
+
+html+=
+
+`<span class="current">
+${visible[i]}
+</span>`;
+
+
+}
+
+else if(real<currentIndex){
+
+
+if(
+document.getElementById("typingInput").value[real]
+===
+currentPassage[real]
+)
+
+html+=
+
+`<span class="correct">
+${visible[i]}
+</span>`;
+
+
+else
+
+
+html+=
+
+`<span class="wrong">
+${visible[i]}
+</span>`;
+
+
+}
+
+else{
+
+
+html+=visible[i];
+
+
+}
+
+
+
+}
+
+
+document.getElementById("passage").innerHTML=html;
+
+
+}
+
+
+
+
+/* ===============================
+   STATS
+================================ */
+
 
 
 function updateStats(){
 
+
 let minutes=(300-timeLeft)/60;
 
-if(minutes<=0){
+
+if(minutes<=0)
+
 minutes=0.01;
-}
+
 
 
 let words=typedCharacters/5;
 
 
+
 let speed=Math.round(words/minutes);
 
 
-let accuracy=typedCharacters>0
-?
-Math.round(((typedCharacters-errors)/typedCharacters)*100)
+
+let accuracy=
+
+typedCharacters?
+
+Math.round(
+((typedCharacters-errors)
+/typedCharacters)*100
+)
+
 :
+
 100;
 
 
-document.getElementById("wpm").innerText=speed;
 
-document.getElementById("accuracy").innerText=accuracy;
+document.getElementById("wpm")
+.innerText=speed;
 
-document.getElementById("errors").innerText=errors;
+
+document.getElementById("accuracy")
+.innerText=accuracy;
+
+
+document.getElementById("errors")
+.innerText=errors;
+
+
 
 }
 
 
 
 
+/* Continue in Part 3/3 */
+
+   
+/* ===============================
+   TIMER
+================================ */
+
 
 function startTimer(){
 
+
 if(started)
+
 return;
 
 
+
 started=true;
+
 
 
 timer=setInterval(()=>{
@@ -1122,21 +1455,29 @@ timer=setInterval(()=>{
 timeLeft--;
 
 
+
 let min=Math.floor(timeLeft/60);
 
 let sec=timeLeft%60;
 
 
+
 document.getElementById("time").innerText=
-min+":"+String(sec).padStart(2,"0");
+
+min+":"+
+String(sec).padStart(2,"0");
+
 
 
 
 if(timeLeft<=0){
 
+
 finishTest();
 
+
 }
+
 
 
 },1000);
@@ -1149,13 +1490,27 @@ finishTest();
 
 
 
-document.getElementById("typingInput").addEventListener("input",function(){
+
+
+
+
+/* ===============================
+   TYPING INPUT
+================================ */
+
+
+
+document
+.getElementById("typingInput")
+.addEventListener("input",function(){
 
 
 
 if(!started){
 
+
 startTimer();
+
 
 }
 
@@ -1165,8 +1520,7 @@ let typed=this.value;
 
 
 
-let currentText=currentPassage;
-
+currentIndex=typed.length;
 
 
 typedCharacters=typed.length;
@@ -1180,7 +1534,12 @@ errors=0;
 for(let i=0;i<typed.length;i++){
 
 
-if(typed[i]!==currentText[i]){
+
+if(
+typed[i]!==currentPassage[i]
+)
+
+{
 
 errors++;
 
@@ -1192,23 +1551,36 @@ errors++;
 
 
 
-// passage complete hone par repeat
+
+/*
+ add more text
+ when near end
+*/
 
 
-if(typed.length>=currentText.length){
+if(
+currentIndex >
+currentPassage.length-200
+)
+
+{
 
 
-currentPassage=currentPassage+"\n\n"+currentPassage;
-
-
-document.getElementById("passage").innerText=currentPassage;
+currentPassage +=
+"\n\n"+
+currentPassage;
 
 
 }
 
 
 
+
+renderPassage();
+
+
 updateStats();
+
 
 
 });
@@ -1219,26 +1591,47 @@ updateStats();
 
 
 
-// LANGUAGE CHANGE
 
 
-document.getElementById("englishLang").onclick=function(){
+/* ===============================
+   LANGUAGE SWITCH
+================================ */
+
+
+document
+.getElementById("englishLang")
+.onclick=function(){
 
 
 currentLanguage="english";
 
 
-currentPassage=passages.english[0];
+currentPassage=
+passages.english[0];
 
 
-document.getElementById("passage").innerText=currentPassage;
+
+currentIndex=0;
+
+
+document
+.getElementById("typingInput")
+.value="";
+
+
+
+renderPassage();
+
 
 
 this.classList.add("active");
 
 
-document.getElementById("hindiLang")
+
+document
+.getElementById("hindiLang")
 .classList.remove("active");
+
 
 
 };
@@ -1248,23 +1641,44 @@ document.getElementById("hindiLang")
 
 
 
-document.getElementById("hindiLang").onclick=function(){
+
+
+document
+.getElementById("hindiLang")
+.onclick=function(){
+
 
 
 currentLanguage="hindi";
 
 
-currentPassage=passages.hindi[0];
+currentPassage=
+passages.hindi[0];
 
 
-document.getElementById("passage").innerText=currentPassage;
+
+currentIndex=0;
+
+
+
+document
+.getElementById("typingInput")
+.value="";
+
+
+
+renderPassage();
+
 
 
 this.classList.add("active");
 
 
-document.getElementById("englishLang")
+
+document
+.getElementById("englishLang")
 .classList.remove("active");
+
 
 
 };
@@ -1277,19 +1691,31 @@ document.getElementById("englishLang")
 
 
 
-// TIME CHANGE
+/* ===============================
+   TIME CHANGE
+================================ */
 
 
-document.getElementById("timeSelect").onchange=function(){
+
+document
+.getElementById("timeSelect")
+.onchange=function(){
+
 
 
 timeLeft=parseInt(this.value);
 
 
+
 let min=Math.floor(timeLeft/60);
 
 
-document.getElementById("time").innerText=min+":00";
+
+document
+.getElementById("time")
+.innerText=
+min+":00";
+
 
 
 };
@@ -1302,34 +1728,57 @@ document.getElementById("time").innerText=min+":00";
 
 
 
-
-// CUSTOM TEXT
-
-
-document.getElementById("customMode").onclick=function(){
+/* ===============================
+   CUSTOM TEXT
+================================ */
 
 
-document.getElementById("customSection")
+
+document
+.getElementById("customMode")
+.onclick=function(){
+
+
+
+document
+.getElementById("customSection")
 .style.display="block";
 
 
+
 };
 
 
 
 
-document.getElementById("startCustom").onclick=function(){
 
 
-let txt=document.getElementById("customText").value.trim();
+
+document
+.getElementById("startCustom")
+.onclick=function(){
+
+
+
+let txt=
+
+document
+.getElementById("customText")
+.value
+.trim();
 
 
 
 if(txt===""){
 
-alert("Please add text");
+
+alert(
+"Please add text"
+);
+
 
 return;
+
 
 }
 
@@ -1338,11 +1787,24 @@ return;
 currentPassage=txt;
 
 
-document.getElementById("passage").innerText=currentPassage;
+currentIndex=0;
 
 
-document.getElementById("customSection")
+
+document
+.getElementById("typingInput")
+.value="";
+
+
+
+document
+.getElementById("customSection")
 .style.display="none";
+
+
+
+renderPassage();
+
 
 
 };
@@ -1355,40 +1817,71 @@ document.getElementById("customSection")
 
 
 
-// RESTART
+/* ===============================
+   RESTART
+================================ */
 
 
-document.getElementById("restart").onclick=function(){
+
+document
+.getElementById("restart")
+.onclick=function(){
+
 
 
 clearInterval(timer);
+
 
 
 timer=null;
 
 
+
 started=false;
+
+
+
+currentIndex=0;
+
 
 
 errors=0;
 
 
+
 typedCharacters=0;
 
 
-document.getElementById("typingInput").value="";
+
+timeLeft=
+parseInt(
+document
+.getElementById("timeSelect")
+.value
+);
 
 
-timeLeft=parseInt(document.getElementById("timeSelect").value);
+
+document
+.getElementById("typingInput")
+.value="";
 
 
 
-document.getElementById("time").innerText=
-Math.floor(timeLeft/60)+":00";
+document
+.getElementById("time")
+.innerText=
 
+Math.floor(timeLeft/60)
++":00";
+
+
+
+renderPassage();
 
 
 updateStats();
+
 
 
 };
@@ -1400,23 +1893,37 @@ updateStats();
 
 
 
-// RESULT
+
+/* ===============================
+   RESULT
+================================ */
+
 
 
 function finishTest(){
 
 
+
 clearInterval(timer);
 
 
+
 started=false;
+
+
+
+document
+.getElementById("typingInput")
+.disabled=true;
 
 
 
 let minutes=(300-timeLeft)/60;
 
 
+
 if(minutes<=0)
+
 minutes=0.01;
 
 
@@ -1424,24 +1931,41 @@ minutes=0.01;
 let words=typedCharacters/5;
 
 
-let net=Math.round(words/minutes);
+
+let speed=Math.round(
+words/minutes
+);
 
 
 
-let accuracy=typedCharacters>0
-?
-Math.round(((typedCharacters-errors)/typedCharacters)*100)
+let accuracy=
+
+typedCharacters?
+
+Math.round(
+((typedCharacters-errors)
+/typedCharacters)*100
+)
+
 :
+
 100;
 
 
 
 
-document.querySelector(".typing-box").innerHTML=`
+
+document
+.querySelector(".typing-box")
+.innerHTML=
+
+
+
+`
 
 <div style="
 text-align:center;
-padding:25px;
+padding:30px;
 ">
 
 
@@ -1452,33 +1976,42 @@ padding:25px;
 </h2>
 
 
-<h3 style="margin-top:20px">
+<h3>
 
-Net Speed : ${net} WPM
+Speed : ${speed} WPM
 
 </h3>
 
 
 <p>
+
 Accuracy : ${accuracy}%
+
 </p>
 
 
 <p>
-Total Characters : ${typedCharacters}
+
+Characters : ${typedCharacters}
+
 </p>
 
 
 <p>
-Total Errors : ${errors}
+
+Errors : ${errors}
+
 </p>
 
 
-<button class="btn" onclick="location.reload()">
+
+<button class="btn"
+onclick="location.reload()">
 
 Try Again
 
 </button>
+
 
 
 </div>
@@ -1493,42 +2026,8 @@ Try Again
 
 
 
-
-
-
-
-// MODE BUTTONS
-
-
-document.getElementById("examMode").onclick=function(){
-
-
-this.classList.add("active");
-
-document.getElementById("practiceMode")
-.classList.remove("active");
-
-
-};
-
-
-
-document.getElementById("practiceMode").onclick=function(){
-
-
-this.classList.add("active");
-
-document.getElementById("examMode")
-.classList.remove("active");
-
-
-};
-
-
-
-
-
 </script>
+
 
 
 
@@ -1538,17 +2037,19 @@ document.getElementById("examMode")
 
 
 <p>
+
 © 2026 Govt Exam Typing Tool
+
 </p>
 
 
 <p>
-Developed By: <b>AMBUJ SHUKLA</b>
-</p>
 
+Developed By:
+<b>
+AMBUJ SHUKLA
+</b>
 
-<p>
-Contact: soorajshukla1996@gmail.com
 </p>
 
 
