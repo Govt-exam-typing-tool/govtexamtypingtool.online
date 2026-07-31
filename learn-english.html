@@ -4,35 +4,43 @@
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+
 <title>
-Learn English Typing | Govt Exam Typing Tool
+English Typing Test | SSC Railway Bank Government Exam Typing Practice
 </title>
 
 
+<meta name="description" content="Free English typing practice for SSC, Railway, Bank and government exams with WPM accuracy test.">
+
+
 <style>
+
 
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial, sans-serif;
+font-family:'Segoe UI',Arial,sans-serif;
 }
 
 
 body{
+
 background:#f4f7fb;
 color:#333;
+
 }
 
 
 /* HEADER */
 
+
 header{
 
 background:#004aad;
-color:white;
 padding:15px 20px;
 
 display:flex;
@@ -45,8 +53,25 @@ flex-wrap:wrap;
 
 .logo{
 
-font-size:20px;
+display:flex;
+align-items:center;
+
+font-size:18px;
 font-weight:bold;
+color:white;
+
+}
+
+
+.logo img{
+
+height:45px;
+width:45px;
+
+border-radius:50%;
+background:white;
+
+margin-right:10px;
 
 }
 
@@ -58,21 +83,45 @@ color:#ffd700;
 }
 
 
+
 nav a{
 
 color:white;
 text-decoration:none;
-margin-left:10px;
-padding:8px;
+
+padding:8px 12px;
+
+border-radius:5px;
+
+font-weight:bold;
+
+font-size:14px;
 
 }
 
 
 
+nav a:hover,
+nav a.active{
+
+background:#ffd700;
+color:#004aad;
+
+}
+
+
+
+
+
+/* CONTAINER */
+
+
 .container{
 
 max-width:1100px;
-margin:auto;
+
+margin:25px auto;
+
 padding:20px;
 
 }
@@ -82,8 +131,11 @@ padding:20px;
 .card{
 
 background:white;
+
 padding:25px;
+
 border-radius:12px;
+
 box-shadow:0 3px 12px rgba(0,0,0,.1);
 
 margin-bottom:20px;
@@ -92,30 +144,98 @@ margin-bottom:20px;
 
 
 
-h1,h2{
+h1{
 
 color:#004aad;
+
+margin-bottom:15px;
 
 }
 
 
 
 
-/* BUTTONS */
+
+/* STATS */
 
 
-button,
-select{
+.stats-box{
 
-padding:10px 15px;
+display:grid;
 
-border-radius:7px;
+grid-template-columns:repeat(4,1fr);
+
+gap:15px;
+
+margin-bottom:20px;
+
+}
+
+
+
+.stat{
+
+background:linear-gradient(135deg,#004aad,#007bff);
+
+color:white;
+
+padding:15px;
+
+border-radius:10px;
+
+text-align:center;
+
+}
+
+
+
+.stat small{
+
+display:block;
+
+}
+
+
+
+.stat b{
+
+font-size:24px;
+
+}
+
+
+
+
+
+
+/* MODE */
+
+
+.mode-tabs{
+
+display:flex;
+
+gap:10px;
+
+margin-bottom:20px;
+
+}
+
+
+
+.mode-btn{
+
+flex:1;
+
+padding:12px;
 
 border:2px solid #004aad;
 
-background:#004aad;
+background:white;
 
-color:white;
+color:#004aad;
+
+border-radius:8px;
 
 font-weight:bold;
 
@@ -125,19 +245,11 @@ cursor:pointer;
 
 
 
-button:hover{
+.mode-btn.active{
 
-background:#00337a;
+background:#004aad;
 
-}
-
-
-
-.active{
-
-background:#ffd700!important;
-
-color:#004aad!important;
+color:white;
 
 }
 
@@ -156,38 +268,32 @@ gap:10px;
 
 flex-wrap:wrap;
 
-margin:20px 0;
+margin-bottom:20px;
 
 }
 
 
 
+select,
+button{
 
+padding:10px 15px;
 
-/* LESSONS */
+border-radius:6px;
 
+border:2px solid #004aad;
 
-.lesson-grid{
-
-display:grid;
-
-grid-template-columns:repeat(3,1fr);
-
-gap:15px;
+font-weight:bold;
 
 }
 
 
 
-.lesson-card{
+button{
 
-background:#eef6ff;
+background:#004aad;
 
-border:2px solid #dbeafe;
-
-padding:15px;
-
-border-radius:10px;
+color:white;
 
 cursor:pointer;
 
@@ -195,19 +301,40 @@ cursor:pointer;
 
 
 
-.lesson-card:hover{
+button:hover{
 
-border-color:#004aad;
+background:#00337a;
+
+}
+
+
+.danger{
+
+background:#dc2626;
+
+border-color:#dc2626;
+
+}
+
+
+
+.success{
+
+background:#16a34a;
+
+border-color:#16a34a;
 
 }
 
 
 
 
-/* PRACTICE AREA */
 
 
-.practice-area{
+/* TYPING WINDOW */
+
+
+.typing-section{
 
 display:none;
 
@@ -215,57 +342,57 @@ display:none;
 
 
 
-.lesson-info{
+.lesson-title{
 
-background:#e8f0ff;
+color:#004aad;
 
-padding:12px;
-
-border-radius:8px;
-
-margin:15px 0;
+font-size:22px;
 
 }
 
 
 
-
-
-/* TEXT */
-
-
 .text-display{
 
-background:#fafcff;
+height:180px;
+
+overflow:hidden;
+
+background:#f8fbff;
 
 border:3px solid #004aad;
 
 border-radius:10px;
 
-padding:25px;
+padding:20px;
 
-min-height:280px;
+margin:20px 0;
 
-font-size:28px;
+
+font-size:30px;
 
 line-height:1.8;
 
+letter-spacing:1px;
+
+color:#94a3b8;
+
 word-spacing:8px;
 
-white-space:pre-wrap;
 
 }
 
 
 
-.correct{
+.text-display span.correct{
 
 color:#16a34a;
 
 }
 
 
-.wrong{
+
+.text-display span.incorrect{
 
 color:#dc2626;
 
@@ -274,7 +401,8 @@ background:#fee2e2;
 }
 
 
-.current{
+
+.text-display span.current{
 
 background:#004aad;
 
@@ -284,9 +412,6 @@ color:white;
 
 
 
-
-
-/* INPUT */
 
 
 #typingInput{
@@ -295,55 +420,13 @@ width:100%;
 
 padding:15px;
 
-margin-top:20px;
-
-font-size:20px;
+font-size:22px;
 
 border:2px solid #004aad;
 
 border-radius:8px;
 
-}
-
-
-
-
-
-/* STATS */
-
-
-.stats{
-
-display:grid;
-
-grid-template-columns:repeat(4,1fr);
-
-gap:15px;
-
-margin:20px 0;
-
-}
-
-
-
-.stat{
-
-background:#004aad;
-
-color:white;
-
-padding:15px;
-
-border-radius:10px;
-
-text-align:center;
-
-}
-
-
-.stat b{
-
-font-size:24px;
+outline:none;
 
 }
 
@@ -358,9 +441,7 @@ font-size:24px;
 
 display:none;
 
-background:#ecfdf5;
-
-border:2px solid #16a34a;
+background:#f8fbff;
 
 padding:20px;
 
@@ -372,17 +453,42 @@ margin-top:20px;
 
 
 
+.result-box h2{
+
+color:#004aad;
+
+}
 
 
-footer{
 
-background:#004aad;
 
-color:white;
 
-padding:20px;
+/* CUSTOM TEXT */
 
-text-align:center;
+
+.custom-box{
+
+display:none;
+
+margin-bottom:20px;
+
+}
+
+
+
+.custom-box textarea{
+
+width:100%;
+
+height:150px;
+
+padding:15px;
+
+font-size:18px;
+
+border:2px solid #004aad;
+
+border-radius:8px;
 
 }
 
@@ -392,42 +498,33 @@ text-align:center;
 
 @media(max-width:800px){
 
-.lesson-grid{
+
+.stats-box{
 
 grid-template-columns:repeat(2,1fr);
 
 }
 
 
-.stats{
+.mode-tabs{
 
-grid-template-columns:repeat(2,1fr);
+flex-direction:column;
 
 }
 
 
 .text-display{
 
-font-size:22px;
+font-size:24px;
 
 }
 
-}
-
-
-
-@media(max-width:500px){
-
-.lesson-grid{
-
-grid-template-columns:1fr;
-
-}
 
 }
 
 
 </style>
+
 
 </head>
 
@@ -436,29 +533,33 @@ grid-template-columns:1fr;
 <body>
 
 
+
 <header>
 
 
 <div class="logo">
 
-⌨️ Govt Exam 
+<img src="logo.png">
+
 
 <span>
-Typing Tool
+Govt Exam Typing Tool
 </span>
 
 </div>
 
 
 
+
 <nav>
+
 
 <a href="index.html">
 Home
 </a>
 
 
-<a href="typing-test.html">
+<a class="active">
 Typing Test
 </a>
 
@@ -469,7 +570,12 @@ English
 
 
 <a href="learn-hindi.html">
-Hindi
+Hindi Mangal
+</a>
+
+
+<a href="mock.html">
+Mock
 </a>
 
 
@@ -480,6 +586,8 @@ Hindi
 
 
 
+
+
 <div class="container">
 
 
@@ -487,37 +595,116 @@ Hindi
 <div class="card">
 
 
+
 <h1>
-English Touch Typing Course
+⌨️ English Live Typing Test
 </h1>
 
 
-<p>
-
-Step by step English typing practice for SSC, Railway, Bank and AHC RO/ARO exams.
-
-</p>
 
 
+<div class="stats-box">
 
-<div class="controls">
+
+<div class="stat">
+
+<small>
+Speed
+</small>
+
+<b id="wpm">
+0
+</b>
+
+WPM
+
+</div>
 
 
-<button id="practiceBtn" class="active">
+
+<div class="stat">
+
+<small>
+Accuracy
+</small>
+
+<b id="accuracy">
+100
+</b>
+
+%
+
+</div>
+
+
+
+
+<div class="stat">
+
+<small>
+Time
+</small>
+
+<b id="time">
+0:00
+</b>
+
+</div>
+
+
+
+
+<div class="stat">
+
+<small>
+Errors
+</small>
+
+<b id="errors">
+0
+</b>
+
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="mode-tabs">
+
+
+<button class="mode-btn active" id="practiceBtn">
 
 ✍️ Practice Mode
 
 </button>
 
 
-
-<button id="examBtn">
+<button class="mode-btn" id="examBtn">
 
 📝 Exam Mode
 
 </button>
 
 
+<button class="mode-btn" id="customBtn">
+
+📄 Add Text
+
+</button>
+
+
+
+</div>
+
+
+
+
+
+<div class="controls">
 
 
 <select id="timeSelect">
@@ -546,352 +733,65 @@ Step by step English typing practice for SSC, Railway, Bank and AHC RO/ARO exams
 </select>
 
 
-</div>
 
 
-
-<div id="lessonList" class="lesson-grid">
-
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-
-<div class="card practice-area" id="practiceArea">
-
-
-<h2 id="lessonTitle">
-
-Select Lesson
-
-</h2>
-
-
-
-<div class="lesson-info" id="lessonInfo">
-
-Lesson details
-
-</div>
-
-
-
-<div id="textDisplay" class="text-display">
-
-Select lesson to start
-
-</div>
-
-
-
-<input 
-type="text"
-id="typingInput"
-placeholder="Start typing here..."
-autocomplete="off"
->
-
-
-
-<div class="stats">
-
-
-<div class="stat">
-
-Speed
-
-<br>
-
-<b id="wpm">
-0
-</b>
-
-WPM
-
-</div>
-
-
-
-<div class="stat">
-
-Accuracy
-
-<br>
-
-<b id="accuracy">
-100
-</b>
-
-%
-
-</div>
-
-
-
-<div class="stat">
-
-Errors
-
-<br>
-
-<b id="errors">
-0
-</b>
-
-</div>
-
-
-
-<div class="stat">
-
-Time
-
-<br>
-
-<b id="time">
-00:00
-</b>
-
-</div>
-
-
-
-</div>
-
-
-
-<button onclick="restartTest()">
+<button class="danger" id="restartBtn">
 
 🔄 Restart
 
 </button>
 
 
-<button onclick="nextLesson()">
-
-Next Lesson ➡️
-
-</button>
-
-
-
-
-<div id="resultBox" class="result-box">
 
 </div>
 
+   <script>
 
 
-</div>
-<script>
+/* ===============================
+   VARIABLES
+================================ */
 
 
-/* =========================
-   TYPING ENGINE
-========================= */
+let currentText="";
 
+let currentIndex=0;
 
-let currentLesson = 0;
+let errors=0;
 
-let currentText = "";
+let totalTyped=0;
 
-let currentIndex = 0;
+let seconds=0;
 
-let errors = 0;
+let timer=null;
 
-let totalTyped = 0;
+let running=false;
 
-let seconds = 0;
-
-let timer = null;
-
-let started = false;
-
-let mode = "practice";
+let mode="practice";
 
 
 
-const lessonList =
-document.getElementById("lessonList");
-
-
-const textDisplay =
-document.getElementById("textDisplay");
 
 
 const typingInput =
 document.getElementById("typingInput");
 
 
+const textDisplay =
+document.getElementById("textDisplay");
 
 
 
 
 
-/* =========================
-   LOAD LESSON MENU
-========================= */
 
 
-function loadLessonMenu(){
+/* ===============================
+   START TEST
+================================ */
 
 
-lessonList.innerHTML="";
-
-
-lessons.forEach((lesson,index)=>{
-
-
-let div=document.createElement("div");
-
-
-div.className="lesson-card";
-
-
-div.innerHTML=`
-
-<h3>
-${lesson.title}
-</h3>
-
-<p>
-${lesson.keys}
-</p>
-
-`;
-
-
-
-div.onclick=function(){
-
-openLesson(index);
-
-};
-
-
-
-lessonList.appendChild(div);
-
-
-
-});
-
-
-}
-
-
-
-
-
-
-/* =========================
-   OPEN LESSON
-========================= */
-
-
-function openLesson(index){
-
-
-currentLesson=index;
-
-
-document.getElementById("practiceArea")
-.style.display="block";
-
-
-
-document.getElementById("lessonTitle")
-.innerText=
-lessons[index].title;
-
-
-
-document.getElementById("lessonInfo")
-.innerText=
-"Practice Keys : "+lessons[index].keys;
-
-
-
-startPractice();
-
-
-}
-
-
-
-
-
-
-
-/* =========================
-   CREATE LONG PRACTICE TEXT
-========================= */
-
-
-function generateText(){
-
-
-
-let source =
-lessons[currentLesson].content;
-
-
-
-let output="";
-
-
-
-while(output.length < 4000){
-
-
-let word =
-source[
-Math.floor(Math.random()*source.length)
-];
-
-
-output += word+" ";
-
-
-}
-
-
-
-return output.trim();
-
-
-
-}
-
-
-
-
-
-
-
-/* =========================
-   START PRACTICE
-========================= */
-
-
-function startPractice(){
-
-
-
-clearInterval(timer);
-
-
-
-currentText =
-generateText();
-
+function startTest(){
 
 
 currentIndex=0;
@@ -902,14 +802,17 @@ totalTyped=0;
 
 seconds=0;
 
-started=false;
 
+clearInterval(timer);
+
+
+running=false;
 
 
 typingInput.value="";
 
-typingInput.disabled=false;
 
+typingInput.disabled=false;
 
 
 document.getElementById("resultBox")
@@ -917,8 +820,14 @@ document.getElementById("resultBox")
 
 
 
-document.getElementById("time")
-.innerText="00:00";
+if(mode==="practice"){
+
+
+currentText =
+generateText();
+
+
+}
 
 
 
@@ -931,6 +840,46 @@ updateStats();
 typingInput.focus();
 
 
+}
+
+
+
+
+
+
+/* ===============================
+   PRACTICE GENERATOR
+================================ */
+
+
+function generateText(){
+
+
+let result="";
+
+
+
+while(result.length < 3000){
+
+
+let randomWord =
+
+englishWords[
+Math.floor(
+Math.random()*englishWords.length
+)
+];
+
+
+result += randomWord+" ";
+
+
+}
+
+
+
+return result.trim();
+
 
 }
 
@@ -940,11 +889,9 @@ typingInput.focus();
 
 
 
-
-
-/* =========================
-   DISPLAY TEXT
-========================= */
+/* ===============================
+   RENDER ONLY VISIBLE AREA
+================================ */
 
 
 function renderText(){
@@ -954,24 +901,57 @@ textDisplay.innerHTML="";
 
 
 
-for(let i=0;i<currentText.length;i++){
+let start =
+currentIndex-120;
 
 
 
-let span=document.createElement("span");
+if(start<0)
+
+start=0;
 
 
 
-span.innerText=currentText[i];
+let end =
+start+300;
 
 
 
-if(i < currentIndex){
+let visible =
+currentText.substring(
+start,
+end
+);
+
+
+
+
+for(let i=0;i<visible.length;i++){
+
+
+
+let realIndex =
+start+i;
+
+
+
+let span =
+document.createElement("span");
+
+
+
+span.innerText =
+visible[i];
+
+
+
+if(realIndex < currentIndex){
 
 
 if(
-typingInput.value[i]
-===currentText[i]
+typingInput.value[realIndex]
+===
+currentText[realIndex]
 )
 
 span.className="correct";
@@ -979,13 +959,13 @@ span.className="correct";
 
 else
 
-span.className="wrong";
+span.className="incorrect";
 
 
 }
 
 
-else if(i===currentIndex){
+else if(realIndex===currentIndex){
 
 
 span.className="current";
@@ -1002,6 +982,7 @@ textDisplay.appendChild(span);
 }
 
 
+
 }
 
 
@@ -1011,9 +992,9 @@ textDisplay.appendChild(span);
 
 
 
-/* =========================
+/* ===============================
    INPUT CHECK
-========================= */
+================================ */
 
 
 typingInput.addEventListener(
@@ -1022,13 +1003,9 @@ function(){
 
 
 
-if(!started){
-
-
-started=true;
+if(!running){
 
 startTimer();
-
 
 }
 
@@ -1038,9 +1015,7 @@ let value=this.value;
 
 
 
-while(
-value.length > currentIndex
-){
+if(value.length > currentIndex){
 
 
 
@@ -1050,7 +1025,8 @@ totalTyped++;
 
 if(
 value[currentIndex]
-!==currentText[currentIndex]
+!==
+currentText[currentIndex]
 ){
 
 
@@ -1064,25 +1040,26 @@ errors++;
 currentIndex++;
 
 
+}
 
-/* AUTO NEW PASSAGE */
+
+
+
+/*
+Auto add new paragraph
+before finishing
+*/
+
 
 if(
-currentIndex>=currentText.length
+currentIndex >
+currentText.length-200
 ){
 
 
-currentText=
-generateText();
+currentText +=
+" "+generateText();
 
-
-currentIndex=0;
-
-
-typingInput.value="";
-
-
-}
 
 
 }
@@ -1096,9 +1073,7 @@ updateStats();
 
 
 
-}
-
-);
+});
 
 
 
@@ -1107,42 +1082,48 @@ updateStats();
 
 
 
-
-/* =========================
+/* ===============================
    TIMER
-========================= */
+================================ */
 
 
 function startTimer(){
 
 
+running=true;
 
-timer=setInterval(()=>{
+
+
+timer=setInterval(function(){
+
 
 
 seconds++;
 
 
 
-let min=
+let min =
 Math.floor(seconds/60);
 
 
 
-let sec=
+let sec =
 seconds%60;
 
 
 
 document.getElementById("time")
-.innerText=
-min+":"+String(sec).padStart(2,"0");
+.innerText =
+min+":"+
+String(sec)
+.padStart(2,"0");
 
 
 
 let limit =
 parseInt(
-document.getElementById("timeSelect").value
+document.getElementById("timeSelect")
+.value
 );
 
 
@@ -1160,7 +1141,6 @@ finishTest();
 },1000);
 
 
-
 }
 
 
@@ -1170,10 +1150,9 @@ finishTest();
 
 
 
-
-/* =========================
+/* ===============================
    STATS
-========================= */
+================================ */
 
 
 function updateStats(){
@@ -1191,27 +1170,32 @@ minutes=0.01;
 
 
 
+
 let words =
 currentIndex/5;
 
 
 
+
 let wpm =
-Math.round(words/minutes);
+Math.round(
+words/minutes
+);
 
 
 
 let accuracy =
-totalTyped===0
-?
-100
-:
+totalTyped?
+
 Math.round(
 ((totalTyped-errors)
-/
-totalTyped)
-*100
-);
+/totalTyped)*100
+)
+
+:
+
+100;
+
 
 
 
@@ -1239,16 +1223,19 @@ document.getElementById("errors")
 
 
 
-
-/* =========================
+/* ===============================
    RESULT
-========================= */
+================================ */
 
 
 function finishTest(){
 
 
 clearInterval(timer);
+
+
+running=false;
+
 
 
 typingInput.disabled=true;
@@ -1270,27 +1257,27 @@ result.innerHTML=`
 🎯 Typing Result
 </h2>
 
-<br>
 
 <p>
-Speed :
+Speed:
 <b>
 ${document.getElementById("wpm").innerText}
+</b>
 WPM
-</b>
 </p>
 
 
 <p>
-Accuracy :
+Accuracy:
 <b>
-${document.getElementById("accuracy").innerText}%
+${document.getElementById("accuracy").innerText}
 </b>
+%
 </p>
 
 
 <p>
-Errors :
+Errors:
 <b>
 ${errors}
 </b>
@@ -1298,20 +1285,21 @@ ${errors}
 
 
 <p>
-Characters :
+Characters:
 <b>
-${totalTyped}
+${currentIndex}
 </b>
 </p>
 
 
 <p>
-Time :
+Time:
 <b>
 ${seconds}
 Seconds
 </b>
 </p>
+
 
 `;
 
@@ -1325,60 +1313,26 @@ Seconds
 
 
 
-/* =========================
+
+/* ===============================
    BUTTONS
-========================= */
+================================ */
 
 
-function restartTest(){
+document
+.getElementById("restartBtn")
+.onclick=function(){
 
 
-startPractice();
+startTest();
 
 
-}
-
-
-
-
-
-
-
-function nextLesson(){
-
-
-if(
-currentLesson < lessons.length-1
-){
-
-
-openLesson(currentLesson+1);
-
-
-}
-
-else{
-
-
-alert(
-"All lessons completed"
-);
-
-
-}
-
-
-}
+};
 
 
 
 
 
-
-
-/* =========================
-   MODE
-========================= */
 
 
 document
@@ -1397,7 +1351,13 @@ document
 .classList.remove("active");
 
 
+startTest();
+
+
 };
+
+
+
 
 
 
@@ -1419,393 +1379,298 @@ document
 .classList.remove("active");
 
 
+
+currentText =
+examParagraphs[
+Math.floor(
+Math.random()*
+examParagraphs.length
+)
+];
+
+
+startTest();
+
+
 };
 
 
 
 
 
+
+
+
+document
+.getElementById("customBtn")
+.onclick=function(){
+
+
+let box =
+document.querySelector(".custom-box");
+
+
+box.style.display="block";
+
+
+};
+
+
+
 </script>
+
+   
+<!-- ===============================
+     CUSTOM TEXT BOX
+================================ -->
+
+
+<div class="custom-box card">
+
+
+<h3>
+Paste Your Paragraph
+</h3>
+
+
+<textarea id="customText"
+placeholder="Paste your typing paragraph here...">
+</textarea>
+
+
+
+<br>
+
+
+<button onclick="loadCustomText()">
+
+Start Custom Test
+
+</button>
+
+
+</div>
+
+
+
+
+
+
+<!-- ===============================
+     TYPING AREA
+================================ -->
+
+
+<div class="card typing-section" id="typingSection">
+
+
+<h2 class="lesson-title">
+
+English Typing Practice
+
+</h2>
+
+
+
+
+<div class="text-display" id="textDisplay">
+
+</div>
+
+
+
+
+
+<input 
+type="text"
+id="typingInput"
+placeholder="Start typing here..."
+autocomplete="off"
+>
+
+
+
+<div class="result-box" id="resultBox">
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
 <script>
 
 
-/* =========================
-   LESSON DATABASE
-========================= */
+/* ===============================
+   CUSTOM TEXT LOAD
+================================ */
 
 
-const lessons = [
+function loadCustomText(){
 
 
-{
-title:"Lesson 1: Home Row - ASDF JKL;",
-keys:"A S D F J K L ;",
+let text =
+document.getElementById("customText")
+.value.trim();
 
-content:[
 
-"asdf jkl; asdf jkl; fdsa ;lkj",
 
-"asdf jkl; sad fad lad ask",
+if(text.length>0){
 
-"fall flask salsa dad lad"
 
-]
+mode="custom";
 
-},
 
+currentText=text;
 
 
-{
-title:"Lesson 2: Home Row Combinations",
-keys:"Home Row Practice",
 
-content:[
+document.querySelector(".custom-box")
+.style.display="none";
 
-"asdf jkl; sad flask lad fall",
 
-"ask dad all lads fall flask",
 
-"half salad alas fall"
+document.getElementById("typingSection")
+.style.display="block";
 
-]
 
-},
 
+startCustomTest();
 
-
-
-{
-title:"Lesson 3: Left Hand Control",
-keys:"A S D F",
-
-content:[
-
-"asdf sad fad dad fast",
-
-"glass flask flag flat",
-
-"safe data fast"
-
-]
-
-},
-
-
-
-
-{
-title:"Lesson 4: Right Hand Control",
-keys:"J K L ;",
-
-content:[
-
-"jkl; lad kill ask",
-
-"all fall hall lake",
-
-"jail skill"
-
-]
-
-},
-
-
-
-
-{
-title:"Lesson 5: Home Row Speed",
-keys:"Home Row Drill",
-
-content:[
-
-"asdf jkl; asdf jkl;",
-
-"fast flask skill salad",
-
-"glass fall hall ask"
-
-]
-
-},
-
-
-
-
-{
-title:"Lesson 6: Top Row Introduction",
-keys:"Q W E R T Y U I O P",
-
-content:[
-
-"qwer tyui op",
-
-"write quiet tower",
-
-"power query"
-
-]
-
-},
-
-
-
-
-{
-title:"Lesson 7: Home + Top Combination",
-keys:"Home + Top",
-
-content:[
-
-"quick write tower",
-
-"quiet water power",
-
-"great skill"
-
-]
-
-},
-
-
-
-
-{
-title:"Lesson 8: Bottom Row Introduction",
-keys:"Z X C V B N M",
-
-content:[
-
-"zxcv bnm",
-
-"move voice become",
-
-"number basic"
-
-]
-
-},
-
-
-
-
-{
-title:"Lesson 9: Complete Keyboard",
-keys:"All Alphabet",
-
-content:[
-
-"computer typing practice",
-
-"government exam preparation",
-
-"keyboard accuracy speed"
-
-]
-
-},
-
-
-
-
-{
-title:"Lesson 10: Common Words",
-keys:"Daily Words",
-
-content:[
-
-"computer knowledge",
-
-"typing practice",
-
-"government service"
-
-]
-
-},
-
-
-
-
-{
-title:"Lesson 11: Office Words",
-keys:"Office Practice",
-
-content:[
-
-"application document office",
-
-"computer department record",
-
-"official letter"
-
-]
-
-},
-
-
-
-
-{
-title:"Lesson 12: Computer Words",
-keys:"Computer Practice",
-
-content:[
-
-"keyboard monitor software",
-
-"hardware internet typing",
-
-"computer system"
-
-]
-
-},
-
-
-
-
-{
-title:"Lesson 13: Government Words",
-keys:"Government Practice",
-
-content:[
-
-"government examination",
-
-"public service department",
-
-"official notification"
-
-]
-
-},
-
-
-
-
-{
-title:"Lesson 14: SSC Practice",
-keys:"SSC Pattern",
-
-content:[
-
-"staff selection commission",
-
-"competitive examination practice",
-
-"candidate should improve typing"
-
-]
-
-},
-
-
-
-
-{
-title:"Lesson 15: Railway Practice",
-keys:"Railway Pattern",
-
-content:[
-
-"railway recruitment board",
-
-"railway examination typing",
-
-"candidate preparation"
-
-]
-
-},
-
-
-
-
-{
-title:"Lesson 16: Bank Practice",
-keys:"Bank Pattern",
-
-content:[
-
-"banking system customer",
-
-"financial service",
-
-"account information"
-
-]
-
-},
-
-
-
-
-{
-title:"Lesson 17: Sentence Practice",
-keys:"Sentences",
-
-content:[
-
-"regular typing practice improves speed",
-
-"accuracy is important for examination",
-
-"daily practice creates confidence"
-
-]
-
-},
-
-
-
-
-{
-title:"Lesson 18: Paragraph Practice",
-keys:"Paragraph",
-
-content:[
-
-"computer knowledge and typing skills are important for government examinations",
-
-"regular practice helps candidates achieve better speed and accuracy"
-
-]
-
-},
-
-
-
-
-{
-title:"Lesson 19: Speed Drill",
-keys:"Speed",
-
-content:[
-
-"practice speed accuracy daily",
-
-"fast typing requires concentration"
-
-]
-
-},
-
-
-
-
-{
-title:"Lesson 20: Accuracy Drill",
-keys:"Accuracy",
-
-content:[
-
-"correct typing is more important than fast typing",
-
-"avoid mistakes during examination"
-
-]
 
 }
+
+
+
+}
+
+
+
+
+function startCustomTest(){
+
+
+currentIndex=0;
+
+errors=0;
+
+totalTyped=0;
+
+seconds=0;
+
+running=false;
+
+
+typingInput.value="";
+
+
+clearInterval(timer);
+
+
+renderText();
+
+updateStats();
+
+
+typingInput.disabled=false;
+
+typingInput.focus();
+
+
+}
+
+
+
+
+
+
+
+/* ===============================
+   ENGLISH WORD DATABASE
+================================ */
+
+
+const englishWords=[
+
+
+"the",
+"and",
+"government",
+"computer",
+"education",
+"practice",
+"typing",
+"speed",
+"accuracy",
+"student",
+"candidate",
+"examination",
+"success",
+"important",
+"regular",
+"learning",
+"keyboard",
+"office",
+"department",
+"information",
+"development",
+"technology",
+"management",
+"application",
+"process",
+"result",
+"experience",
+"knowledge",
+"ability",
+"improve",
+"prepare",
+"question",
+"answer",
+"service",
+"system",
+"online",
+"training",
+"skill",
+"performance",
+"national",
+"country",
+"people",
+"work",
+"time",
+"correct",
+"method",
+"daily",
+"future",
+"career",
+"selection",
+"competition",
+"professional",
+"complete",
+"available",
+"required",
+"candidate",
+"government",
+"employee",
+"department",
+"official",
+"document",
+"report",
+"record",
+"data",
+"entry",
+"management",
+"communication",
+"computer",
+"keyboard",
+"practice",
+"accuracy",
+"typing"
+
 
 ];
 
@@ -1813,62 +1678,71 @@ content:[
 
 
 
-/* =========================
-   AUTO CREATE EXTRA LESSONS
-   UP TO 56
-========================= */
 
 
-while(lessons.length < 56){
+/* ===============================
+   EXAM PASSAGES
+================================ */
 
 
-let number =
-lessons.length + 1;
+const examParagraphs=[
 
 
 
-lessons.push({
+"Computer knowledge and typing skill are important requirements for many government examinations. Candidates should practice regularly to improve their speed and accuracy. A good typing speed with fewer mistakes helps in achieving better performance during the examination.",
 
 
-title:
-"Lesson "+number+": Exam Practice",
+
+"Regular practice develops confidence and improves keyboard control. Government offices require accurate data entry and document preparation. Therefore typing skills have become an important part of many competitive examinations.",
 
 
-keys:
-"Typing Practice",
+
+"Time management plays an important role in every examination. Candidates should maintain accuracy while increasing their typing speed. Continuous practice with proper technique can improve overall performance."
 
 
-content:[
 
-
-"government examination typing practice improves speed and accuracy",
-
-
-"regular keyboard practice helps candidates prepare for typing tests",
-
-
-"computer knowledge and typing skill are required for various examinations"
-
-
-]
-
-
-});
-
-
-}
+];
 
 
 
 
 
-/* LOAD MENU */
 
-loadLessonMenu();
+/* ===============================
+   PAGE LOAD
+================================ */
+
+
+document
+.getElementById("typingSection")
+.style.display="block";
+
+
+startTest();
 
 
 
 </script>
+
+
+
+<footer style="
+background:#004aad;
+color:white;
+padding:20px;
+text-align:center;
+margin-top:30px;
+">
+
+
+English Typing Practice Tool
+
+
+</footer>
+
+
+
+</div>
 
 
 </body>
