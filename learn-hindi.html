@@ -7,28 +7,28 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
 <title>
-Hindi Mangal Typing Practice Online Free | SSC UPPSC RO ARO Railway Typing Test
+Hindi Mangal Typing Practice | SSC RO ARO Railway Typing Test
 </title>
 
 
-<meta name="description" content="Free Hindi Mangal typing practice online. Learn Hindi typing for SSC, UPPSC RO ARO, High Court, Railway and government exams with speed and accuracy test.">
+<meta name="description" content="Hindi Mangal typing practice for SSC, Railway, High Court and government exams.">
 
 
 <style>
+
 
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:'Segoe UI',Arial,sans-serif
+font-family:'Segoe UI',Arial,sans-serif;
 }
 
 
 body{
 
-background:#f4f6f9;
+background:#f4f7fb;
 color:#333;
 
 }
@@ -53,9 +53,9 @@ flex-wrap:wrap;
 
 display:flex;
 align-items:center;
+color:white;
 font-size:18px;
 font-weight:bold;
-color:white;
 
 }
 
@@ -65,8 +65,8 @@ color:white;
 height:45px;
 width:45px;
 border-radius:50%;
-margin-right:10px;
 background:white;
+margin-right:10px;
 
 }
 
@@ -85,9 +85,8 @@ color:white;
 text-decoration:none;
 padding:8px 12px;
 border-radius:5px;
-font-weight:600;
-margin-left:6px;
 font-size:14px;
+font-weight:bold;
 
 }
 
@@ -103,12 +102,13 @@ color:#004aad;
 
 
 
-/* MAIN */
+
+/* CONTAINER */
 
 
 .container{
 
-max-width:1000px;
+max-width:1100px;
 margin:25px auto;
 padding:20px;
 
@@ -120,7 +120,7 @@ padding:20px;
 background:white;
 padding:25px;
 border-radius:12px;
-box-shadow:0 2px 10px rgba(0,0,0,.1);
+box-shadow:0 3px 12px rgba(0,0,0,.1);
 margin-bottom:20px;
 
 }
@@ -130,17 +130,147 @@ margin-bottom:20px;
 h1{
 
 color:#004aad;
-font-size:26px;
-margin-bottom:10px;
+margin-bottom:15px;
 
 }
 
 
-.intro{
 
-line-height:1.8;
-color:#555;
+
+
+/* STATS */
+
+
+.stats-box{
+
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:15px;
 margin-bottom:20px;
+
+}
+
+
+
+.stat{
+
+background:linear-gradient(135deg,#004aad,#007bff);
+color:white;
+padding:15px;
+border-radius:10px;
+text-align:center;
+
+}
+
+
+.stat small{
+
+display:block;
+
+}
+
+
+.stat b{
+
+font-size:24px;
+
+}
+
+
+
+
+/* MODE */
+
+
+.mode-tabs{
+
+display:flex;
+gap:10px;
+margin-bottom:20px;
+
+}
+
+
+
+.mode-btn{
+
+flex:1;
+padding:12px;
+border:2px solid #004aad;
+background:white;
+color:#004aad;
+border-radius:8px;
+font-weight:bold;
+cursor:pointer;
+
+}
+
+
+
+.mode-btn.active{
+
+background:#004aad;
+color:white;
+
+}
+
+
+
+
+/* CONTROL */
+
+
+.controls{
+
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+
+}
+
+
+
+select,
+button{
+
+padding:10px 15px;
+border-radius:6px;
+border:2px solid #004aad;
+font-weight:bold;
+
+}
+
+
+
+button{
+
+background:#004aad;
+color:white;
+cursor:pointer;
+
+}
+
+
+button:hover{
+
+background:#00337a;
+
+}
+
+
+
+.btn-danger{
+
+background:#dc2626;
+border-color:#dc2626;
+
+}
+
+
+.btn-success{
+
+background:#16a34a;
+border-color:#16a34a;
 
 }
 
@@ -150,98 +280,40 @@ margin-bottom:20px;
 /* LESSON */
 
 
-.stage-box{
+.lesson-container{
 
-border:1px solid #ddd;
-border-radius:8px;
-margin-bottom:12px;
-overflow:hidden;
+margin-top:20px;
 
 }
 
 
 
-.stage-title{
+.lesson-card{
 
-background:#004aad;
-color:white;
-padding:12px 15px;
-cursor:pointer;
-font-weight:bold;
-display:flex;
-justify-content:space-between;
-
-}
-
-
-.stage-title:hover{
-
-background:#00337a;
-
-}
-
-
-
-.lesson-list{
-
-display:none;
+background:#f8fbff;
+border:2px solid #ddd;
 padding:15px;
-background:#f3f7ff;
-
-}
-
-
-
-.lesson-list.active{
-
-display:block;
-
-}
-
-
-
-.lesson-item{
-
-background:white;
-border:1px solid #ddd;
-padding:12px;
-border-radius:6px;
-margin-bottom:8px;
+border-radius:8px;
+margin-bottom:10px;
 cursor:pointer;
-display:flex;
-justify-content:space-between;
-align-items:center;
 
 }
 
 
-.lesson-item:hover{
+
+.lesson-card:hover{
 
 border-color:#004aad;
-background:#eef5ff;
-
-}
-
-
-
-.badge{
-
-background:#16a34a;
-color:white;
-font-size:12px;
-padding:4px 8px;
-border-radius:4px;
 
 }
 
 
 
 
+/* TYPING AREA */
 
-/* TYPING BOX */
 
-
-#typingBox{
+.typing-section{
 
 display:none;
 
@@ -253,73 +325,39 @@ display:none;
 
 font-size:22px;
 color:#004aad;
-margin-bottom:15px;
 
 }
 
 
 
-.text-area{
 
-background:#f8faff;
-border:3px dashed #004aad;
+.text-display{
+
+background:#f8fbff;
+border:3px solid #004aad;
 border-radius:10px;
 padding:25px;
+margin:20px 0;
+
 font-size:30px;
 line-height:2;
-font-family:'Mangal','Nirmala UI',sans-serif;
-min-height:220px;
-margin:15px 0;
 
-}
-
-
-
-
-#inputBox{
-
-width:100%;
-padding:14px;
-font-size:22px;
-border:2px solid #004aad;
-border-radius:8px;
-outline:none;
 font-family:'Mangal','Nirmala UI',sans-serif;
 
-}
-
-
-
-.stats{
-
-display:flex;
-gap:15px;
-flex-wrap:wrap;
-margin-top:15px;
+min-height:250px;
 
 }
 
 
 
-.stats span{
-
-background:#e8f0ff;
-padding:8px 12px;
-border-radius:5px;
-font-weight:bold;
-
-}
-
-
-
-.correct{
+.text-display span.correct{
 
 color:#16a34a;
 
 }
 
 
-.wrong{
+.text-display span.incorrect{
 
 color:#dc2626;
 background:#fee2e2;
@@ -327,7 +365,7 @@ background:#fee2e2;
 }
 
 
-.current{
+.text-display span.current{
 
 background:#004aad;
 color:white;
@@ -336,40 +374,76 @@ color:white;
 
 
 
-.btn{
+#typingInput{
 
-background:#004aad;
-color:white;
-border:none;
-padding:10px 20px;
-border-radius:6px;
-cursor:pointer;
-font-weight:bold;
-margin-top:15px;
-margin-right:8px;
+width:100%;
+padding:15px;
 
-}
+font-size:24px;
 
+font-family:'Mangal','Nirmala UI',sans-serif;
 
-.btn-success{
+border:2px solid #004aad;
 
-background:#16a34a;
+border-radius:8px;
+
+outline:none;
 
 }
 
 
 
-@media(max-width:700px){
+
+/* RESULT */
 
 
-nav{
+.result-box{
 
-margin-top:10px;
+display:none;
+
+background:#f8fbff;
+
+padding:20px;
+
+border-radius:10px;
+
+margin-top:20px;
 
 }
 
 
-.text-area{
+
+.result-box h2{
+
+color:#004aad;
+
+}
+
+
+
+
+
+/* MOBILE */
+
+
+@media(max-width:800px){
+
+
+.stats-box{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+
+.mode-tabs{
+
+flex-direction:column;
+
+}
+
+
+.text-display{
 
 font-size:24px;
 
@@ -379,14 +453,16 @@ font-size:24px;
 }
 
 
+
+
 </style>
 
 
 </head>
 
 
-
 <body>
+
 
 
 <header>
@@ -394,9 +470,11 @@ font-size:24px;
 
 <div class="logo">
 
-<img src="logo.png" alt="Govt Exam Typing Tool">
+<img src="logo.png">
 
-<span>Govt Exam Typing Tool</span>
+<span>
+Govt Exam Typing Tool
+</span>
 
 </div>
 
@@ -419,7 +497,7 @@ English
 </a>
 
 
-<a href="learn-hindi.html" class="active">
+<a class="active">
 Hindi Mangal
 </a>
 
@@ -437,6 +515,7 @@ Mock
 
 
 
+
 <div class="container">
 
 
@@ -444,21 +523,77 @@ Mock
 
 
 <h1>
-📚 Hindi Mangal Typing Course - 28 Lessons
+⌨️ Hindi Mangal Typing Practice
 </h1>
 
 
-
-<p class="intro">
-
-Hindi Mangal typing सीखें step by step.
-SSC, UPPSC RO ARO, High Court, Railway और अन्य सरकारी परीक्षाओं के लिए Hindi typing practice करें।
-
+<p>
+SSC, UPPSC RO/ARO, High Court, Railway और अन्य सरकारी परीक्षाओं के लिए Hindi Mangal typing practice करें।
 </p>
 
 
+<br>
 
-<div id="lessonContainer"></div>
+
+
+<div class="stats-box">
+
+
+<div class="stat">
+
+<small>
+Speed
+</small>
+
+<b id="wpm">
+0
+</b>
+WPM
+
+</div>
+
+
+
+<div class="stat">
+
+<small>
+Accuracy
+</small>
+
+<b id="accuracy">
+100
+</b>
+%
+
+</div>
+
+
+
+<div class="stat">
+
+<small>
+Time
+</small>
+
+<b id="time">
+0:00
+</b>
+
+</div>
+
+
+
+<div class="stat">
+
+<small>
+Errors
+</small>
+
+<b id="errors">
+0
+</b>
+
+</div>
 
 
 
@@ -468,602 +603,1304 @@ SSC, UPPSC RO ARO, High Court, Railway और अन्य सरकारी �
 
 
 
-<div class="card" id="typingBox">
+<div class="mode-tabs">
 
 
-<h2 class="lesson-title" id="lessonTitle"></h2>
+<button class="mode-btn active" id="practiceBtn">
+
+✍️ Practice Mode
+
+</button>
+
+
+<button class="mode-btn" id="examBtn">
+
+📝 Exam Mode
+
+</button>
+
+
+<button class="mode-btn" id="customBtn">
+
+📄 Add Text
+
+</button>
+
+
+</div>
 
 
 
-<div class="text-area" id="typingText"></div>
+<div class="controls">
 
+
+<select id="timeSelect">
+
+<option value="60">
+1 Minute
+</option>
+
+
+<option value="300">
+5 Minutes
+</option>
+
+
+<option value="900">
+15 Minutes
+</option>
+
+
+<option value="1800">
+30 Minutes
+</option>
+
+
+</select>
+
+
+<button class="btn-danger" id="restartBtn">
+
+🔄 Restart
+
+</button>
+
+
+</div>
+
+
+
+<div id="lessonContainer" class="lesson-container">
+
+</div>
+
+
+
+</div>
+<script>
+
+
+/* ===============================
+   BASIC VARIABLES
+================================ */
+
+
+let currentLesson = 0;
+
+let currentText = "";
+
+let currentIndex = 0;
+
+let errors = 0;
+
+let totalTyped = 0;
+
+let seconds = 0;
+
+let timer = null;
+
+let running = false;
+
+let mode = "practice";
+
+let customText = "";
+
+let examText = "";
+
+
+
+const textDisplay =
+document.getElementById("textDisplay");
+
+
+const typingInput =
+document.getElementById("typingInput");
+
+
+
+/* ===============================
+   LOAD LESSON MENU
+================================ */
+
+
+function loadLessons(){
+
+
+let box =
+document.getElementById("lessonContainer");
+
+
+box.innerHTML="";
+
+
+lessonData.forEach((lesson,index)=>{
+
+
+let div =
+document.createElement("div");
+
+
+div.className="lesson-card";
+
+
+div.innerHTML=
+`
+
+<b>
+${lesson.title}
+</b>
+
+<br>
+
+<small>
+${lesson.type}
+</small>
+
+`;
+
+
+
+div.onclick=function(){
+
+startLesson(index);
+
+};
+
+
+
+box.appendChild(div);
+
+
+
+});
+
+
+}
+
+
+
+
+/* ===============================
+   START LESSON
+================================ */
+
+
+function startLesson(index){
+
+
+currentLesson=index;
+
+
+mode="practice";
+
+
+document
+.getElementById("typingSection")
+.style.display="block";
+
+
+
+document
+.getElementById("lessonTitle")
+.innerHTML=
+lessonData[index].title;
+
+
+
+currentText=
+generatePractice(index);
+
+
+
+resetTest();
+
+
+
+renderText();
+
+
+typingInput.focus();
+
+
+
+}
+
+
+
+
+
+
+/* ===============================
+   PRACTICE GENERATOR
+================================ */
+
+
+function generatePractice(index){
+
+
+let lesson =
+lessonData[index];
+
+
+
+let words =
+lesson.words;
+
+
+
+let result="";
+
+
+
+while(result.length < 2500){
+
+
+
+let random =
+
+words[
+Math.floor(
+Math.random()*words.length
+)
+];
+
+
+
+result += random+" ";
+
+
+
+}
+
+
+
+return result.trim();
+
+
+
+}
+
+
+
+
+
+
+
+/* ===============================
+   RENDER TEXT
+================================ */
+
+
+function renderText(){
+
+
+textDisplay.innerHTML="";
+
+
+
+for(let i=0;i<currentText.length;i++){
+
+
+let span =
+document.createElement("span");
+
+
+span.innerText =
+currentText[i];
+
+
+
+if(i < currentIndex){
+
+
+if(
+typingInput.value[i]
+===
+currentText[i]
+)
+
+span.className="correct";
+
+
+else
+
+span.className="incorrect";
+
+
+}
+
+
+else if(i===currentIndex){
+
+
+span.className="current";
+
+
+}
+
+
+
+textDisplay.appendChild(span);
+
+
+
+}
+
+
+}
+
+
+
+
+
+
+
+
+/* ===============================
+   INPUT CHECK
+================================ */
+
+
+typingInput.addEventListener(
+"input",
+function(){
+
+
+if(!running)
+
+startTimer();
+
+
+
+let value =
+this.value;
+
+
+
+if(value.length > currentIndex){
+
+
+totalTyped++;
+
+
+
+if(
+value[currentIndex]
+!== 
+currentText[currentIndex]
+)
+
+{
+
+errors++;
+
+}
+
+
+
+currentIndex++;
+
+
+}
+
+
+
+renderText();
+
+updateStats();
+
+
+
+if(currentIndex>=currentText.length){
+
+
+if(mode==="practice"){
+
+
+currentText +=
+" "+generatePractice(currentLesson);
+
+
+renderText();
+
+
+}
+
+
+}
+
+
+
+});
+
+
+
+
+
+
+
+
+/* ===============================
+   TIMER
+================================ */
+
+
+function startTimer(){
+
+
+running=true;
+
+
+
+timer =
+setInterval(function(){
+
+
+seconds++;
+
+
+
+let min =
+Math.floor(seconds/60);
+
+
+let sec =
+seconds%60;
+
+
+
+document.getElementById("time")
+.innerText =
+min+":"+String(sec)
+.padStart(2,"0");
+
+
+
+let limit =
+parseInt(
+document.getElementById("timeSelect")
+.value
+);
+
+
+
+if(seconds>=limit){
+
+
+finishTest();
+
+
+}
+
+
+
+},1000);
+
+
+}
+
+
+
+
+
+
+
+/* ===============================
+   RESET
+================================ */
+
+
+function resetTest(){
+
+
+clearInterval(timer);
+
+
+running=false;
+
+
+seconds=0;
+
+currentIndex=0;
+
+errors=0;
+
+totalTyped=0;
+
+
+typingInput.value="";
+
+
+document.getElementById("time")
+.innerText="0:00";
+
+
+document.getElementById("resultBox")
+.style.display="none";
+
+
+updateStats();
+
+
+}
+
+
+
+
+
+
+/* ===============================
+   STATS
+================================ */
+
+
+function updateStats(){
+
+
+
+let minutes =
+seconds/60;
+
+
+
+if(minutes<=0)
+
+minutes=0.01;
+
+
+
+let words =
+currentIndex/5;
+
+
+
+let wpm =
+Math.round(
+words/minutes
+);
+
+
+
+let accuracy =
+totalTyped?
+
+Math.round(
+((totalTyped-errors)
+/totalTyped)*100
+)
+
+:
+
+100;
+
+
+
+document.getElementById("wpm")
+.innerText=wpm;
+
+
+document.getElementById("accuracy")
+.innerText=accuracy;
+
+
+document.getElementById("errors")
+.innerText=errors;
+
+
+
+}
+
+
+
+
+
+
+
+
+/* ===============================
+   RESULT
+================================ */
+
+
+function finishTest(){
+
+
+clearInterval(timer);
+
+
+running=false;
+
+
+typingInput.disabled=true;
+
+
+
+let result =
+document.getElementById("resultBox");
+
+
+
+result.style.display="block";
+
+
+
+result.innerHTML=
+
+`
+
+<h2>
+🎯 Hindi Typing Result
+</h2>
+
+
+<p>
+Speed:
+<b>
+${document.getElementById("wpm").innerText}
+</b>
+WPM
+</p>
+
+
+<p>
+Accuracy:
+<b>
+${document.getElementById("accuracy").innerText}
+</b>
+%
+</p>
+
+
+<p>
+Errors:
+<b>
+${errors}
+</b>
+</p>
+
+
+<p>
+Characters:
+<b>
+${currentIndex}
+</b>
+</p>
+
+
+<p>
+Time:
+<b>
+${seconds}
+Seconds
+</b>
+</p>
+
+
+`;
+
+
+
+}
+
+
+
+
+
+
+
+
+/* ===============================
+   BUTTONS
+================================ */
+
+
+document
+.getElementById("restartBtn")
+.onclick=function(){
+
+
+resetTest();
+
+renderText();
+
+
+};
+
+
+
+
+
+
+document
+.getElementById("practiceBtn")
+.onclick=function(){
+
+
+mode="practice";
+
+
+this.classList.add("active");
+
+
+document
+.getElementById("examBtn")
+.classList.remove("active");
+
+
+};
+
+
+
+
+
+
+
+document
+.getElementById("examBtn")
+.onclick=function(){
+
+
+mode="exam";
+
+
+this.classList.add("active");
+
+
+document
+.getElementById("practiceBtn")
+.classList.remove("active");
+
+
+currentText =
+examParagraphs[
+Math.floor(
+Math.random()*examParagraphs.length
+)
+];
+
+
+resetTest();
+
+
+renderText();
+
+
+};
+
+
+
+
+
+
+document
+.getElementById("customBtn")
+.onclick=function(){
+
+
+let text =
+prompt(
+"अपना paragraph paste करें"
+);
+
+
+
+if(text){
+
+
+mode="custom";
+
+
+currentText=text;
+
+
+resetTest();
+
+
+renderText();
+
+
+}
+
+
+
+};
+
+
+
+
+
+</script>
+<!-- ===============================
+     TYPING SECTION
+================================ -->
+
+
+<div class="card typing-section" id="typingSection">
+
+
+<h2 class="lesson-title" id="lessonTitle">
+
+</h2>
+
+
+
+<div class="text-display" id="textDisplay">
+
+</div>
 
 
 
 <input 
 type="text"
-id="inputBox"
+id="typingInput"
 placeholder="यहाँ टाइप करना शुरू करें..."
 autocomplete="off"
 >
 
 
 
-<div class="stats">
-
-
-<span>
-गति: <b id="wpm">0</b> WPM
-</span>
-
-
-<span>
-शुद्धता: <b id="accuracy">100</b>%
-</span>
-
+<div class="result-box" id="resultBox">
 
 </div>
 
 
 
-<button class="btn" onclick="backLesson()">
+<br>
 
-⬅ वापस
+
+<button onclick="backToLessons()">
+
+⬅ Back
 
 </button>
 
 
-
-<button class="btn btn-success" onclick="nextLesson()">
-
-अगला ➡
-
-</button>
-
-
-
 </div>
 
 
 
-</div>
+
+
 <script>
 
-const lessons = [
+
+/* ===============================
+   HINDI LESSON DATA
+================================ */
+
+
+const lessonData=[
+
 
 {
-stage:"चरण 1: मूल व्यंजन अभ्यास",
-items:[
+title:"Lesson 1: ि र Practice",
+type:"Key Drill",
 
-{
-title:"पाठ 1: क ख ग घ",
-text:"क ख ग घ क ख ग घ अभ्यास करें और सही उंगली स्थिति के साथ टाइपिंग सीखें"
+words:[
+"िर",
+"रि",
+"किर",
+"रित",
+"चित्र",
+"चित"
+]
+
 },
 
-{
-title:"पाठ 2: च छ ज झ",
-text:"च छ ज झ च छ ज झ हिंदी टाइपिंग में अक्षरों का नियमित अभ्यास गति बढ़ाता है"
-},
+
 
 {
-title:"पाठ 3: ट ठ ड ढ",
-text:"ट ठ ड ढ ट ठ ड ढ का अभ्यास करें शुद्धता के साथ टाइप करना सीखें"
+title:"Lesson 2: ् क Practice",
+type:"Key Drill",
+
+words:[
+"क",
+"क्",
+"क्त",
+"कर्म",
+"शक्ति",
+"भक्ति"
+]
+
 },
 
+
+
 {
-title:"पाठ 4: त थ द ध",
-text:"त थ द ध हिंदी भाषा के महत्वपूर्ण अक्षर हैं इनका अभ्यास टाइपिंग में जरूरी है"
+title:"Lesson 3: े त Practice",
+type:"Key Drill",
+
+words:[
+"ते",
+"तेज",
+"केत",
+"नेत",
+"सेवा",
+"देश"
+]
+
+},
+
+
+
+
+{
+title:"Lesson 4: ो च Practice",
+type:"Key Drill",
+
+words:[
+"चो",
+"चोर",
+"सोच",
+"मोच",
+"लोच"
+]
+
+},
+
+
+
+{
+title:"Lesson 5: Basic Combination",
+type:"Combination",
+
+words:[
+"चित्र",
+"चरित्र",
+"किताब",
+"केतक",
+"तेज"
+]
+
+},
+
+
+
+
+{
+title:"Lesson 6: Home Row Practice",
+type:"Home Practice",
+
+words:[
+"भारत",
+"सरकार",
+"कर्मचारी",
+"कार्यालय",
+"अधिकारी"
+]
+
+},
+
+
+
+{
+title:"Lesson 7: ु प Practice",
+type:"Key Drill",
+
+words:[
+"पु",
+"पुर",
+"पुस्तक",
+"कुशल",
+"कुर्सी"
+]
+
+},
+
+
+
+
+{
+title:"Lesson 8: मात्रा Combination",
+type:"Combination",
+
+words:[
+"कुशल",
+"परीक्षा",
+"शिक्षा",
+"विद्यार्थी"
+]
+
+},
+
+
+
+
+{
+title:"Lesson 9: आ मात्रा",
+type:"Matra",
+
+words:[
+"राम",
+"काम",
+"नाम",
+"भारत",
+"बाजार"
+]
+
+},
+
+
+
+{
+title:"Lesson 10: ई मात्रा",
+type:"Matra",
+
+words:[
+"जीवन",
+"नीति",
+"सीमा",
+"रीति"
+]
+
+},
+
+
+
+
+{
+title:"Lesson 11: ए ऐ मात्रा",
+type:"Matra",
+
+words:[
+"देश",
+"सेवा",
+"कैसे",
+"ऐसा"
+]
+
+},
+
+
+
+{
+title:"Lesson 12: ओ औ मात्रा",
+type:"Matra",
+
+words:[
+"मौसम",
+"औजार",
+"योग",
+"सोना"
+]
+
+},
+
+
+
+
+{
+title:"Lesson 13: सामान्य शब्द",
+type:"Words",
+
+words:[
+"कंप्यूटर",
+"शिक्षा",
+"परीक्षा",
+"अभ्यास",
+"सफलता"
+]
+
+},
+
+
+
+
+{
+title:"Lesson 14: सरकारी शब्द",
+type:"Government",
+
+words:[
+"सरकार",
+"विभाग",
+"नियुक्ति",
+"आवेदन",
+"प्रक्रिया"
+]
+
+},
+
+
+
+
+{
+title:"Lesson 15: कार्यालय शब्द",
+type:"Office",
+
+words:[
+"कार्यालय",
+"दस्तावेज",
+"प्रबंधन",
+"सूचना",
+"रिपोर्ट"
+]
+
+},
+
+
+
+
+{
+title:"Lesson 16-20 Sentence Practice",
+type:"Sentence",
+
+words:[
+"नियमित अभ्यास करने से हिंदी टाइपिंग की गति बढ़ती है",
+"सरकारी परीक्षा में शुद्धता बहुत महत्वपूर्ण होती है",
+"कंप्यूटर ज्ञान आज के समय में आवश्यक है"
+]
+
+},
+
+
+
+
+{
+title:"Lesson 21 Exam Practice",
+type:"Exam",
+
+words:[
+"उम्मीदवारों को परीक्षा के लिए नियमित अभ्यास करना चाहिए"
+]
+
+},
+
+
+
+
+{
+title:"Lesson 22 High Court Practice",
+type:"Exam",
+
+words:[
+"उच्च न्यायालय में हिंदी टाइपिंग का विशेष महत्व होता है"
+]
+
+},
+
+
+
+
+{
+title:"Lesson 23 Railway Practice",
+type:"Exam",
+
+words:[
+"रेलवे परीक्षा में कंप्यूटर आधारित टेस्ट आयोजित किया जाता है"
+]
+
+},
+
+
+
+
+{
+title:"Lesson 24 SSC Practice",
+type:"Exam",
+
+words:[
+"SSC परीक्षा में तेज गति और शुद्ध टाइपिंग आवश्यक है"
+]
+
+},
+
+
+
+
+{
+title:"Lesson 25 Final Practice",
+type:"Final",
+
+words:[
+"लगातार अभ्यास और सही तकनीक से हिंदी टाइपिंग में सफलता प्राप्त की जा सकती है"
+]
+
 }
 
-]
-},
 
-
-
-{
-stage:"चरण 2: शेष व्यंजन अभ्यास",
-items:[
-
-{
-title:"पाठ 5: प फ ब भ",
-text:"प फ ब भ का अभ्यास करने से हिंदी मंगल टाइपिंग में उंगलियों की गति बेहतर होती है"
-},
-
-{
-title:"पाठ 6: म य र ल",
-text:"म य र ल अक्षरों का प्रयोग हिंदी शब्दों में अधिक होता है नियमित अभ्यास करें"
-},
-
-{
-title:"पाठ 7: व श ष स ह",
-text:"व श ष स ह अक्षरों का अभ्यास सरकारी परीक्षा की हिंदी टाइपिंग के लिए आवश्यक है"
-},
-
-{
-title:"पाठ 8: क्ष त्र ज्ञ",
-text:"क्ष त्र ज्ञ जैसे संयुक्त अक्षरों का अभ्यास हिंदी मंगल फॉन्ट में जरूरी है"
-}
-
-]
-},
-
-
-
-{
-stage:"चरण 3: स्वर और मात्रा",
-items:[
-
-{
-title:"पाठ 9: स्वर अभ्यास",
-text:"अ आ इ ई उ ऊ ए ऐ ओ औ हिंदी स्वर का अभ्यास करके टाइपिंग नियंत्रण बढ़ाएं"
-},
-
-{
-title:"पाठ 10: छोटी मात्रा",
-text:"ा ि ी ु ू मात्रा का सही प्रयोग हिंदी टाइपिंग में बहुत महत्वपूर्ण होता है"
-},
-
-{
-title:"पाठ 11: बड़ी मात्रा",
-text:"े ै ो ौ ं ः का अभ्यास करें और शब्दों को सही तरीके से टाइप करें"
-},
-
-{
-title:"पाठ 12: हलंत और संयुक्त अक्षर",
-text:"् हलंत और संयुक्त अक्षरों का अभ्यास करने से कठिन शब्द आसानी से टाइप होते हैं"
-}
-
-]
-},
-
-
-
-{
-stage:"चरण 4: शब्द अभ्यास",
-items:[
-
-{
-title:"पाठ 13: सामान्य शब्द",
-text:"भारत शिक्षा कंप्यूटर परीक्षा विद्यार्थी शिक्षक कार्यालय आवेदन सफलता अभ्यास"
-},
-
-{
-title:"पाठ 14: सरकारी शब्द",
-text:"सरकार विभाग कर्मचारी अधिकारी नियुक्ति चयन प्रक्रिया परीक्षा परिणाम"
-},
-
-{
-title:"पाठ 15: कार्यालय शब्द",
-text:"कार्यालय दस्तावेज रिपोर्ट पत्र आवेदन सूचना विभाग प्रबंधन कार्य प्रणाली"
-}
-
-]
-},
-
-
-
-{
-stage:"चरण 5: वाक्य अभ्यास",
-items:[
-
-{
-title:"पाठ 16: सरल वाक्य",
-text:"नियमित अभ्यास करने से हिंदी टाइपिंग की गति और शुद्धता दोनों बढ़ती हैं"
-},
-
-{
-title:"पाठ 17: शिक्षा वाक्य",
-text:"शिक्षा हमारे जीवन का महत्वपूर्ण हिस्सा है और सफलता प्राप्त करने में सहायता करती है"
-},
-
-{
-title:"पाठ 18: नौकरी वाक्य",
-text:"सरकारी नौकरी के लिए हिंदी टाइपिंग टेस्ट पास करना आवश्यक होता है"
-}
-
-]
-},
-
-
-
-{
-stage:"चरण 6: परीक्षा स्तर अभ्यास",
-items:[
-
-{
-title:"पाठ 19: SSC हिंदी टाइपिंग",
-text:"SSC की विभिन्न परीक्षाओं में कंप्यूटर और टाइपिंग ज्ञान का विशेष महत्व होता है उम्मीदवारों को नियमित अभ्यास करना चाहिए"
-},
-
-{
-title:"पाठ 20: UPPSC RO ARO अभ्यास",
-text:"उत्तर प्रदेश लोक सेवा आयोग द्वारा आयोजित परीक्षाओं में हिंदी टाइपिंग की आवश्यकता होती है अच्छी गति और शुद्धता सफलता के लिए जरूरी है"
-},
-
-{
-title:"पाठ 21: High Court Typing",
-text:"उच्च न्यायालय में टाइपिंग कार्य के लिए सही शब्दों की जानकारी और तेज गति आवश्यक होती है"
-}
-
-]
-},
-
-
-
-{
-stage:"चरण 7: Advanced Paragraph",
-items:[
-
-{
-title:"पाठ 22: कार्यालय पैराग्राफ",
-text:"आज के समय में कंप्यूटर प्रत्येक कार्यालय का महत्वपूर्ण भाग बन चुका है डाटा एंट्री रिपोर्ट तैयार करना और ऑनलाइन कार्य कंप्यूटर द्वारा किए जाते हैं"
-},
-
-{
-title:"पाठ 23: डिजिटल भारत",
-text:"डिजिटल भारत अभियान ने देश में तकनीक के उपयोग को बढ़ावा दिया है इंटरनेट और कंप्यूटर ज्ञान आज के समय में बहुत आवश्यक है"
-},
-
-{
-title:"पाठ 24: प्रतियोगी परीक्षा",
-text:"प्रतियोगी परीक्षाओं में सफलता प्राप्त करने के लिए मेहनत अनुशासन और नियमित अभ्यास आवश्यक होता है"
-}
-
-]
-},
-
-
-
-{
-stage:"चरण 8: Final Exam Practice",
-items:[
-
-{
-title:"पाठ 25: अंतिम अभ्यास 1",
-text:"हिंदी टाइपिंग सीखने के लिए लगातार अभ्यास करना जरूरी है सही तरीके से अभ्यास करने पर गति और शुद्धता में सुधार होता है"
-},
-
-{
-title:"पाठ 26: अंतिम अभ्यास 2",
-text:"उम्मीदवारों को परीक्षा से पहले मॉक टेस्ट का अभ्यास करना चाहिए इससे समय प्रबंधन और आत्मविश्वास बढ़ता है"
-},
-
-{
-title:"पाठ 27: अंतिम अभ्यास 3",
-text:"सरकारी परीक्षाओं में अच्छे प्रदर्शन के लिए टाइपिंग कौशल महत्वपूर्ण भूमिका निभाता है नियमित अभ्यास सफलता की कुंजी है"
-},
-
-{
-title:"पाठ 28: Final Hindi Mangal Passage",
-text:"हिंदी मंगल टाइपिंग सरकारी परीक्षाओं के लिए एक महत्वपूर्ण कौशल है लगातार अभ्यास सही तकनीक और धैर्य से कोई भी उम्मीदवार अच्छी गति प्राप्त कर सकता है"
-}
-
-]
-
-}
-
-];
-
-</script>
-<script>
-
-const hindiLessons = [
-
-{
-stage:"CHARAN 1: VYANJAN ABHYAS",
-items:[
-["पाठ 1: क ख ग घ","क ख ग घ क ख ग घ क ख ग घ क ख ग घ क ख ग घ"],
-["पाठ 2: च छ ज झ","च छ ज झ च छ ज झ च छ ज झ च छ ज झ"],
-["पाठ 3: ट ठ ड ढ","ट ठ ड ढ ट ठ ड ढ ट ठ ड ढ ट ठ ड ढ"],
-["पाठ 4: त थ द ध","त थ द ध त थ द ध त थ द ध त थ द ध"]
-]
-},
-
-
-{
-stage:"CHARAN 2: SHABD ABHYAS",
-items:[
-["पाठ 5: छोटे शब्द","घर जल फल कल राम नाम काम देश"],
-["पाठ 6: सामान्य शब्द","भारत सरकार कंप्यूटर शिक्षा परीक्षा नौकरी"],
-["पाठ 7: कार्यालय शब्द","कार्यालय अधिकारी कर्मचारी आवेदन पत्र"],
-["पाठ 8: परीक्षा शब्द","सरकारी परीक्षा प्रतियोगिता सफलता अभ्यास"]
-]
-},
-
-
-{
-stage:"CHARAN 3: MATRA ABHYAS",
-items:[
-["पाठ 9: आ की मात्रा","राम नाम काम दाम भारत बाजार"],
-["पाठ 10: इ ई मात्रा","दिन किताब शिक्षा विद्यार्थी परीक्षा"],
-["पाठ 11: उ ऊ मात्रा","कुर्सी फूल दुकान जरूरी"],
-["पाठ 12: ए ऐ ओ औ मात्रा","देश पैसा सेवा मौका औजार"]
-]
-},
-
-
-{
-stage:"CHARAN 4: VAKYA ABHYAS",
-items:[
-["पाठ 13: सरल वाक्य",
-"मैं कंप्यूटर पर टाइपिंग करता हूं। रोज अभ्यास करने से गति बढ़ती है।"],
-
-["पाठ 14: शिक्षा वाक्य",
-"शिक्षा जीवन का सबसे बड़ा धन है। मेहनत और अभ्यास से सफलता मिलती है।"],
-
-["पाठ 15: नौकरी वाक्य",
-"सरकारी नौकरी के लिए टाइपिंग टेस्ट पास करना आवश्यक है।"]
-]
-},
-
-
-{
-stage:"CHARAN 5: GOVT EXAM PRACTICE",
-items:[
-
-["पाठ 16: SSC Practice",
-"कर्मचारी चयन आयोग द्वारा विभिन्न परीक्षाएं आयोजित की जाती हैं। उम्मीदवारों को अच्छी गति और शुद्धता के साथ परीक्षा पास करनी होती है।"],
-
-["पाठ 17: Railway Practice",
-"रेलवे परीक्षा में कंप्यूटर आधारित टेस्ट और टाइपिंग टेस्ट महत्वपूर्ण होता है। नियमित अभ्यास से सफलता प्राप्त की जा सकती है।"],
-
-["पाठ 18: Bank Practice",
-"बैंकिंग क्षेत्र में कंप्यूटर ज्ञान और तेज टाइपिंग का बहुत महत्व है।"]
-]
-},
-
-
-{
-stage:"CHARAN 6: ADVANCED PASSAGE",
-items:[
-
-["पाठ 19: Digital India",
-"आज भारत डिजिटल युग में आगे बढ़ रहा है। कंप्यूटर और इंटरनेट ने जीवन को आसान बना दिया है।"],
-
-["पाठ 20: Computer Knowledge",
-"कंप्यूटर आधुनिक जीवन का महत्वपूर्ण हिस्सा है। हर क्षेत्र में कंप्यूटर का उपयोग किया जाता है।"],
-
-["पाठ 21: Typing Importance",
-"टाइपिंग एक महत्वपूर्ण कौशल है। सरकारी परीक्षाओं में इसकी आवश्यकता होती है।"]
-]
-},
-
-
-{
-stage:"CHARAN 7: MOCK PRACTICE",
-items:[
-
-["पाठ 22: Mock Passage 1",
-"समय का सही उपयोग सफलता की पहली सीढ़ी है। नियमित अभ्यास करने वाला व्यक्ति अपने लक्ष्य को प्राप्त कर सकता है।"],
-
-["पाठ 23: Mock Passage 2",
-"कड़ी मेहनत और आत्मविश्वास से हर कठिन कार्य आसान हो जाता है।"],
-
-["पाठ 24: Mock Passage 3",
-"अच्छी गति के साथ शुद्धता बनाए रखना टाइपिंग परीक्षा में जरूरी है।"]
-]
-},
-
-
-{
-stage:"CHARAN 8: FINAL EXAM",
-items:[
-
-["पाठ 25: Final Practice 1",
-"सरकारी परीक्षा में सफलता पाने के लिए लगातार अभ्यास और धैर्य जरूरी है।"],
-
-["पाठ 26: Final Practice 2",
-"अपनी गलतियों को सुधारें और प्रतिदिन टाइपिंग का अभ्यास करें।"],
-
-["पाठ 27: Final Practice 3",
-"अच्छा टाइपिस्ट बनने के लिए सही तकनीक और नियमित अभ्यास आवश्यक है।"],
-
-["पाठ 28: अंतिम अभ्यास",
-"आपने हिंदी मंगल टाइपिंग के सभी पाठ पूरे कर लिए हैं। अब मॉक टेस्ट देकर अपनी तैयारी जांचें।"]
-]
-
-}
 
 ];
 
 
 
-let currentStage=0;
-let currentLesson=0;
-let startTime=0;
-let completed=false;
 
 
 
-function loadHindiLessons(){
 
-let box=document.getElementById("lessonContainer");
-
-hindiLessons.forEach((stage,s)=>{
-
-let html="";
-
-stage.items.forEach((item,i)=>{
-
-html+=`
-
-<div class="lesson-item" onclick="startHindiLesson(${s},${i})">
-
-<b>${item[0]}</b>
-
-<span class="badge">
-Mangal
-</span>
-
-</div>
-
-`;
-
-});
+/* ===============================
+   EXAM PARAGRAPH
+================================ */
 
 
-box.innerHTML+=`
-
-<div class="stage-box">
-
-<div class="stage-title" onclick="toggleStage(this)">
-
-${stage.stage}
-
-<span>+</span>
-
-</div>
+const examParagraphs=[
 
 
-<div class="lesson-list">
-
-${html}
-
-</div>
-
-</div>
-
-`;
-
-});
+"आज के समय में कंप्यूटर ज्ञान और हिंदी टाइपिंग सरकारी कार्यों का महत्वपूर्ण भाग बन चुका है। उम्मीदवारों को नियमित अभ्यास करके अपनी गति और शुद्धता में सुधार करना चाहिए।",
 
 
-document.querySelector(".lesson-list").classList.add("active");
+"सरकारी कार्यालयों में दस्तावेज तैयार करने के लिए तेज और सही टाइपिंग आवश्यक होती है। हिंदी मंगल टाइपिंग का अभ्यास परीक्षा सफलता में सहायता करता है।",
 
-}
+
+"समय का सही उपयोग और लगातार अभ्यास किसी भी कौशल को बेहतर बनाता है। टाइपिंग परीक्षा में गति के साथ शुद्धता बनाए रखना जरूरी होता है।"
+
+
+];
 
 
 
-function toggleStage(el){
-
-el.nextElementSibling.classList.toggle("active");
-
-}
 
 
 
-function startHindiLesson(s,i){
 
-currentStage=s;
-currentLesson=i;
-
-completed=false;
-
-let lesson=hindiLessons[s].items[i];
+function backToLessons(){
 
 
-document.querySelector(".card").style.display="none";
-
-document.getElementById("typingBox").style.display="block";
-
-
-document.getElementById("lessonTitle").innerHTML=lesson[0];
+document
+.getElementById("typingSection")
+.style.display="none";
 
 
-document.getElementById("typingText").innerHTML=lesson[1];
-
-
-document.getElementById("inputBox").value="";
-
-
-startTime=new Date().getTime();
-
-
-document.getElementById("inputBox").focus();
+document
+.getElementById("lessonContainer")
+.style.display="block";
 
 
 }
 
 
-function backLesson(){
-
-document.querySelector(".card").style.display="block";
-
-document.getElementById("typingBox").style.display="none";
-
-}
 
 
 
-function nextLesson(){
-
-if(currentLesson < hindiLessons[currentStage].items.length-1){
-
-startHindiLesson(currentStage,currentLesson+1);
-
-}
-
-else if(currentStage < hindiLessons.length-1){
-
-startHindiLesson(currentStage+1,0);
-
-}
-
-else{
-
-alert("🎉 सभी हिंदी मंगल पाठ पूरे हो गए");
-
-backLesson();
-
-}
-
-}
-
-
-
-document.getElementById("inputBox").addEventListener("input",function(){
-
-let typed=this.value;
-
-let target=hindiLessons[currentStage].items[currentLesson][1];
-
-
-let correct=0;
-
-
-for(let i=0;i<typed.length;i++){
-
-if(typed[i]===target[i])
-correct++;
-
-}
-
-
-let accuracy=typed.length?
-Math.round(correct/typed.length*100):100;
-
-
-let time=(new Date().getTime()-startTime)/60000;
-
-
-let words=Math.round(typed.length/5);
-
-
-let wpm=time?
-Math.round(words/time):0;
-
-
-document.getElementById("wpm").innerHTML=wpm;
-
-document.getElementById("accuracy").innerHTML=accuracy;
-
-
-
-if(typed===target){
-
-alert("🎉 पाठ पूरा हुआ");
-
-}
-
-});
-
-
-
-loadHindiLessons();
+loadLessons();
 
 
 </script>
+
+
+
+<footer style="
+text-align:center;
+padding:20px;
+background:#004aad;
+color:white;
+margin-top:20px;
+">
+
+
+Developed By:
+<b>
+AMBUJ SHUKLA
+</b>
+
+<br>
+
+Contact:
+soorajshukla1996@gmail.com
+
+
+</footer>
 
 
 </body>
+
 </html>
