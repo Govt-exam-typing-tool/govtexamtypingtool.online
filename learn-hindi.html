@@ -3,58 +3,65 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hindi Mangal Typing Tool | 30 Min Practice</title>
-<meta name="description" content="Free Hindi Mangal typing practice. 30 Minute typing test with WPM Accuracy Timer.">
-
+<title>Hindi Mangal Learning Platform | 28 Lessons + Test</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial,sans-serif;}
-body{background:#f4f7fb;color:#333;}
-header{background:#004aad;padding:15px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;}
-.logo{color:#fff;font-size:18px;font-weight:bold}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial}
+body{background:#f0f4f9}
+header{background:#004aad;padding:15px 20px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 8px rgba(0,0,0,0.1)}
+.logo{color:#fff;font-size:20px;font-weight:bold;display:flex;align-items:center;gap:10px}
 .logo span{color:#ffd700}
-nav a{color:white;text-decoration:none;padding:8px 12px;margin-left:5px;border-radius:5px;font-weight:bold;}
-nav a:hover,nav a.active{background:#ffd700;color:#004aad;}
-.container{max-width:1200px;margin:25px auto;padding:20px;}
-.card{background:white;padding:25px;border-radius:12px;box-shadow:0 3px 12px rgba(0,0,0,.1);}
-h1{color:#004aad;margin-bottom:20px;text-align:center;}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-bottom:20px;}
-.stat{background:linear-gradient(135deg,#004aad,#007bff);color:white;padding:18px;border-radius:10px;text-align:center;box-shadow:0 3px 8px rgba(0,0,0,0.1);}
-.stat small{display:block;font-size:13px;margin-bottom:5px;}
-.stat b{font-size:28px;}
-.mode-tabs{display:flex;gap:10px;margin-bottom:20px;}
-.mode-btn{flex:1;padding:14px;border:2px solid #004aad;background:white;color:#004aad;border-radius:8px;font-weight:bold;cursor:pointer;transition:0.2s;font-size:15px;}
-.mode-btn.active{background:#004aad;color:white;box-shadow:0 0 10px #004aad;}
-.controls{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;justify-content:center;}
-select,.btn{padding:12px 18px;border-radius:6px;border:2px solid #004aad;font-weight:bold;font-size:15px;}
-.btn{background:#004aad;color:white;cursor:pointer;}
-.btn:hover{background:#00337a}
+nav a{color:#fff;text-decoration:none;padding:8px 14px;border-radius:6px;font-weight:600;margin-left:8px;transition:0.2s}
+nav a:hover, nav a.active{background:#ffd700;color:#004aad}
+.container{max-width:1300px;margin:25px auto;padding:20px;display:grid;grid-template-columns:350px 1fr;gap:20px}
+.card{background:#fff;padding:20px;border-radius:12px;box-shadow:0 3px 12px rgba(0,0,0,0.08);}
+h2{color:#004aad;margin-bottom:15px;font-size:20px;border-bottom:2px solid #004aad;padding-bottom:8px}
+
+/* LEFT SIDEBAR - LESSONS */
+#lessonListBox{height:calc(100vh - 150px);overflow-y:auto;position:sticky;top:20px}
+.level-box{border:1px solid #ddd;border-radius:8px;margin-bottom:10px;overflow:hidden}
+.level-header{background:#004aad;color:#fff;padding:12px 15px;cursor:pointer;font-weight:bold;display:flex;justify-content:space-between;font-size:14px}
+.level-header:hover{background:#00337a}
+.level-content{display:none;padding:10px;background:#f8fbff;max-height:400px;overflow-y:auto}
+.level-content.active{display:block}
+.lesson-item{display:flex;justify-content:space-between;align-items:center;padding:10px;border:1px solid #bbdefb;border-radius:6px;cursor:pointer;background:#fff;margin-bottom:6px;font-size:14px;transition:0.2s}
+.lesson-item:hover{background:#e3f2fd;border-color:#004aad;transform:translateX(3px)}
+.lesson-item.active{background:#004aad;color:white;border-color:#004aad}
+.key-badge{background:#00838f;color:#fff;padding:3px 6px;border-radius:4px;margin:0 1px;font-size:11px;font-weight:bold}
+
+/* RIGHT SIDE - TYPING AREA */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:15px;}
+.stat{background:linear-gradient(135deg,#004aad,#007bff);color:white;padding:15px;border-radius:10px;text-align:center;box-shadow:0 3px 8px rgba(0,0,0,0.1)}
+.stat small{display:block;font-size:12px;margin-bottom:3px;opacity:0.9}
+.stat b{font-size:24px;}
+.mode-tabs{display:flex;gap:8px;margin-bottom:15px;}
+.mode-btn{flex:1;padding:12px;border:2px solid #004aad;background:white;color:#004aad;border-radius:8px;font-weight:bold;cursor:pointer;transition:0.2s}
+.mode-btn.active{background:#004aad;color:white}
+.controls{display:flex;gap:10px;margin-bottom:15px;}
+select,.btn{padding:10px 15px;border-radius:6px;border:2px solid #004aad;font-weight:bold;cursor:pointer}
+.btn{background:#004aad;color:white;}
 .btn-danger{background:#dc2626;border-color:#dc2626;}
-.btn-danger:hover{background:#b91c1c}
-.passage-box{background:#f8fbff;border:3px solid #004aad;border-radius:10px;padding:20px;margin-bottom:20px;}
-.passage-title{font-weight:bold;color:#004aad;margin-bottom:10px;font-size:16px;}
-#passage{height:250px;overflow-y:auto;font-size:28px;line-height:2.8;word-spacing:8px;white-space:pre-wrap;padding:15px;color:#333;scroll-behavior:smooth;font-family:'Mangal','Nirmala UI', sans-serif;background:white;border-radius:6px;}
+.passage-box{background:#f8fbff;border:3px solid #004aad;border-radius:10px;padding:15px;margin-bottom:15px;}
+.passage-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;color:#004aad;font-weight:bold}
+#passage{height:280px;overflow-y:auto;font-size:28px;line-height:2.8;word-spacing:8px;white-space:pre-wrap;padding:15px;color:#333;font-family:'Mangal','Nirmala UI', sans-serif;background:white;border-radius:6px;scroll-behavior:smooth;}
 .correct{color:#16a34a;}
-.wrong{color:#fff;background:#dc2626;padding:2px 3px;border-radius:3px;}
+.wrong{color:#fff;background:#dc2626;padding:2px 3px;border-radius:3px;animation: shake 0.2s;}
 .current{background:#004aad;color:white;padding:3px 5px;border-radius:4px;box-shadow:0 0 8px #004aad;}
-.typing-box{background:white;border:3px dashed #004aad;padding:20px;border-radius:10px;}
-#typingInput{width:100%;height:130px;resize:none;padding:15px;font-size:22px;border:2px solid #004aad;border-radius:8px;outline:none;font-family:'Mangal','Nirmala UI', sans-serif;transition:0.2s;}
-#typingInput.error{border-color:#dc2626;box-shadow:0 0 8px #dc2626;}
-#customSection{display:none;margin-bottom:20px;}
-#customText{width:100%;height:150px;padding:15px;font-size:20px;border:2px solid #004aad;border-radius:8px;font-family:'Mangal','Nirmala UI', sans-serif;}
-footer{margin-top:30px;background:#004aad;color:white;padding:20px;text-align:center;}
-@media(max-width:800px){
-.stats{grid-template-columns:repeat(2,1fr);}
-.mode-tabs{flex-direction:column;}
-}
+.ref-line{opacity:0.3;}
+@keyframes shake {0%{transform:translateX(0);}25%{transform:translateX(-2px);}50%{transform:translateX(2px);}75%{transform:translateX(-2px);}100%{transform:translateX(0);}}
+#typingInput{width:100%;height:120px;resize:none;padding:15px;font-size:22px;border:2px solid #004aad;border-radius:8px;font-family:'Mangal','Nirmala UI', sans-serif;outline:none;transition:0.2s}
+#typingInput:focus{box-shadow:0 0 10px #004aad}
+#typingInput.error{border-color:#dc2626;box-shadow:0 0 10px #dc2626;}
+.feedback{margin-top:10px;padding:10px;border-radius:6px;font-weight:bold;text-align:center}
+#customSection{display:none;margin-bottom:15px;}
+#customText{width:100%;height:120px;padding:12px;font-size:18px;border:2px solid #004aad;border-radius:8px;font-family:'Mangal','Nirmala UI', sans-serif;}
+footer{grid-column:1/-1;margin-top:20px;background:#004aad;color:white;padding:20px;text-align:center;border-radius:10px}
+@media(max-width:1000px){.container{grid-template-columns:1fr;}#lessonListBox{position:static;height:auto}}
 </style>
 </head>
-
 <body>
 
 <header>
-<div class="logo">
-<span>Govt Exam Hindi Mangal</span>
-</div>
+<div class="logo">⌨️ <span>Govt Exam Hindi Mangal</span></div>
 <nav>
 <a href="index.html">Home</a>
 <a href="typing-test.html">English</a>
@@ -64,10 +71,18 @@ footer{margin-top:30px;background:#004aad;color:white;padding:20px;text-align:ce
 </header>
 
 <div class="container">
-<div class="card">
-<h1>⌨️ हिंदी मंगल टाइपिंग टेस्ट</h1>
 
-<!-- STATS - 4 BOX -->
+<!-- LEFT: LESSONS -->
+<div class="card" id="lessonListBox">
+<h2>📚 28 Lessons Course</h2>
+<div id="lessonList"></div>
+</div>
+
+<!-- RIGHT: TYPING TEST -->
+<div class="card">
+<h2 id="currentLessonTitle">⌨️ 30 Minute Speed Test</h2>
+
+<!-- STATS -->
 <div class="stats">
 <div class="stat"><small>गति</small><b id="wpm">0</b> WPM</div>
 <div class="stat"><small>शुद्धता</small><b id="accuracy">100</b> %</div>
@@ -77,9 +92,10 @@ footer{margin-top:30px;background:#004aad;color:white;padding:20px;text-align:ce
 
 <!-- MODE -->
 <div class="mode-tabs">
-<button class="mode-btn active" id="practiceMode">✍️ अभ्यास मोड 30 मिनट</button>
+<button class="mode-btn active" id="lessonMode">📖 Lesson Mode</button>
+<button class="mode-btn" id="practiceMode">✍️ अभ्यास 30 मिनट</button>
 <button class="mode-btn" id="examMode">📝 परीक्षा मोड</button>
-<button class="mode-btn" id="customMode">📄 कस्टम टेक्स्ट</button>
+<button class="mode-btn" id="customMode">📄 कस्टम</button>
 </div>
 
 <!-- CONTROL -->
@@ -92,6 +108,7 @@ footer{margin-top:30px;background:#004aad;color:white;padding:20px;text-align:ce
 <option value="1800" selected>30 मिनट</option>
 </select>
 <button class="btn btn-danger" id="restart">🔄 रीस्टार्ट</button>
+<button class="btn" id="nextBtn" onclick="nextLesson()" style="background:#16a34a;border-color:#16a34a">अगला ➡️</button>
 </div>
 
 <!-- CUSTOM -->
@@ -102,106 +119,168 @@ footer{margin-top:30px;background:#004aad;color:white;padding:20px;text-align:ce
 
 <!-- PASSAGE -->
 <div class="passage-box">
-<div class="passage-title">📖 पैराग्राफ - ऑटो स्क्रॉल चालू</div>
+<div class="passage-header">
+<span>📖 <span id="passageTitle">टाइप करना शुरू करें</span></span>
+<span id="keyInfo"></span>
+</div>
 <div id="passage"></div>
 </div>
 
 <!-- TYPING AREA -->
-<div class="typing-box" id="typingBox">
+<div style="background:#fff;border:3px dashed #004aad;padding:15px;border-radius:10px;">
 <h3 style="color:#004aad;margin-bottom:10px">यहाँ टाइप करें 👇</h3>
-<textarea id="typingInput" placeholder="यहाँ टाइप करना शुरू करें..." spellcheck="false"></textarea>
+<textarea id="typingInput" placeholder="यहाँ टाइप करना शुरू करें..." spellcheck="false" autocomplete="off"></textarea>
+<div class="feedback" id="feedback"></div>
 </div>
 
 </div>
+
+<footer>
+<p>© 2026 Govt Exam Hindi Mangal Learning Platform</p>
+<p>Developed By: <b>AMBUJ SHUKLA</b> | Auto Scroll | Wrong Highlight | 30 Min Practice</p>
+</footer>
+
 </div>
 
 <script>
+// ========== 28 LESSONS DATA ==========
 const baseParagraphs = [
-  "भारत सरकार विभिन्न विभागों में भर्ती के लिए प्रत्येक वर्ष प्रतियोगी परीक्षाओं का आयोजन करती है। आज के समय में कंप्यूटर ज्ञान और टाइपिंग कौशल सरकारी नौकरी की तैयारी करने वाले विद्यार्थियों के लिए बहुत महत्वपूर्ण है। बिना कंप्यूटर के आज कोई काम नहीं होता। हर विभाग में डाटा एंट्री का काम होता है। नियमित अभ्यास से सफलता मिलती है।",
-  "सरकारी कार्यालयों में हिंदी भाषा का उपयोग लगातार बढ़ रहा है। दस्तावेज तैयार करने, रिकॉर्ड रखने और जानकारी को सुरक्षित रखने के लिए तेज और सही टाइपिंग आवश्यक होती है। इसलिए अभ्यास जरूरी है। हर कर्मचारी को हिंदी टाइपिंग आनी चाहिए। समय की बचत होती है और काम जल्दी होता है।",
-  "सफलता रातों रात नहीं मिलती। इसके लिए कड़ी मेहनत और धैर्य चाहिए। अगर आप अच्छे टाइपिस्ट बनना चाहते हैं तो रोज अभ्यास करें। अपना लक्ष्य निर्धारित करें और उसे प्राप्त करें। समय बर्बाद मत करो। निरंतर प्रयास से ही सफलता मिलती है। एक दिन जरूर सफलता मिलेगी।",
-  "आज के डिजिटल युग में कंप्यूटर ज्ञान आवश्यक है। इंटरनेट ने पूरी दुनिया को जोड़ दिया है। हम ईमेल भेज सकते हैं, ऑनलाइन कक्षा कर सकते हैं और घर से काम कर सकते हैं। टाइपिंग सभी कंप्यूटर काम की नींव है। इसके बिना कुछ नहीं हो सकता। हर फील्ड में कंप्यूटर है।",
-  "लंबे समय तक टाइपिंग करते समय अपने स्वास्थ्य का ध्यान रखें। सीधे बैठें और पीठ सीधी रखें। हर 30 मिनट में ब्रेक लें। आंखों का व्यायाम करें। पानी पीते रहें। गलत तरीके से बैठने से कमर दर्द होता है। स्वास्थ्य सबसे जरूरी है। काम के साथ सेहत भी जरूरी है।"
+  "भारत सरकार विभिन्न विभागों में भर्ती के लिए प्रत्येक वर्ष प्रतियोगी परीक्षाओं का आयोजन करती है। आज के समय में कंप्यूटर ज्ञान और टाइपिंग कौशल सरकारी नौकरी की तैयारी करने वाले विद्यार्थियों के लिए बहुत महत्वपूर्ण है।",
+  "सरकारी कार्यालयों में हिंदी भाषा का उपयोग लगातार बढ़ रहा है। दस्तावेज तैयार करने, रिकॉर्ड रखने और जानकारी को सुरक्षित रखने के लिए तेज और सही टाइपिंग आवश्यक होती है। इसलिए अभ्यास जरूरी है।",
+  "सफलता रातों रात नहीं मिलती। इसके लिए कड़ी मेहनत और धैर्य चाहिए। अगर आप अच्छे टाइपिस्ट बनना चाहते हैं तो रोज अभ्यास करें। अपना लक्ष्य निर्धारित करें और उसे प्राप्त करें।",
+  "आज के डिजिटल युग में कंप्यूटर ज्ञान आवश्यक है। इंटरनेट ने पूरी दुनिया को जोड़ दिया है। हम ईमेल भेज सकते हैं, ऑनलाइन कक्षा कर सकते हैं और घर से काम कर सकते हैं।",
+  "लंबे समय तक टाइपिंग करते समय अपने स्वास्थ्य का ध्यान रखें। सीधे बैठें और पीठ सीधी रखें। हर 30 मिनट में ब्रेक लें। आंखों का व्यायाम करें। पानी पीते रहें।"
 ];
 
-let fullText = "";
-let currentIndex = 0;
-let timer = null;
-let started = false;
-let timeLeft = 1800;
-let errors = 0;
-let typedCharacters = 0;
-let currentMode = "practice";
-let typingInputRef;
-let loadedWords = 0;
-const CHUNK_SIZE = 500;
+const data = {
+  lessons: [
+    {level:"STAGE 1: HOME ROW - घर की पंक्ति", items:[
+      {title:"Lesson 1: क स द फ", keys:['क','स','द','फ'], type:"drill"},
+      {title:"Lesson 2: ज क ल ;", keys:['ज','क','ल',';'], type:"drill"},
+      {title:"Lesson 3: FULL HOME ROW", keys:['क','स','द','फ','ज','क','ल',';'], type:"drill"}
+    ]},
+    {level:"STAGE 2: UPPER ROW - ऊपर की पंक्ति", items:[
+      {title:"Lesson 4: र उ", keys:['र','उ'], type:"drill"},
+      {title:"Lesson 5: ए इ", keys:['ए','इ'], type:"drill"},
+      {title:"Lesson 6: व ओ", keys:['व','ओ'], type:"drill"},
+      {title:"Lesson 7: प य", keys:['प','य'], type:"drill"},
+      {title:"Lesson 8: FULL UPPER ROW", keys:['प','व','ए','र','य','उ','इ','ओ'], type:"drill"}
+    ]},
+    {level:"STAGE 3: LOWER ROW - नीचे की पंक्ति", items:[
+      {title:"Lesson 9: ज ङ ण", keys:['ज','ङ','ण'], type:"drill"},
+      {title:"Lesson 10: त ब न म", keys:['त','ब','न','म'], type:"drill"},
+      {title:"Lesson 11: FULL LOWER ROW", keys:['ज','ङ','ण','त','ब','न','म'], type:"drill"}
+    ]},
+    {level:"STAGE 4: FULL KEYBOARD", items:[
+      {title:"Lesson 12: ALL LETTERS", keys:['क','ख','ग','घ','ङ','च','छ','ज','झ','ञ','ट','ठ','ड','ढ','ण','त','थ','द','ध','न','प','फ','ब','भ','म','य','र','ल','व','श','ष','स','ह'], type:"drill"},
+      {title:"Lesson 13: WITH MATRA", type:"practice"}
+    ]},
+    {level:"STAGE 5: WORDS & SENTENCES", items:[
+      {title:"Lesson 14: COMMON WORDS", type:"practice"},
+      {title:"Lesson 15: OFFICE WORDS", type:"practice"},
+      {title:"Lesson 16: EXAM WORDS", type:"practice"},
+      {title:"Lesson 17: SIMPLE SENTENCES", type:"practice"},
+      {title:"Lesson 18: JOB RELATED", type:"practice"}
+    ]},
+    {level:"STAGE 6: PARAGRAPHS", items:[
+      {title:"Lesson 19: MOTIVATION", type:"practice"},
+      {title:"Lesson 20: TECHNOLOGY", type:"practice"},
+      {title:"Lesson 21: HEALTH", type:"practice"},
+      {title:"Lesson 22: GOVERNMENT", type:"practice"},
+      {title:"Lesson 23: EDUCATION", type:"practice"}
+    ]},
+    {level:"STAGE 7: FINAL EXAM", items:[
+      {title:"Lesson 24: NUMBERS & SYMBOLS", type:"practice"},
+      {title:"Lesson 25: OFFICE PARAGRAPH 1", type:"practice"},
+      {title:"Lesson 26: OFFICE PARAGRAPH 2", type:"practice"},
+      {title:"Lesson 27: FINAL PRACTICE", type:"practice"},
+      {title:"Lesson 28: FINAL EXAM PARAGRAPH", type:"practice"}
+    ]}
+  ]
+};
 
-// 30 MIN GENERATOR
-function generateLongText(minutes){
-  let targetWords = minutes * 90;
-  let result = "";
-  let baseText = baseParagraphs.join(" ");
-  let words = [];
-  while(words.length < targetWords){
-    words = words.concat(baseText.split(" "));
+let currentLevel=0, currentItem=0, fullText="", currentIndex=0, timer=null, started=false;
+let timeLeft=1800, errors=0, typedCharacters=0, currentMode="lesson";
+let typingInputRef, loadedWords=0; const CHUNK_SIZE=500;
+
+function generateWords(keys, targetWords=80){
+  let words = []; while(words.length < targetWords){
+    let wordLen = Math.floor(Math.random() * 3) + 3; let word = ""; 
+    for(let k=0; k<wordLen; k++) word += keys[Math.floor(Math.random() * keys.length)]; 
+    words.push(word);
   }
-  words = words.slice(0, targetWords);
-  for(let i=0; i<words.length; i+=9){
-    result += words.slice(i, i+9).join(" ") + "\n";
-  }
+  let result = ""; for(let i=0; i<words.length; i+=10) {result += words.slice(i, i+10).join(" ") + "\n";} 
   return result.trim();
 }
 
+function generateChunk(wordsNeeded){
+  let result = ""; let baseText = baseParagraphs.join(" "); let words = [];
+  while(words.length < wordsNeeded){words = words.concat(baseText.split(" "));}
+  words = words.slice(0, wordsNeeded);
+  for(let i=0; i<words.length; i+=9){result += words.slice(i, i+9).join(" ") + "\n";}
+  return result.trim();
+}
+
+function loadLessonList(){
+  let list = document.getElementById('lessonList');
+  data.lessons.forEach((levelObj, lIndex)=>{
+    let lessonsHTML = '';
+    levelObj.items.forEach((item, iIndex)=>{
+      let keysHTML = item.keys? item.keys.map(k=>`<span class="key-badge">${k}</span>`).join('') : `<span style="color:#666;font-size:12px">Practice</span>`;
+      lessonsHTML += `<div class="lesson-item" id="lesson-${lIndex}-${iIndex}" onclick="startLesson(${lIndex},${iIndex})"><b>${item.title}</b><div>${keysHTML}</div></div>`;
+    });
+    list.innerHTML += `<div class="level-box"><div class="level-header" onclick="this.nextElementSibling.classList.toggle('active')">${levelObj.level} <span>+</span></div><div class="level-content">${lessonsHTML}</div></div>`;
+  });
+  document.querySelector('.level-content').classList.add('active');
+}
+
+function startLesson(lIndex, iIndex){
+  document.querySelectorAll('.lesson-item').forEach(el=>el.classList.remove('active'));
+  document.getElementById(`lesson-${lIndex}-${iIndex}`).classList.add('active');
+  
+  currentLevel=lIndex; currentItem=iIndex; currentMode="lesson";
+  document.getElementById('lessonMode').classList.add('active');
+  document.querySelectorAll('.mode-btn').forEach(btn=>{if(btn.id!='lessonMode')btn.classList.remove('active')});
+  
+  let item = data.lessons[lIndex].items[iIndex];
+  document.getElementById('currentLessonTitle').innerText = item.title;
+  document.getElementById('passageTitle').innerText = item.title;
+  document.getElementById('keyInfo').innerHTML = item.keys? `Keys: ${item.keys.map(k=>`<span class="key-badge">${k}</span>`).join(' ')}` : '';
+  
+  if(item.type === "drill"){fullText = generateWords(item.keys, 80);}
+  else {fullText = generateChunk(CHUNK_SIZE); loadedWords = CHUNK_SIZE;}
+  
+  restartTest();
+}
+
+// AUTO SCROLL + HIGHLIGHT
 function renderPassage(){
-  let start = currentIndex - 150;
-  if(start<0) start=0;
-  let end = start + 500;
-  let visible = fullText.substring(start, end);
-  let html = "";
-  let typed = typingInputRef.value;
-
+  let start = currentIndex - 200; if(start<0) start=0;
+  let end = start + 600; let visible = fullText.substring(start, end); let html = ""; let typed = typingInputRef.value;
+  
   for(let i=0;i<visible.length;i++){
-    let real = start + i;
-    let char = visible[i];
-    let cls = "";
-
-    if(real === currentIndex){
-      cls = "current";
-    }
-    else if(real < currentIndex){
-      if(typed[real] === fullText[real])
-        cls = "correct";
-      else
-        cls = "wrong";
-    }
+    let real = start + i; let char = visible[i]; let cls = "";
+    if(real === currentIndex){cls = "current";}
+    else if(real < currentIndex){cls = typed[real] === fullText[real]? 'correct' : 'wrong';}
+    if(real < currentIndex-200 || real > currentIndex+200){cls += ' ref-line';}
     html += `<span class="${cls}">${char}</span>`;
   }
   document.getElementById("passage").innerHTML = html;
-
-  let currentSpan = document.querySelector('#passage.current');
-  if(currentSpan){
-    currentSpan.scrollIntoView({behavior: 'smooth', block: 'center'});
-  }
+  let currentSpan = document.querySelector('#passage .current');
+  if(currentSpan){currentSpan.scrollIntoView({behavior: 'smooth', block: 'center'});}
 }
 
 function updateStats(){
-  let minutes = (parseInt(document.getElementById("timeSelect").value)-timeLeft)/60;
-  if(minutes<=0) minutes=0.01;
-  let words = typedCharacters/5;
-  let speed = Math.round(words/minutes);
+  let minutes = (parseInt(document.getElementById("timeSelect").value)-timeLeft)/60; if(minutes<=0) minutes=0.01;
+  let words = typedCharacters/5; let speed = Math.round(words/minutes);
   let accuracy = typedCharacters? Math.round(((typedCharacters-errors)/typedCharacters)*100) : 100;
-  document.getElementById("wpm").innerText = speed;
-  document.getElementById("accuracy").innerText = accuracy;
-  document.getElementById("errors").innerText = errors;
+  document.getElementById("wpm").innerText = speed; document.getElementById("accuracy").innerText = accuracy; document.getElementById("errors").innerText = errors;
 }
 
 function startTimer(){
-  if(started) return;
-  started = true;
+  if(started) return; started = true;
   timer = setInterval(()=>{
-    timeLeft--;
-    let min = Math.floor(timeLeft/60);
-    let sec = timeLeft%60;
+    timeLeft--; let min = Math.floor(timeLeft/60); let sec = timeLeft%60;
     document.getElementById("time").innerText = min + ":" + String(sec).padStart(2,"0");
     if(timeLeft<=0){finishTest();}
   },1000);
@@ -209,122 +288,72 @@ function startTimer(){
 
 function handleTyping(){
   if(!started){startTimer();}
-  let typed = typingInputRef.value;
-  currentIndex = typed.length;
-  typedCharacters = typed.length;
-  errors = 0;
-
-  for(let i=0;i<typed.length;i++){
-    if(typed[i]!== fullText[i]){errors++;}
-  }
-
+  let typed = typingInputRef.value; currentIndex = typed.length; typedCharacters = typed.length; errors = 0;
+  for(let i=0;i<typed.length;i++){if(typed[i]!== fullText[i]){errors++;}}
+  
   // CHUNK LOADING
-  if(currentIndex > fullText.length * 0.8 && currentMode!== "custom"){
-    let newChunk = generateLongText(10);
-    fullText += "\n\n" + newChunk;
-    loadedWords += 900;
+  if(currentIndex > fullText.length * 0.8 && currentMode!=="lesson"){
+    let newChunk = generateChunk(CHUNK_SIZE); fullText += "\n\n" + newChunk; loadedWords += CHUNK_SIZE;
   }
-
+  
+  // FEEDBACK
   if(!fullText.startsWith(typed)){
     typingInputRef.classList.add("error");
+    document.getElementById('feedback').innerText = '❌ गलती! Backspace दबाएं';
+    document.getElementById('feedback').style.background = '#fee2e2'; document.getElementById('feedback').style.color = '#dc2626';
   } else {
     typingInputRef.classList.remove("error");
+    document.getElementById('feedback').innerText = '✅ सही जा रहे हैं... लगे रहें';
+    document.getElementById('feedback').style.background = '#dcfce7'; document.getElementById('feedback').style.color = '#16a34a';
   }
-
-  renderPassage();
-  updateStats();
-
-  if(currentIndex >= fullText.length && currentMode === "exam"){
-    finishTest();
-  }
+  
+  renderPassage(); updateStats();
+  if(typed === fullText && currentMode==="lesson"){finishTest();}
 }
 
 // MODE BUTTONS
-document.getElementById("practiceMode").onclick=function(){
-  currentMode="practice";
-  document.querySelectorAll('.mode-btn').forEach(btn=>btn.classList.remove('active'));
-  this.classList.add('active');
-  restartTest();
-};
-document.getElementById("examMode").onclick=function(){
-  currentMode="exam";
-  document.querySelectorAll('.mode-btn').forEach(btn=>btn.classList.remove('active'));
-  this.classList.add('active');
-  restartTest();
-};
-document.getElementById("customMode").onclick=function(){
-  currentMode="custom";
-  document.querySelectorAll('.mode-btn').forEach(btn=>btn.classList.remove('active'));
-  this.classList.add('active');
-  document.getElementById("customSection").style.display="block";
-};
+document.getElementById("lessonMode").onclick=function(){currentMode="lesson"; setActiveMode('lessonMode');};
+document.getElementById("practiceMode").onclick=function(){currentMode="practice"; setActiveMode('practiceMode'); let minutes=timeLeft/60; fullText=generateChunk(minutes*90); restartTest();};
+document.getElementById("examMode").onclick=function(){currentMode="exam"; setActiveMode('examMode'); let minutes=timeLeft/60; fullText=generateChunk(minutes*90); restartTest();};
+document.getElementById("customMode").onclick=function(){currentMode="custom"; setActiveMode('customMode'); document.getElementById("customSection").style.display="block";};
 
-// TIME CHANGE
-document.getElementById("timeSelect").onchange=function(){
-  timeLeft = parseInt(this.value);
-  let min = Math.floor(timeLeft/60);
-  document.getElementById("time").innerText = min + ":00";
-};
+function setActiveMode(id){document.querySelectorAll('.mode-btn').forEach(btn=>btn.classList.remove('active')); document.getElementById(id).classList.add('active');}
 
-// CUSTOM TEXT
-document.getElementById("startCustom").onclick=function(){
-  let txt = document.getElementById("customText").value.trim();
-  if(txt===""){alert("कृपया टेक्स्ट जोड़ें"); return;}
-  fullText = txt;
-  document.getElementById("customSection").style.display="none";
-  restartTest();
-};
-
-// RESTART
+document.getElementById("timeSelect").onchange=function(){timeLeft = parseInt(this.value); let min = Math.floor(timeLeft/60); document.getElementById("time").innerText = min + ":00";};
+document.getElementById("startCustom").onclick=function(){let txt = document.getElementById("customText").value.trim(); if(txt===""){alert("कृपया टेक्स्ट जोड़ें"); return;} fullText = txt; document.getElementById("customSection").style.display="none"; restartTest();};
 document.getElementById("restart").onclick=restartTest;
+
 function restartTest(){
-  clearInterval(timer); timer=null; started=false;
-  currentIndex=0; errors=0; typedCharacters=0; loadedWords=0;
+  clearInterval(timer); timer=null; started=false; currentIndex=0; errors=0; typedCharacters=0;
   timeLeft = parseInt(document.getElementById("timeSelect").value);
   document.getElementById("time").innerText = Math.floor(timeLeft/60)+":00";
-  document.getElementById("typingInput").value="";
-  document.getElementById("typingInput").disabled=false;
-  document.getElementById("typingInput").classList.remove("error");
+  document.getElementById("typingInput").value=""; document.getElementById("typingInput").disabled=false; document.getElementById("typingInput").classList.remove("error");
+  typingInputRef = document.getElementById("typingInput"); typingInputRef.addEventListener("input", handleTyping); renderPassage(); updateStats();
+}
 
-  let minutes = timeLeft / 60;
-  fullText = generateLongText(minutes);
-  loadedWords = minutes * 90;
-
-  typingInputRef = document.getElementById("typingInput");
-  typingInputRef.addEventListener("input", handleTyping);
-  renderPassage(); updateStats();
+function nextLesson(){
+  let level = data.lessons[currentLevel];
+  if(currentItem < level.items.length - 1){startLesson(currentLevel, currentItem + 1);}
+  else if(currentLevel < data.lessons.length - 1){startLesson(currentLevel + 1, 0);}
+  else{alert("🎉 सभी 28 Lessons पूरे हो गए!");}
 }
 
 function finishTest(){
-  clearInterval(timer); started=false;
-  typingInputRef.disabled=true;
-  let minutes = (parseInt(document.getElementById("timeSelect").value)-timeLeft)/60;
-  if(minutes<=0) minutes=0.01;
-  let words = typedCharacters/5;
-  let speed = Math.round(words/minutes);
+  clearInterval(timer); started=false; typingInputRef.disabled=true;
+  let minutes = (parseInt(document.getElementById("timeSelect").value)-timeLeft)/60; if(minutes<=0) minutes=0.01;
+  let words = typedCharacters/5; let speed = Math.round(words/minutes);
   let accuracy = typedCharacters? Math.round(((typedCharacters-errors)/typedCharacters)*100) : 100;
-  document.getElementById("typingBox").innerHTML=`
-  <div style="text-align:center;padding:30px;">
-  <h2 style="color:#004aad">🎉 टेस्ट पूरा हुआ</h2>
-  <h3>गति : ${speed} WPM</h3>
-  <p>शुद्धता : ${accuracy}%</p>
-  <p>कुल अक्षर : ${typedCharacters}</p>
-  <p>कुल गलती : ${errors}</p>
-  <button class="btn" onclick="restartTest()">फिर से करें</button>
-  </div>`;
+  alert(`🎉 बधाई हो!\nगति: ${speed} WPM\nशुद्धता: ${accuracy}%\nसमय: ${Math.floor(minutes)} मिनट`);
+  if(currentMode==="lesson"){document.getElementById('nextBtn').style.display='inline-block';}
 }
 
 window.onload = function(){
+  loadLessonList();
   typingInputRef = document.getElementById("typingInput");
   typingInputRef.addEventListener("input", handleTyping);
-  restartTest();
+  startLesson(0,0); // pehla lesson auto start
 }
 </script>
-
-<footer>
-<p>© 2026 Govt Exam Hindi Mangal Tool</p>
-<p>Developed By: <b>AMBUJ SHUKLA</b></p>
-</footer>
 
 </body>
 </html>
