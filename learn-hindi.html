@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hindi Mangal Typing Practice | SSC RO ARO Railway High Court</title>
+<meta name="description" content="Free Hindi Mangal typing practice for SSC, RO ARO, Railway and government exams.">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial,sans-serif;}
+body{background:#f4f7fb;color:#333;}
+header{background:#004aad;padding:15px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;}
+.logo{color:white;font-size:18px;font-weight:bold;}
+.logo span{color:#ffd700;}
+nav a{color:white;text-decoration:none;padding:8px 12px;margin:5px;border-radius:5px;font-weight:bold;}
+nav a.active,nav a:hover{background:#ffd700;color:#004aad;}
+.container{max-width:1100px;margin:25px auto;padding:20px;}
+.card{background:white;padding:25px;border-radius:12px;box-shadow:0 3px 12px rgba(0,0,0,.1);margin-bottom:20px;}
+h1{color:#004aad;margin-bottom:15px;}
+.stats-box{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-bottom:20px;}
+.stat{background:#004aad;color:white;padding:15px;border-radius:10px;text-align:center;}
+.stat b{font-size:24px;display:block;}
+.mode-tabs{display:flex;gap:10px;margin-bottom:20px;}
+.mode-btn{flex:1;padding:12px;background:white;color:#004aad;border:2px solid #004aad;border-radius:8px;font-weight:bold;cursor:pointer;transition:0.2s;}
+.mode-btn.active{background:#004aad;color:white;}
+.controls{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;}
+select,button{padding:10px 15px;border-radius:6px;border:2px solid #004aad;font-weight:bold;}
+button{background:#004aad;color:white;cursor:pointer;}
+.typing-section{display:block;}
+.text-display{height:180px;overflow-y:auto;background:#f8fbff;border:3px solid #004aad;border-radius:10px;padding:20px;margin:20px 0;font-size:32px;line-height:1.8;font-family:'Mangal','Nirmala UI',sans-serif;word-spacing:8px;}
+.correct{color:#16a34a;}
+.incorrect{color:#dc2626;background:#fee2e2;}
+.current{background:#004aad;color:white;padding:0 3px;border-radius:3px;}
+#typingInput{width:100%;padding:15px;font-size:24px;border:2px solid #004aad;border-radius:8px;font-family:'Mangal','Nirmala UI',sans-serif;outline:none;}
+.result-box{display:none;background:#e8f5e9;padding:20px;margin-top:20px;border-radius:10px;border-left:4px solid #16a34a;}
+.custom-box{display:none;margin-bottom:20px;}
+.custom-box textarea{width:100%;height:150px;padding:15px;font-size:18px;font-family:'Mangal','Nirmala UI',sans-serif;border:2px solid #004aad;border-radius:8px;}
+@media(max-width:800px){
+.stats-box{grid-template-columns:repeat(2,1fr);}
+.text-display{font-size:24px;}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo"><span>Govt Exam Hindi Mangal Typing</span></div>
+<nav>
+<a href="index.html">Home</a>
+<a href="typing-test.html">English</a>
+<a class="active">Hindi Mangal</a>
+<a href="mock.html">Mock</a>
+</nav>
+</header>
+
+<div class="container">
+<div class="card">
+<h1>⌨️ Hindi Mangal Live Typing Test</h1>
+
+<div class="stats-box">
+<div class="stat">Speed<b id="wpm">0</b>WPM</div>
+<div class="stat">Accuracy<b id="accuracy">100</b>%</div>
+<div class="stat">Time<b id="time">0:00</b></div>
+<div class="stat">Errors<b id="errors">0</b></div>
+</div>
+
+<div class="mode-tabs">
+<button class="mode-btn active" id="practiceBtn">Practice</button>
+<button class="mode-btn" id="examBtn">Exam</button>
+<button class="mode-btn" id="customBtn">Custom</button>
+</div>
+
+<div class="controls">
+<select id="timeSelect">
+<option value="60">1 Minute</option>
+<option value="300" selected>5 Minutes</option>
+<option value="900">15 Minutes</option>
+<option value="1800">30 Minutes</option>
+</select>
+<button id="restartBtn">🔄 Restart</button>
+</div>
+
+<!-- CUSTOM TEXT BOX -->
+<div class="custom-box card">
+<h3>अपना Paragraph डालें</h3>
+<textarea id="customText" placeholder="यहाँ अपना Hindi paragraph paste करें..."></textarea><br><br>
+<button onclick="loadCustomText()">Start Custom Test</button>
+</div>
+
+<!-- TYPING SECTION -->
+<div class="card typing-section" id="typingSection">
+<h2>Hindi Mangal Typing Practice</h2>
+<div class="text-display" id="textDisplay"></div>
+<input type="text" id="typingInput" placeholder="यहाँ टाइप करना शुरू करें..." autocomplete="off">
+<div class="result-box" id="resultBox"></div>
+</div>
+
+</div>
+</div>
+
+<script>
+let currentText="";
+let currentIndex=0;
+let errors=0;
+let totalTyped=0;
+let seconds=0;
+let timer=null;
+let running=false;
+let mode="practice";
+
+const typingInput = document.getElementById("typingInput");
+const textDisplay = document.getElementById("textDisplay");
+
+function setActiveMode(btnId){
+  document.querySelectorAll('.mode-btn').forEach(btn=>btn.classList.remove('active'));
+  document.getElementById(btnId).classList.add('active');
+}
+
+function startTest(){
+  currentIndex=0;
+  errors=0;
+  totalTyped=0;
+  seconds=0;
+  clearInterval(timer);
+  running=false;
+  typingInput.value="";
+  typingInput.disabled=false;
+  document.getElementById("resultBox").style.display="none";
+  document.getElementById("customBox").style.display="none";
+
+  if(mode==="practice"){
+    currentText = generateHindiText();
+  }
+  renderText();
+  updateStats();
+  typingInput.focus();
+}
+
+function generateHindiText(){
+  let result="";
+  while(result.length < 3000){
+    let word = hindiWords[Math.floor(Math.random()*hindiWords.length)];
+    result += word+" ";
+  }
+  return result.trim();
+}
+
+function renderText(){
+  textDisplay.innerHTML="";
+  let start = currentIndex-120;
+  if(start<0) start=0;
+  let end = start+300;
+  let visible = currentText.substring(start,end);
+  for(let i=0;i<visible.length;i++){
+    let realIndex = start+i;
+    let span = document.createElement("span");
+    span.innerText = visible[i];
+    if(realIndex < currentIndex){
+      if(typingInput.value[realIndex] === currentText[realIndex])
+        span.className="correct";
+      else
+        span.className="incorrect";
+    }
+    else if(realIndex===currentIndex){
+      span.className="current";
+    }
+    textDisplay.appendChild(span);
+  }
+  let currentSpan = textDisplay.querySelector('.current');
+  if(currentSpan) currentSpan.scrollIntoView({block: 'center'});
+}
+
+typingInput.addEventListener("input",function(){
+  if(!running){startTimer();}
+  let value=this.value;
+  if(value.length > currentIndex){
+    totalTyped++;
+    if(value[currentIndex]!== currentText[currentIndex]){errors++;}
+    currentIndex++;
+  }
+  if(value.length < currentIndex){currentIndex = value.length;}
+  if(currentIndex > currentText.length-200 && mode==="practice"){
+    currentText += " "+generateHindiText();
+  }
+  renderText();
+  updateStats();
+  if(currentIndex >= currentText.length && mode!=="practice"){
+    finishTest();
+  }
+});
+
+function startTimer(){
+  running=true;
+  timer=setInterval(function(){
+    seconds++;
+    let min = Math.floor(seconds/60);
+    let sec = seconds%60;
+    document.getElementById("time").innerText = min+":"+String(sec).padStart(2,"0");
+    let limit = parseInt(document.getElementById("timeSelect").value);
+    if(seconds>=limit){finishTest();}
+  },1000);
+}
+
+function updateStats(){
+  let minutes = seconds/60;
+  if(minutes<=0) minutes=0.01;
+  let words = currentIndex/5;
+  let wpm = Math.round(words/minutes);
+  let accuracy = totalTyped? Math.round(((totalTyped-errors)/totalTyped)*100) : 100;
+  document.getElementById("wpm").innerText=wpm;
+  document.getElementById("accuracy").innerText=accuracy;
+  document.getElementById("errors").innerText=errors;
+}
+
+function finishTest(){
+  clearInterval(timer);
+  running=false;
+  typingInput.disabled=true;
+  let result = document.getElementById("resultBox");
+  result.style.display="block";
+  result.innerHTML=`
+  <h2>🎯 Hindi Typing Result</h2>
+  <p><b>Speed:</b> ${document.getElementById("wpm").innerText} WPM</p>
+  <p><b>Accuracy:</b> ${document.getElementById("accuracy").innerText} %</p>
+  <p><b>Errors:</b> ${errors}</p>
+  <p><b>Characters Typed:</b> ${currentIndex}</p>
+  <p><b>Time:</b> ${seconds} Seconds</p>
+  `;
+}
+
+// BUTTONS
+document.getElementById("restartBtn").onclick=function(){startTest();};
+
+document.getElementById("practiceBtn").onclick=function(){
+  mode="practice"; setActiveMode('practiceBtn'); startTest();
+};
+
+document.getElementById("examBtn").onclick=function(){
+  mode="exam"; setActiveMode('examBtn');
+  currentText = examParagraphs[Math.floor(Math.random()*examParagraphs.length)];
+  startTest();
+};
+
+document.getElementById("customBtn").onclick=function(){
+  mode="custom"; setActiveMode('customBtn');
+  document.querySelector(".custom-box").style.display="block";
+  typingInput.disabled=true;
+};
+
+function loadCustomText(){
+  let text = document.getElementById("customText").value.trim();
+  if(text.length>0){
+    currentText=text;
+    document.querySelector(".custom-box").style.display="none";
+    startTest();
+  } else {
+    alert("कृपया पहले paragraph paste करें");
+  }
+}
+
+const hindiWords=["किरण","चित्र","चरित्र","प्रकृति","शक्ति","भक्ति","कर्म","कार्य","सरकार","भारत","शिक्षा","परीक्षा","विद्यार्थी","अधिकारी","कर्मचारी","कार्यालय","आवेदन","प्रक्रिया","नियुक्ति","सफलता","अभ्यास","गति","शुद्धता","कंप्यूटर","तकनीक","सूचना","विभाग","प्रबंधन","दस्तावेज","रिपोर्ट","प्रणाली","सेवा","समय","ज्ञान","अनुभव","उम्मीदवार","प्रतियोगिता","सरकारी","नियमित","प्रयास","उपयोग","महत्वपूर्ण","आवश्यक","सही","गलती","सुधार","लक्ष्य","प्राप्ति","मंगल","टाइपिंग","कौशल","परीक्षण"];
+
+const examParagraphs=[
+"आज के समय में कंप्यूटर ज्ञान और हिंदी टाइपिंग सरकारी परीक्षाओं का महत्वपूर्ण भाग बन चुका है। उम्मीदवारों को नियमित अभ्यास करके अपनी गति और शुद्धता में सुधार करना चाहिए। सही तकनीक और लगातार अभ्यास से बेहतर परिणाम प्राप्त किए जा सकते हैं।",
+"सरकारी कार्यालयों में हिंदी भाषा का उपयोग लगातार बढ़ रहा है। दस्तावेज तैयार करने, रिकॉर्ड रखने और जानकारी को सुरक्षित रखने के लिए तेज और सही टाइपिंग आवश्यक होती है।",
+"प्रतियोगी परीक्षाओं में समय प्रबंधन और शुद्धता का विशेष महत्व होता है। उम्मीदवारों को प्रतिदिन अभ्यास करके अपनी टाइपिंग गति बढ़ानी चाहिए और गलतियों को कम करना चाहिए।",
+"उत्तर प्रदेश और अन्य राज्यों की सरकारी परीक्षाओं में हिंदी टाइपिंग टेस्ट आयोजित किए जाते हैं। अच्छी गति के साथ सही अक्षरों का प्रयोग सफलता के लिए आवश्यक होता है।"
+];
+
+startTest();
+</script>
+
+<footer style="background:#004aad;color:white;padding:20px;text-align:center;margin-top:30px;">
+Hindi Mangal Typing Practice Tool
+</footer>
+
+</body>
+</html>
