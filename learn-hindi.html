@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hindi Mangal Typing Course | 28 Lessons | Govt Exam</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial}
+body{background:#f4f6f9}
+header{background:#004aad;padding:15px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap}
+.logo{color:#fff;font-size:18px;font-weight:bold}
+.logo span{color:#ffd700}
+nav a{color:#fff;text-decoration:none;padding:8px 12px;border-radius:5px;font-weight:600;margin-left:8px}
+nav a:hover, nav a.active{background:#ffd700;color:#004aad}
+.container{max-width:950px;margin:20px auto;padding:20px}
+.card{background:#fff;padding:25px;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,0.1);margin-bottom:20px}
+h1{color:#004aad;margin-bottom:15px;font-size:24px}
+.note{background:#fff8e1; border-left:4px solid #ffd700; padding:10px; margin-bottom:15px; border-radius:4px}
+.level-box{border:1px solid #ddd;border-radius:8px;margin-bottom:12px;overflow:hidden}
+.level-header{background:#004aad;color:#fff;padding:12px 15px;cursor:pointer;font-weight:bold;display:flex;justify-content:space-between}
+.level-header:hover{background:#00337a}
+.level-content{display:none;padding:15px;background:#e3f2fd;max-height:500px;overflow-y:auto}
+.level-content.active{display:block}
+.lesson-item{display:flex;justify-content:space-between;align-items:center;padding:12px;border:1px solid #bbdefb;border-radius:6px;cursor:pointer;background:#fff;margin-bottom:8px}
+.lesson-item:hover{background:#e1f5fe;border-color:#004aad}
+.key-badge{background:#00838f;color:#fff;padding:4px 8px;border-radius:4px;margin:0 2px;font-size:12px;font-weight:bold}
+#lessonBox{display:none}
+#lessonTextWrapper{height: 280px;overflow-y: auto;border:2px dashed #004aad;border-radius:8px;background:#e3f2fd;padding:25px;margin:15px 0;}
+#lessonText{font-size:28px;line-height:2.5;letter-spacing:1px;white-space: pre-wrap;font-family:'Mangal','Nirmala UI', sans-serif;}
+#lessonInput{width:100%;padding:15px;font-size:22px;border:2px solid #004aad;border-radius:8px;outline:none;font-family:'Mangal','Nirmala UI', sans-serif;}
+#lessonInput:disabled{background:#e0e0e0}
+.stats{display:flex;gap:15px;margin-top:10px;flex-wrap:wrap}
+.stats span{background:#bbdefb;padding:8px 12px;border-radius:5px;font-weight:bold}
+.correct{color:#2e7d32}.wrong{color:#c62828;background:#ffebee}.current{background:#004aad;color:#fff;padding:2px 3px;border-radius:3px}
+.btn{padding:10px 20px;background:#004aad;color:#fff;border:none;border-radius:6px;cursor:pointer;font-weight:bold;margin-top:10px;margin-right:10px}
+.btn-success{background:#2e7d32}
+.btn:disabled{background:#9e9e9e}
+#resultPopup{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:999;justify-content:center;align-items:center}
+.result-card{background:#fff;padding:30px;border-radius:12px;text-align:center;max-width:400px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><span>Govt Exam Hindi Mangal</span></div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="learn-hindi.html" class="active">Lessons</a>
+    <a href="hindi-typing-test.html">Typing Test</a>
+  </nav>
+</header>
+
+<div class="container">
+  <div class="card" id="lessonListBox">
+    <h1>📚 Hindi Mangal Typing Course - 28 Lessons</h1>
+    <div class="note"><b>Note:</b> Drill = 60 Words | Practice Paragraph = 100 Words Minimum</div>
+    <div id="lessonList"></div>
+  </div>
+
+  <div class="card" id="lessonBox">
+    <h2 id="lessonTitle"></h2>
+    <div id="keysInfo"></div>
+    <div id="lessonTextWrapper"><div id="lessonText"></div></div>
+    <input type="text" id="lessonInput" placeholder="यहाँ टाइप करें..." autocomplete="off">
+    <div class="stats">
+      <span>Speed: <span id="wpm">0</span> WPM</span>
+      <span>Accuracy: <span id="acc">100%</span></span>
+      <span>Words: <span id="wordCount">0</span></span>
+    </div>
+    <div id="feedback"></div>
+    <button class="btn" onclick="backToList()">⬅️ Back</button>
+    <button class="btn btn-success" id="nextBtn" onclick="nextLesson()">Next ➡️</button>
+  </div>
+</div>
+
+<div id="resultPopup"><div class="result-card">
+  <h2>🎉 Lesson Complete!</h2>
+  <p><b>Speed:</b> <span id="resultWpm">0</span> WPM</p>
+  <p><b>Accuracy:</b> <span id="resultAcc">100%</span></p>
+  <button class="btn btn-success" onclick="closeResult()">Next Lesson</button>
+</div></div>
+
+<script>
+const baseParagraphs = [
+  "भारत सरकार विभिन्न विभागों में भर्ती के लिए प्रत्येक वर्ष प्रतियोगी परीक्षाओं का आयोजन करती है। आज के समय में कंप्यूटर ज्ञान और टाइपिंग कौशल सरकारी नौकरी की तैयारी करने वाले विद्यार्थियों के लिए बहुत महत्वपूर्ण है। बिना कंप्यूटर के आज कोई काम नहीं होता। हर विभाग में डाटा एंट्री का काम होता है।",
+  "सरकारी कार्यालयों में हिंदी भाषा का उपयोग लगातार बढ़ रहा है। दस्तावेज तैयार करने, रिकॉर्ड रखने और जानकारी को सुरक्षित रखने के लिए तेज और सही टाइपिंग आवश्यक होती है। इसलिए अभ्यास जरूरी है। हर कर्मचारी को हिंदी टाइपिंग आनी चाहिए। समय की बचत होती है।",
+  "सफलता रातों रात नहीं मिलती। इसके लिए कड़ी मेहनत और धैर्य चाहिए। अगर आप अच्छे टाइपिस्ट बनना चाहते हैं तो रोज अभ्यास करें। अपना लक्ष्य निर्धारित करें और उसे प्राप्त करें। समय बर्बाद मत करो। निरंतर प्रयास से ही सफलता मिलती है।",
+  "आज के डिजिटल युग में कंप्यूटर ज्ञान आवश्यक है। इंटरनेट ने पूरी दुनिया को जोड़ दिया है। हम ईमेल भेज सकते हैं, ऑनलाइन कक्षा कर सकते हैं और घर से काम कर सकते हैं। टाइपिंग सभी कंप्यूटर काम की नींव है। इसके बिना कुछ नहीं हो सकता।",
+  "लंबे समय तक टाइपिंग करते समय अपने स्वास्थ्य का ध्यान रखें। सीधे बैठें और पीठ सीधी रखें। हर 30 मिनट में ब्रेक लें। आंखों का व्यायाम करें। पानी पीते रहें। गलत तरीके से बैठने से कमर दर्द होता है। स्वास्थ्य सबसे जरूरी है।"
+];
+
+const data = {
+  lessons: [
+    {level:"STAGE 1: HOME ROW", items:[
+      {title:"Lesson 1: क स द फ", keys:['क','स','द','फ'], type:"drill"},
+      {title:"Lesson 2: ज क ल ;", keys:['ज','क','ल',';'], type:"drill"},
+      {title:"Lesson 3: FULL HOME ROW", keys:['क','स','द','फ','ज','क','ल',';'], type:"drill"}
+    ]},
+    {level:"STAGE 2: UPPER ROW", items:[
+      {title:"Lesson 4: र उ", keys:['र','उ'], type:"drill"},
+      {title:"Lesson 5: ए इ", keys:['ए','इ'], type:"drill"},
+      {title:"Lesson 6: व ओ", keys:['व','ओ'], type:"drill"},
+      {title:"Lesson 7: प य", keys:['प','य'], type:"drill"},
+      {title:"Lesson 8: FULL UPPER ROW", keys:['प','व','ए','र','य','उ','इ','ओ'], type:"drill"}
+    ]},
+    {level:"STAGE 3: LOWER ROW", items:[
+      {title:"Lesson 9: ज ङ ण", keys:['ज','ङ','ण'], type:"drill"},
+      {title:"Lesson 10: त ब न म", keys:['त','ब','न','म'], type:"drill"},
+      {title:"Lesson 11: FULL LOWER ROW", keys:['ज','ङ','ण','त','ब','न','म'], type:"drill"}
+    ]},
+    {level:"STAGE 4: FULL KEYBOARD", items:[
+      {title:"Lesson 12: ALL LETTERS", keys:['क','ख','ग','घ','ङ','च','छ','ज','झ','ञ','ट','ठ','ड','ढ','ण','त','थ','द','ध','न','प','फ','ब','भ','म','य','र','ल','व','श','ष','स','ह'], type:"drill"},
+      {title:"Lesson 13: WITH MATRA", text:"practice", wordCount:100}
+    ]},
+    {level:"STAGE 5: WORDS", items:[
+      {title:"Lesson 14: COMMON WORDS", text:"practice", wordCount:100},
+      {title:"Lesson 15: OFFICE WORDS", text:"practice", wordCount:100},
+      {title:"Lesson 16: EXAM WORDS", text:"practice", wordCount:100}
+    ]},
+    {level:"STAGE 6: SENTENCES", items:[
+      {title:"Lesson 17: SIMPLE", text:"practice", wordCount:100},
+      {title:"Lesson 18: JOB RELATED", text:"practice", wordCount:100},
+      {title:"Lesson 19: MOTIVATION", text:"practice", wordCount:100}
+    ]},
+    {level:"STAGE 7: EXAM PRACTICE", items:[
+      {title:"Lesson 20: NUMBERS", text:"practice", wordCount:100},
+      {title:"Lesson 21: OFFICE PARAGRAPH 1", text:"practice", wordCount:100},
+      {title:"Lesson 22: OFFICE PARAGRAPH 2", text:"practice", wordCount:100},
+      {title:"Lesson 23: MOTIVATION PARAGRAPH", text:"practice", wordCount:100},
+      {title:"Lesson 24: TECHNOLOGY PARAGRAPH", text:"practice", wordCount:100},
+      {title:"Lesson 25: HEALTH PARAGRAPH", text:"practice", wordCount:100},
+      {title:"Lesson 26: FINAL PRACTICE 1", text:"practice", wordCount:100},
+      {title:"Lesson 27: FINAL PRACTICE 2", text:"practice", wordCount:100},
+      {title:"Lesson 28: FINAL EXAM PARAGRAPH", text:"practice", wordCount:100}
+    ]}
+  ]
+};
+
+// GENERATOR FUNCTION
+function generateWords(keys, targetWords=60){
+  let words = [];
+  while(words.length < targetWords){
+    let wordLen = Math.floor(Math.random() * 3) + 3;
+    let word = "";
+    for(let k=0; k<wordLen; k++) word += keys[Math.floor(Math.random() * keys.length)];
+    words.push(word);
+  }
+  let result = "";
+  for(let i=0; i<words.length; i+=10) {
+    result += words.slice(i, i+10).join(" ") + "\n";
+  }
+  return result.trim();
+}
+
+// 100 WORDS PARAGRAPH GENERATOR
+function generateParagraph(wordCount){
+  let result = "";
+  while(result.split(" ").length < wordCount){
+    result += baseParagraphs[Math.floor(Math.random() * baseParagraphs.length)] + " ";
+  }
+  // 8-10 words per line
+  let words = result.trim().split(" ");
+  let formatted = "";
+  for(let i=0; i<words.length; i+=9){
+    formatted += words.slice(i, i+9).join(" ") + "\n";
+  }
+  return formatted.trim();
+}
+
+let currentLevel = 0, currentItem = 0, startTime = 0, lessonCompleted = false;
+
+function loadLessonList(){
+  let list = document.getElementById('lessonList');
+  data.lessons.forEach((levelObj, lIndex)=>{
+    let lessonsHTML = '';
+    levelObj.items.forEach((item, iIndex)=>{
+      let keysHTML = item.keys? item.keys.map(k=>`<span class="key-badge">${k}</span>`).join('') : '<span style="color:#666">100 Words</span>';
+      lessonsHTML += `<div class="lesson-item" onclick="startLesson(${lIndex},${iIndex})"><b>${item.title}</b><div>${keysHTML}</div></div>`;
+    });
+    list.innerHTML += `<div class="level-box"><div class="level-header" onclick="this.nextElementSibling.classList.toggle('active')">${levelObj.level} <span>+</span></div><div class="level-content">${lessonsHTML}</div></div>`;
+  });
+  document.querySelector('.level-content').classList.add('active');
+}
+
+function startLesson(lIndex, iIndex){
+  lessonCompleted = false; currentLevel = lIndex; currentItem = iIndex;
+  let item = data.lessons[lIndex].items[iIndex];
+
+  let lessonText = "";
+  if(item.type === "drill"){
+    lessonText = generateWords(item.keys, 60); // 60 words
+  } else {
+    lessonText = generateParagraph(item.wordCount || 100); // 100 words
+  }
+
+  document.getElementById('lessonListBox').style.display = 'none';
+  document.getElementById('lessonBox').style.display = 'block';
+  document.getElementById('lessonTitle').innerText = item.title;
+  document.getElementById('keysInfo').innerHTML = item.keys? `Keys: ${item.keys.map(k=>`<span class="key-badge">${k}</span>`).join(' ')}` : `<b>Target: ${item.wordCount} Words</b>`;
+  document.getElementById('lessonText').innerText = lessonText;
+  document.getElementById('lessonInput').value=''; document.getElementById('lessonInput').disabled = false;
+  document.getElementById('nextBtn').disabled = true; document.getElementById('lessonInput').focus();
+  document.getElementById('wpm').innerText = '0'; document.getElementById('acc').innerText = '100%'; document.getElementById('wordCount').innerText = '0';
+  document.getElementById('lessonTextWrapper').scrollTop = 0; startTime = new Date().getTime();
+}
+
+function backToList(){document.getElementById('lessonListBox').style.display = 'block';document.getElementById('lessonBox').style.display = 'none';}
+function nextLesson(){let level = data.lessons[currentLevel];if(currentItem < level.items.length - 1){startLesson(currentLevel, currentItem + 1);}else if(currentLevel < data.lessons.length - 1){startLesson(currentLevel + 1, 0);}else{alert("🎉 All Lessons Completed!");backToList();}}
+function showResult(wpm, acc){lessonCompleted = true;document.getElementById('lessonInput').disabled = true;document.getElementById('nextBtn').disabled = false;document.getElementById('resultWpm').innerText = wpm;document.getElementById('resultAcc').innerText = acc + '%';document.getElementById('resultPopup').style.display = 'flex';}
+function closeResult(){document.getElementById('resultPopup').style.display = 'none';nextLesson();}
+
+document.getElementById('lessonInput').addEventListener('input', function(){
+  if(lessonCompleted) return;
+  let typed = this.value;
+  let target = document.getElementById('lessonText').innerText;
+  let time = (new Date().getTime() - startTime) / 1000 / 60;
+  let words = typed.trim().split(" ").filter(w=>w.length>0).length;
+  let wpm = time > 0? Math.round(words / time) : 0;
+  let correct = 0; for(let i=0; i<typed.length; i++) if(typed[i] === target[i]) correct++;
+  let acc = typed.length > 0? Math.round((correct/typed.length)*100) : 100;
+  document.getElementById('wpm').innerText = wpm;document.getElementById('acc').innerText = acc + '%';document.getElementById('wordCount').innerText = words;
+  let html=''; for(let i=0;i<target.length;i++){let cls=''; if(i<typed.length) cls=typed[i]===target[i]?'correct':'wrong'; if(i===typed.length) cls+=' current'; html+=`<span class="${cls}">${target[i]}</span>`;}
+  document.getElementById('lessonText').innerHTML=html;
+  document.getElementById('lessonTextWrapper').scrollTop = document.querySelector('.current')?.offsetTop - 100;
+  if(typed === target){showResult(wpm, acc);}
+  else if(!target.startsWith(typed)){
+    document.getElementById('feedback').innerText = '❌ गलती! दोबारा जांचें';
+    document.getElementById('feedback').style.color = '#c62828';
+  } else {
+    document.getElementById('feedback').innerText = '⌨️ टाइप करते रहें...';
+    document.getElementById('feedback').style.color = '#004aad';
+  }
+});
+
+loadLessonList();
+</script>
+</body>
+</html>
