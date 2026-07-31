@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hindi Mangal Typing - IGNOU Help Zone</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial}
+body{background:#f4f6f9}
+header{background:#6a1b9a;padding:15px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap}
+.logo{display:flex;align-items:center;font-size:18px;font-weight:bold;color:#fff}
+.logo img{height:40px;margin-right:8px}.logo span{color:#ffb300}
+nav a{color:#fff;text-decoration:none;padding:8px 12px;border-radius:5px;font-weight:600;margin-left:8px}
+nav a:hover, nav a.active{background:#ffb300;color:#6a1b9a}
+.container{max-width:950px;margin:20px auto;padding:20px}
+.card{background:#fff;padding:25px;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,0.1);margin-bottom:20px}
+h1{color:#6a1b9a;margin-bottom:15px;font-size:24px}
+.note{background:#fff8e1; border-left:4px solid #ffb300; padding:10px; margin-bottom:15px; border-radius:4px}
+.level-box{border:1px solid #ddd;border-radius:8px;margin-bottom:12px;overflow:hidden}
+.level-header{background:#6a1b9a;color:#fff;padding:12px 15px;cursor:pointer;font-weight:bold;display:flex;justify-content:space-between}
+.level-header:hover{background:#4a148c}
+.level-content{display:none;padding:15px;background:#f3e5f5;max-height:500px;overflow-y:auto}
+.level-content.active{display:block}
+.lesson-item{display:flex;justify-content:space-between;align-items:center;padding:12px;border:1px solid #e1bee7;border-radius:6px;cursor:pointer;background:#fff;margin-bottom:8px}
+.lesson-item:hover{background:#ede7f6;border-color:#6a1b9a}
+.key-badge{background:#00838f;color:#fff;padding:4px 8px;border-radius:4px;margin:0 2px;font-size:12px;font-weight:bold}
+#lessonBox{display:none}
+#lessonTextWrapper{height: 250px;overflow-y: auto;border:2px dashed #6a1b9a;border-radius:8px;background:#f3e5f5;padding:25px;margin:15px 0;}
+#lessonText{font-size:26px;line-height:2.5;letter-spacing:2px;white-space: pre-wrap;font-family:'Mangal', sans-serif;}
+#lessonInput{width:100%;padding:15px;font-size:20px;border:2px solid #6a1b9a;border-radius:8px;outline:none;font-family:'Mangal', sans-serif;}
+#lessonInput:disabled{background:#e0e0e0}
+.stats{display:flex;gap:15px;margin-top:10px;flex-wrap:wrap}
+.stats span{background:#e1bee7;padding:8px 12px;border-radius:5px;font-weight:bold}
+.correct{color:#2e7d32}.wrong{color:#c62828;background:#ffebee}.current{background:#6a1b9a;color:#fff;padding:2px 0}
+.btn{padding:10px 20px;background:#6a1b9a;color:#fff;border:none;border-radius:6px;cursor:pointer;font-weight:bold;margin-top:10px;margin-right:10px}
+.btn-success{background:#2e7d32}
+.btn:disabled{background:#9e9e9e}
+#resultPopup{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:999;justify-content:center;align-items:center}
+.result-card{background:#fff;padding:30px;border-radius:12px;text-align:center;max-width:400px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/15/IGNOU_logo.svg/1200px-IGNOU_logo.svg.png"><span>IGNOU Help Zone</span></div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="learn-english.html">English</a>
+    <a href="learn-hindi.html" class="active">Hindi</a>
+  </nav>
+</header>
+
+<div class="container">
+  <div class="card" id="lessonListBox">
+    <h1>📚 Hindi Mangal Course - 28 Path</h1>
+    <div class="note"><b>Note:</b> Har path 50-60 shabdon ka hai. Complete hote hi result aa jayega</div>
+    <div id="lessonList"></div>
+  </div>
+
+  <div class="card" id="lessonBox">
+    <h2 id="lessonTitle"></h2>
+    <div id="keysInfo"></div>
+    <div id="lessonTextWrapper"><div id="lessonText"></div></div>
+    <input type="text" id="lessonInput" placeholder="यहां टाइप करें..." autocomplete="off" oninput="checkLesson()">
+    <div class="stats">
+      <span>गति: <span id="wpm">0</span> WPM</span>
+      <span>शुद्धता: <span id="acc">100%</span></span>
+      <span>शब्द: <span id="wordCount">0</span>/50</span>
+    </div>
+    <div id="feedback"></div>
+    <button class="btn" onclick="backToList()">⬅️ वापस</button>
+    <button class="btn btn-success" id="nextBtn" onclick="nextLesson()">अगला पाठ ➡️</button>
+  </div>
+</div>
+
+<div id="resultPopup"><div class="result-card">
+  <h2>🎉 पाठ पूरा हुआ!</h2>
+  <p><b>गति:</b> <span id="resultWpm">0</span> WPM</p>
+  <p><b>शुद्धता:</b> <span id="resultAcc">100%</span></p>
+  <button class="btn btn-success" onclick="closeResult()">अगला पाठ</button>
+</div></div>
+
+<script>
+const data = {
+  title: "📚 Hindi Mangal Course - 28 Path",
+  lessons: [
+    {level:"CHARAN 1: MUL VYANJAN", items:[
+      {title:"पाठ 1: क ख ग घ", keys:['क','ख','ग','घ'], type:"drill"},
+      {title:"पाठ 2: च छ ज झ", keys:['च','छ','ज','झ'], type:"drill"},
+      {title:"पाठ 3: ट ठ ड ढ", keys:['ट','ठ','ड','ढ'], type:"drill"},
+      {title:"पाठ 4: त थ द ध", keys:['त','थ','द','ध'], type:"drill"}
+    ]},
+    {level:"CHARAN 2: SHESH VYANJAN", items:[
+      {title:"पाठ 5: प फ ब भ", keys:['प','फ','ब','भ'], type:"drill"},
+      {title:"पाठ 6: म य र ल", keys:['म','य','र','ल'], type:"drill"},
+      {title:"पाठ 7: व श ष स", keys:['व','श','ष','स'], type:"drill"},
+      {title:"पाठ 8: ह क्ष त्र ज्ञ", keys:['ह','क्ष','त्र','ज्ञ'], type:"drill"}
+    ]},
+    {level:"CHARAN 3: SWAR", items:[
+      {title:"पाठ 9: अ से औ", keys:['अ','आ','इ','ई','उ','ऊ','ए','ऐ','ओ','औ'], type:"drill"}
+    ]},
+    {level:"CHARAN 4: MATRA", items:[
+      {title:"पाठ 10: ा ि ी ु", keys:['ा','ि','ी','ु'], type:"drill"},
+      {title:"पाठ 11: ू े ै ो", keys:['ू','े','ै','ो'], type:"drill"},
+      {title:"पाठ 12: ौ ं ः ्", keys:['ौ','ं','ः','्'], type:"drill"}
+    ]},
+    {level:"CHARAN 5: CHINH AUR NUMBER", items:[
+      {title:"पाठ 13: ।,", keys:['।','], type:"drill"},
+      {title:"पाठ 14: 1 2 3 4 5", keys:['1','2','3','4','5'], type:"drill"},
+      {title:"पाठ 15: 6 7 8 9 0", keys:['6','7','8','9','0'], type:"drill"}
+    ]},
+    {level:"CHARAN 6: SHABD", items:[
+      {title:"पाठ 16: 2 अक्षर शब्द", text:"काम नाम राम घर जल फल कलम किताब भारत देश स्कूल परीक्षा कंप्यूटर कार्यालय"},
+      {title:"पाठ 17: 3 अक्षर शब्द", text:"भारत देश स्कूल किताब परीक्षा कंप्यूटर कार्यालय कर्मचारी अधिकारी विद्यार्थी शिक्षक"},
+      {title:"पाठ 18: 4 अक्षर शब्द", text:"कंप्यूटर कार्यालय परीक्षा कर्मचारी अधिकारी विद्यार्थी शिक्षक प्रशिक्षण आवेदन पत्र"}
+    ]},
+    {level:"CHARAN 7: VAKYA", items:[
+      {title:"पाठ 19: सरल वाक्य", text:"मैं कंप्यूटर पर टाइप करता हूं। मुझे टाइपिंग पसंद है। रोज अभ्यास करता हूं। गति बढ़ रही है। सफलता मिलेगी।"},
+      {title:"पाठ 20: रोजमर्रा", text:"शिक्षा सबसे बड़ा धन है। रोज अभ्यास करें। मेहनत का फल मीठा होता है। समय का सदुपयोग करें। लक्ष्य पर ध्यान दें।"},
+      {title:"पाठ 21: नौकरी वाक्य", text:"सरकारी नौकरी के लिए टाइपिंग टेस्ट पास करना जरूरी है। 30 शब्द प्रति मिनट की गति चाहिए। शुद्धता भी जरूरी है। अभ्यास से सब संभव है।"}
+    ]},
+    {level:"CHARAN 8: EXAM PRACTICE", items:[
+      {title:"पाठ 22: संख्या और चिन्ह", text:"संख्या का अभ्यास रोज करें 1 2 3 4 5 6 7 8 9 0। डाटा एंट्री में संख्या बहुत आती है। चिन्ह भी महत्वपूर्ण हैं @ # $ % & * ( )। शुद्धता पर ध्यान दें। गति के साथ शुद्धता भी जरूरी है। सरकारी परीक्षा में यही पूछा जाता है। अभ्यास से सब आसान हो जाता है।"},
+      {title:"पाठ 23: कार्यालय पैराग्राफ 1", text:"आज के समय में कंप्यूटर का ज्ञान बहुत आवश्यक है। इसके बिना कार्यालय का काम संभव नहीं है। हर विभाग में कंप्यूटर का उपयोग होता है। डाटा एंट्री, रिपोर्ट बनाना और ईमेल भेजना सभी काम कंप्यूटर से होते हैं। टाइपिंग आना बहुत जरूरी है। रोज अभ्यास करने से गति बढ़ती है।"},
+      {title:"पाठ 24: कार्यालय पैराग्राफ 2", text:"SSC, बैंक और रेलवे की परीक्षा में टाइपिंग टेस्ट होता है। इसमें कम से कम 30 शब्द प्रति मिनट टाइप करने होते हैं। साथ में 95 प्रतिशत शुद्धता भी चाहिए। इसके लिए रोज अभ्यास करना जरूरी है। परीक्षा के समय घबराएं नहीं। पहले शुद्धता पर ध्यान दें। गति अपने आप बढ़ जाएगी।"},
+      {title:"पाठ 25: प्रेरणा पैराग्राफ", text:"सफलता एक दिन में नहीं मिलती। इसके लिए मेहनत और धैर्य चाहिए। अगर आप अच्छे टाइपिस्ट बनना चाहते हैं तो रोज अभ्यास करें। अपना लक्ष्य बनाएं और उसे पूरा करें। दूसरों से तुलना न करें। हर कोई अपने समय पर सीखता है। अपने आप पर विश्वास रखें। एक दिन आपको सफलता अवश्य मिलेगी।"},
+      {title:"पाठ 26: तकनीक पैराग्राफ", text:"आज के डिजिटल युग में कंप्यूटर ज्ञान बहुत जरूरी है। इंटरनेट ने पूरी दुनिया को जोड़ दिया है। हम ईमेल भेज सकते हैं, ऑनलाइन क्लास ले सकते हैं और घर से काम कर सकते हैं। टाइपिंग सभी कंप्यूटर काम का आधार है। टच टाइपिंग सीखें। टच टाइपिंग का मतलब है बिना कीबोर्ड देखे टाइप करना। इससे गति बढ़ती है।"},
+      {title:"पाठ 27: स्वास्थ्य पैराग्राफ", text:"लंबे समय तक टाइपिंग करते समय स्वास्थ्य का ध्यान रखें। सीधे बैठकर टाइप करें। पीठ सीधी रखें। हर 30 मिनट बाद ब्रेक लें। आंखों का व्यायाम करें। पानी पीते रहें। सही पॉश्चर में बैठें। इससे हाथ और पीठ का दर्द नहीं होगा। स्वास्थ्य सबसे जरूरी है। गति बाद में बढ़ेगी।"},
+      {title:"पाठ 28: अंतिम अभ्यास", text:"बधाई हो। आपने सभी पाठ पूरे कर लिए हैं। अब मॉक टेस्ट रोज दें। गलती होने पर तुरंत सुधारें। सरकारी परीक्षा में प्रतिस्पर्धा बहुत है। केवल अच्छे उम्मीदवार ही चुने जाते हैं। मेहनत करते रहें। अपना लक्ष्य हासिल करें। आपके उज्ज्वल भविष्य के लिए शुभकामनाएं।"}
+    ]}
+  ]
+};
+
+function generateWords(keys, targetWords=50, wordLen=3){
+  let words = [];
+  while(words.length < targetWords){
+    let word = "";
+    for(let k=0; k<wordLen; k++) word += keys[Math.floor(Math.random() * keys.length)];
+    words.push(word);
+  }
+  let result = "";
+  for(let i=0; i<words.length; i+=10) result += words.slice(i, i+10).join(" ") + "\n";
+  return result.trim();
+}
+
+let currentLevel = 0, currentItem = 0, startTime = 0, lessonCompleted = false;
+
+function loadLessonList(){
+  let list = document.getElementById('lessonList');
+  data.lessons.forEach((levelObj, lIndex)=>{
+    let lessonsHTML = '';
+    levelObj.items.forEach((item, iIndex)=>{
+      let keysHTML = item.keys? item.keys.map(k=>`<span class="key-badge">${k}</span>`).join('') : '<span style="color:#666">अभ्यास</span>';
+      lessonsHTML += `<div class="lesson-item" onclick="startLesson(${lIndex},${iIndex})"><b>${item.title}</b><div>${keysHTML}</div></div>`;
+    });
+    list.innerHTML += `<div class="level-box"><div class="level-header" onclick="this.nextElementSibling.classList.toggle('active')">${levelObj.level} <span>+</span></div><div class="level-content">${lessonsHTML}</div></div>`;
+  });
+  document.querySelector('.level-content').classList.add('active');
+}
+
+function startLesson(lIndex, iIndex){
+  lessonCompleted = false; currentLevel = lIndex; currentItem = iIndex;
+  let item = data.lessons[lIndex].items[iIndex];
+  let lessonText = item.type? generateWords(item.keys, item.type=="pro"?60:50, item.type=="pro"?5:3) : item.text;
+
+  document.getElementById('lessonListBox').style.display = 'none';
+  document.getElementById('lessonBox').style.display = 'block';
+  document.getElementById('lessonTitle').innerText = item.title;
+  document.getElementById('keysInfo').innerHTML = item.keys? `Keys: ${item.keys.map(k=>`<span class="key-badge">${k}</span>`).join(' ')}` : '';
+  document.getElementById('lessonText').innerText = lessonText;
+  document.getElementById('lessonInput').value = ''; document.getElementById('lessonInput').disabled = false;
+  document.getElementById('nextBtn').disabled = true; document.getElementById('lessonInput').focus();
+  document.getElementById('wpm').innerText = '0'; document.getElementById('acc').innerText = '100%'; document.getElementById('wordCount').innerText = '0';
+  document.getElementById('lessonTextWrapper').scrollTop = 0; startTime = new Date().getTime();
+}
+
+function backToList(){document.getElementById('lessonListBox').style.display = 'block';document.getElementById('lessonBox').style.display = 'none';}
+function nextLesson(){let level = data.lessons[currentLevel];if(currentItem < level.items.length - 1){startLesson(currentLevel, currentItem + 1);}else if(currentLevel < data.lessons.length - 1){startLesson(currentLevel + 1, 0);}else{alert("🎉 सभी पाठ पूरे हुए!");backToList();}}
+function showResult(wpm, acc){lessonCompleted = true;document.getElementById('lessonInput').disabled = true;document.getElementById('nextBtn').disabled = false;document.getElementById('resultWpm').innerText = wpm;document.getElementById('resultAcc').innerText = acc + '%';document.getElementById('resultPopup').style.display = 'flex';}
+function closeResult(){document.getElementById('resultPopup').style.display = 'none';nextLesson();}
+function autoScroll(){let span = document.querySelector('#lessonText.current');if(span) span.scrollIntoView({behavior: 'smooth', block: 'center'});}
+
+function checkLesson(){
+  if(lessonCompleted) return;
+  let typed = document.getElementById('lessonInput').value;
+  let target = document.getElementById('lessonText').innerText;
+  let time = (new Date().getTime() - startTime) / 1000 / 60;
+  let words = typed.trim().split(" ").filter(w=>w.length>0).length;
+  let wpm = time > 0? Math.round(words / time) : 0;
+  let correct = 0; for(let i=0; i<typed.length; i++) if(typed[i] === target[i]) correct++;
+  let acc = typed.length > 0? Math.round((correct/typed.length)*100) : 100;
+  document.getElementById('wpm').innerText = wpm;document.getElementById('acc').innerText = acc + '%';document.getElementById('wordCount').innerText = words;
+  let html=''; for(let i=0;i<target.length;i++){let cls=''; if(i<typed.length) cls=typed[i]===target[i]?'correct':'wrong'; if(i===typed.length) cls+=' current'; html+=`<span class="${cls}">${target[i]}</span>`;}
+  document.getElementById('lessonText').innerHTML=html; autoScroll();
+  if(typed === target){showResult(wpm, acc);}
+  else if(target.startsWith(typed)){
+    document.getElementById('feedback').innerText = '⌨️ टाइप करते रहें...';
+    document.getElementById('feedback').style.color = '#6a1b9a';
+  }
+  else{
+    document.getElementById('feedback').innerText = '❌ गलती! वर्तनी देखें';
+    document.getElementById('feedback').style.color = '#c62828';
+  }
+}
+
+loadLessonList();
+</script>
+</body>
+</html>
