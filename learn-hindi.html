@@ -28,15 +28,15 @@ h1{color:#004aad;margin-bottom:15px;font-size:24px}
 #lessonBox{display:none}
 #lessonTextWrapper{
   height: 350px;overflow-y: auto;border:3px solid #004aad;border-radius:8px;background:#f8fbff;padding:25px;margin:15px 0;
-  scroll-behavior: smooth; /* Smooth scroll */
+  scroll-behavior: smooth;
 }
 #lessonText{font-size:28px;line-height:2.8;letter-spacing:1px;white-space: pre-wrap;font-family:'Mangal','Nirmala UI', sans-serif;}
 
 /* HIGHLIGHT COLORS */
 .correct{color:#16a34a;}
-.wrong{color:#fff;background:#dc2626;padding:2px 3px;border-radius:3px;animation: shake 0.2s;} /* Red + Shake */
-.current{background:#004aad;color:#fff;padding:3px 5px;border-radius:4px;box-shadow:0 0 8px #004aad;} /* Blue Highlight */
-.ref-line{opacity:0.4;} /* Reference lines upar neeche */
+.wrong{color:#fff;background:#dc2626;padding:2px 3px;border-radius:3px;animation: shake 0.2s;}
+.current{background:#004aad;color:#fff;padding:3px 5px;border-radius:4px;box-shadow:0 0 8px #004aad;}
+.ref-line{opacity:0.4;}
 
 @keyframes shake {
  0% { transform: translateX(0); }
@@ -48,7 +48,7 @@ h1{color:#004aad;margin-bottom:15px;font-size:24px}
 
 #lessonInput{width:100%;padding:15px;font-size:22px;border:2px solid #004aad;border-radius:8px;outline:none;font-family:'Mangal','Nirmala UI', sans-serif;}
 #lessonInput:disabled{background:#e0e0e0}
-#lessonInput.error{border-color:#dc2626;box-shadow:0 0 8px #dc2626;} /* Input bhi red ho jaye */
+#lessonInput.error{border-color:#dc2626;box-shadow:0 0 8px #dc2626;}
 
 .stats{display:flex;gap:15px;margin-top:10px;flex-wrap:wrap}
 .stats span{background:#bbdefb;padding:8px 12px;border-radius:5px;font-weight:bold}
@@ -73,7 +73,7 @@ h1{color:#004aad;margin-bottom:15px;font-size:24px}
 <div class="container">
   <div class="card" id="lessonListBox">
     <h1>📚 Hindi Mangal Typing Course - 28 Lessons</h1>
-    <div class="note"><b>Features:</b> Auto Scroll | Wrong Highlight | 30 Min Practice</div>
+    <div class="note"><b>Features:</b> Auto Scroll | Wrong Highlight | 30 Min Practice | Chunk Loading</div>
     <div id="lessonList"></div>
   </div>
 
@@ -111,10 +111,49 @@ const baseParagraphs = [
   "लंबे समय तक टाइपिंग करते समय अपने स्वास्थ्य का ध्यान रखें। सीधे बैठें और पीठ सीधी रखें। हर 30 मिनट में ब्रेक लें। आंखों का व्यायाम करें। पानी पीते रहें। गलत तरीके से बैठने से कमर दर्द होता है। स्वास्थ्य सबसे जरूरी है। काम के साथ सेहत भी जरूरी है।"
 ];
 
+// 28 LESSONS COMPLETE
 const data = {
   lessons: [
-    {level:"STAGE 1: HOME ROW", items:[{title:"Lesson 1: क स द फ", keys:['क','स','द','फ'], type:"drill"}]},
+    {level:"STAGE 1: HOME ROW", items:[
+      {title:"Lesson 1: क स द फ", keys:['क','स','द','फ'], type:"drill"},
+      {title:"Lesson 2: ज क ल ;", keys:['ज','क','ल',';'], type:"drill"},
+      {title:"Lesson 3: FULL HOME ROW", keys:['क','स','द','फ','ज','क','ल',';'], type:"drill"}
+    ]},
+    {level:"STAGE 2: UPPER ROW", items:[
+      {title:"Lesson 4: र उ", keys:['र','उ'], type:"drill"},
+      {title:"Lesson 5: ए इ", keys:['ए','इ'], type:"drill"},
+      {title:"Lesson 6: व ओ", keys:['व','ओ'], type:"drill"},
+      {title:"Lesson 7: प य", keys:['प','य'], type:"drill"},
+      {title:"Lesson 8: FULL UPPER ROW", keys:['प','व','ए','र','य','उ','इ','ओ'], type:"drill"}
+    ]},
+    {level:"STAGE 3: LOWER ROW", items:[
+      {title:"Lesson 9: ज ङ ण", keys:['ज','ङ','ण'], type:"drill"},
+      {title:"Lesson 10: त ब न म", keys:['त','ब','न','म'], type:"drill"},
+      {title:"Lesson 11: FULL LOWER ROW", keys:['ज','ङ','ण','त','ब','न','म'], type:"drill"}
+    ]},
+    {level:"STAGE 4: FULL KEYBOARD", items:[
+      {title:"Lesson 12: ALL LETTERS", keys:['क','ख','ग','घ','ङ','च','छ','ज','झ','ञ','ट','ठ','ड','ढ','ण','त','थ','द','ध','न','प','फ','ब','भ','म','य','र','ल','व','श','ष','स','ह'], type:"drill"},
+      {title:"Lesson 13: WITH MATRA", type:"practice", targetTime:30}
+    ]},
+    {level:"STAGE 5: WORDS", items:[
+      {title:"Lesson 14: COMMON WORDS", type:"practice", targetTime:30},
+      {title:"Lesson 15: OFFICE WORDS", type:"practice", targetTime:30},
+      {title:"Lesson 16: EXAM WORDS", type:"practice", targetTime:30}
+    ]},
+    {level:"STAGE 6: SENTENCES", items:[
+      {title:"Lesson 17: SIMPLE", type:"practice", targetTime:30},
+      {title:"Lesson 18: JOB RELATED", type:"practice", targetTime:30},
+      {title:"Lesson 19: MOTIVATION", type:"practice", targetTime:30}
+    ]},
     {level:"STAGE 7: EXAM PRACTICE", items:[
+      {title:"Lesson 20: NUMBERS", type:"practice", targetTime:30},
+      {title:"Lesson 21: OFFICE PARAGRAPH 1", type:"practice", targetTime:30},
+      {title:"Lesson 22: OFFICE PARAGRAPH 2", type:"practice", targetTime:30},
+      {title:"Lesson 23: MOTIVATION PARAGRAPH", type:"practice", targetTime:30},
+      {title:"Lesson 24: TECHNOLOGY PARAGRAPH", type:"practice", targetTime:30},
+      {title:"Lesson 25: HEALTH PARAGRAPH", type:"practice", targetTime:30},
+      {title:"Lesson 26: FINAL PRACTICE 1", type:"practice", targetTime:30},
+      {title:"Lesson 27: FINAL PRACTICE 2", type:"practice", targetTime:30},
       {title:"Lesson 28: FINAL EXAM PARAGRAPH", type:"practice", targetTime:30}
     ]}
   ]
@@ -174,7 +213,6 @@ function startLesson(lIndex, iIndex){
   startTime = new Date().getTime(); clearInterval(timerInterval); timerInterval = setInterval(updateTimer, 1000);
 }
 
-// AUTO SCROLL + HIGHLIGHT FUNCTION
 function renderText(currentIndex){
   let target = fullText;
   let typed = document.getElementById('lessonInput').value;
@@ -188,15 +226,13 @@ function renderText(currentIndex){
     if(i === typed.length) {
       cls += ' current';
     }
-    // Reference lines - current line ke 100 char aage peeche halke dikho
-    if(i < typed.length - 100 || i > typed.length + 100){
+    if(i < typed.length - 150 || i > typed.length + 150){
       cls += ' ref-line';
     }
     html += `<span class="${cls}">${target[i]}</span>`;
   }
   document.getElementById('lessonText').innerHTML = html;
 
-  // AUTO SCROLL: current span ko center me lao
   let currentSpan = document.querySelector('.current');
   if(currentSpan){
     currentSpan.scrollIntoView({behavior: 'smooth', block: 'center'});
@@ -204,7 +240,7 @@ function renderText(currentIndex){
 }
 
 function backToList(){clearInterval(timerInterval);document.getElementById('lessonListBox').style.display = 'block';document.getElementById('lessonBox').style.display = 'none';}
-function nextLesson(){clearInterval(timerInterval);alert("Next Lesson");backToList();}
+function nextLesson(){clearInterval(timerInterval);let level = data.lessons[currentLevel];if(currentItem < level.items.length - 1){startLesson(currentLevel, currentItem + 1);}else if(currentLevel < data.lessons.length - 1){startLesson(currentLevel + 1, 0);}else{alert("🎉 All Lessons Completed!");backToList();}}
 function showResult(wpm, acc){
   clearInterval(timerInterval); lessonCompleted = true;
   document.getElementById('lessonInput').disabled = true; document.getElementById('nextBtn').disabled = false;
@@ -228,7 +264,6 @@ document.getElementById('lessonInput').addEventListener('input', function(){
   let acc = typed.length > 0? Math.round((correct/typed.length)*100) : 100;
   document.getElementById('wpm').innerText = wpm;document.getElementById('acc').innerText = acc + '%';document.getElementById('wordCount').innerText = words;
 
-  // WRONG TYPE CHECK - Input box red karo
   if(!target.startsWith(typed)){
     this.classList.add('error');
     document.getElementById('feedback').innerText = '❌ गलती! Backspace dabao';
@@ -239,16 +274,19 @@ document.getElementById('lessonInput').addEventListener('input', function(){
     document.getElementById('feedback').style.color = '#004aad';
   }
 
-  renderText(typed.length); // Har input par render + auto scroll
+  renderText(typed.length);
 
-  // CHUNK LOADING
+  // CHUNK LOADING FIXED
   if(typed.length > fullText.length * 0.8 && item.type === "practice"){
     let newChunk = generateChunk(CHUNK_SIZE);
     fullText += "\n\n" + newChunk;
     loadedWords += CHUNK_SIZE;
   }
 
-  if(typed === fullText && loadedWords >= 2700){showResult(wpm, acc);}
+  // COMPLETE CONDITION FIXED
+  if(typed.length >= 2700 && item.type === "practice"){
+    showResult(wpm, acc);
+  }
 });
 
 loadLessonList();
