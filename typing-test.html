@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>
-Free Online Typing Test | English & Hindi Mangal Typing Practice
+Govt Exam Typing Tool | English & Hindi Mangal Typing Test
 </title>
 
-<meta name="description" content="Free typing test for SSC, Railway, Bank and government exams. Practice English and Hindi Mangal typing with WPM and accuracy.">
+<meta name="description" content="Free online typing test for SSC, Railway, Bank and government exams. Practice English and Hindi Mangal typing with WPM and accuracy.">
 
 
 <style>
@@ -24,108 +24,92 @@ font-family:'Segoe UI',Arial,sans-serif;
 
 
 body{
-background:#f4f6f9;
+background:#f4f7fb;
 color:#333;
 }
 
 
-header{
+/* HEADER */
 
+header{
 background:#004aad;
 padding:15px 20px;
 display:flex;
 justify-content:space-between;
 align-items:center;
 flex-wrap:wrap;
-
 }
 
 
 .logo{
-
 display:flex;
 align-items:center;
 font-size:18px;
 font-weight:bold;
 color:white;
-
 }
 
 
 .logo img{
-
 height:45px;
 width:45px;
 border-radius:50%;
 margin-right:10px;
-
+background:white;
 }
 
 
 .logo span{
-
 color:#ffd700;
-
 }
 
 
 nav a{
-
 color:white;
 text-decoration:none;
 padding:8px 12px;
-margin-left:5px;
 border-radius:5px;
-font-weight:bold;
+font-weight:600;
+margin-left:6px;
 font-size:14px;
-
 }
 
 
 nav a:hover,
 nav a.active{
-
 background:#ffd700;
 color:#004aad;
-
 }
 
 
+/* CONTAINER */
 
 .container{
-
 max-width:1100px;
 margin:25px auto;
 padding:20px;
-
 }
-
 
 
 .card{
-
 background:white;
 padding:25px;
 border-radius:12px;
-box-shadow:0 2px 10px rgba(0,0,0,.1);
-
+box-shadow:0 3px 12px rgba(0,0,0,.1);
+margin-bottom:20px;
 }
-
 
 
 h1{
-
 color:#004aad;
 margin-bottom:15px;
-
+font-size:26px;
 }
-
 
 
 /* STATS */
 
-
-.stats{
+.stats-box{
 
 display:grid;
 grid-template-columns:repeat(4,1fr);
@@ -137,35 +121,65 @@ margin-bottom:20px;
 
 .stat{
 
-background:#004aad;
+background:linear-gradient(135deg,#004aad,#007bff);
 color:white;
 padding:15px;
-border-radius:8px;
+border-radius:10px;
 text-align:center;
 
 }
 
 
 .stat small{
-
 display:block;
 font-size:13px;
-
 }
 
 
 .stat b{
+font-size:24px;
+}
 
-font-size:25px;
+
+
+/* BUTTONS */
+
+.mode-tabs,
+.lang-tabs{
+
+display:flex;
+gap:10px;
+margin-bottom:15px;
+
+}
+
+
+.mode-btn,
+.lang-btn{
+
+flex:1;
+padding:12px;
+border:2px solid #004aad;
+background:white;
+color:#004aad;
+border-radius:8px;
+cursor:pointer;
+font-weight:bold;
+
+}
+
+
+.mode-btn.active,
+.lang-btn.active{
+
+background:#004aad;
+color:white;
 
 }
 
 
 
-/* BUTTON */
-
-
-.buttons{
+.controls{
 
 display:flex;
 gap:10px;
@@ -175,89 +189,60 @@ margin-bottom:15px;
 }
 
 
-button,
-select{
+
+select,
+.btn{
 
 padding:10px 15px;
-border:2px solid #004aad;
 border-radius:6px;
-background:white;
+border:2px solid #004aad;
 font-weight:bold;
+
+}
+
+
+.btn{
+
+background:#004aad;
+color:white;
 cursor:pointer;
 
 }
 
 
-button.active{
+.btn-success{
 
-background:#004aad;
-color:white;
+background:#16a34a;
+border-color:#16a34a;
+
+}
+
+
+.btn-danger{
+
+background:#dc2626;
+border-color:#dc2626;
 
 }
 
 
 
-/* TEXT */
+/* ADD TEXT */
 
+.add-text-section{
 
-.typing-area{
-
-background:#f8faff;
-border:3px solid #004aad;
-border-radius:10px;
-padding:25px;
-min-height:250px;
+display:none;
+margin-bottom:20px;
 
 }
 
 
-#textDisplay{
-
-font-size:28px;
-line-height:2;
-font-family:Consolas;
-
-}
-
-
-.mangal{
-
-font-family:Mangal;
-font-size:26px;
-
-}
-
-
-.correct{
-
-color:green;
-
-}
-
-
-.wrong{
-
-color:red;
-background:#fee2e2;
-
-}
-
-
-.current{
-
-background:#004aad;
-color:white;
-
-}
-
-
-
-#inputBox{
+.add-text-section textarea{
 
 width:100%;
-margin-top:20px;
+height:150px;
 padding:15px;
-font-size:20px;
+font-size:18px;
 border:2px solid #004aad;
 border-radius:8px;
 
@@ -265,44 +250,152 @@ border-radius:8px;
 
 
 
-.result{
+/* TYPING AREA */
 
-display:none;
-margin-top:20px;
-background:#e8f5e9;
-padding:20px;
+.typing-area{
+
+background:#f8fbff;
+border:3px solid #004aad;
 border-radius:10px;
-text-align:center;
+padding:25px;
+min-height:250px;
+cursor:text;
 
 }
 
 
+.text-display{
 
-@media(max-width:700px){
+font-size:32px;
+line-height:1.8;
+word-spacing:5px;
+letter-spacing:0;
+font-family:'Segoe UI',Arial,sans-serif;
+color:#94a3b8;
+white-space:pre-wrap;
+overflow-wrap:break-word;
 
+}
+
+
+.text-display.mangal{
+
+font-family:'Mangal',sans-serif;
+font-size:28px;
+word-spacing:5px;
+
+}
+
+
+.text-display span.correct{
+
+color:#16a34a;
+
+}
+
+
+.text-display span.incorrect{
+
+color:#dc2626;
+background:#fee2e2;
+
+}
+
+
+.text-display span.current{
+
+background:#004aad;
+color:white;
+
+}
+
+
+#hiddenInput{
+
+opacity:0;
+position:absolute;
+left:-9999px;
+
+}
 .stats{
+display:flex;
+gap:15px;
+flex-wrap:wrap;
+margin-top:15px;
+}
+
+
+.stats span{
+background:#e8f0ff;
+padding:8px 12px;
+border-radius:5px;
+font-weight:bold;
+}
+
+
+/* FOOTER */
+
+.footer{
+
+background:#004aad;
+color:white;
+text-align:center;
+padding:20px;
+margin-top:30px;
+line-height:1.8;
+
+}
+
+
+.footer b{
+
+color:#ffd700;
+
+}
+
+
+@media(max-width:800px){
+
+.stats-box{
 
 grid-template-columns:repeat(2,1fr);
 
 }
 
-nav{
 
-margin-top:10px;
+.mode-tabs,
+.lang-tabs{
+
+flex-direction:column;
+
+}
+
+
+.text-display{
+
+font-size:24px;
 
 }
 
-#textDisplay{
-
-font-size:22px;
 
 }
+
+
+/* RESULT */
+
+.result-box{
+
+display:none;
+background:#fff;
+padding:20px;
+border-radius:10px;
+margin-top:20px;
+border:2px solid #004aad;
 
 }
 
 
 </style>
-
 
 </head>
 
@@ -312,10 +405,9 @@ font-size:22px;
 
 <header>
 
-
 <div class="logo">
 
-<img src="logo.png">
+<img src="logo.png" alt="Logo">
 
 <span>Govt Exam Typing Tool</span>
 
@@ -324,7 +416,9 @@ font-size:22px;
 
 <nav>
 
-<a href="index.html">Home</a>
+<a href="index.html">
+Home
+</a>
 
 <a href="typing-test.html" class="active">
 Typing Test
@@ -342,7 +436,6 @@ Hindi Mangal
 Mock
 </a>
 
-
 </nav>
 
 
@@ -357,23 +450,22 @@ Mock
 
 
 <h1>
-⌨️ Live Typing Test
+⌨️ Live Typing Test 2026
 </h1>
 
 
-
-<div class="stats">
+<div class="stats-box">
 
 
 <div class="stat">
 <small>Speed</small>
-<b id="wpm">0</b>
+<b id="wpm">0</b> WPM
 </div>
 
 
 <div class="stat">
 <small>Accuracy</small>
-<b id="accuracy">100%</b>
+<b id="accuracy">100</b>%
 </div>
 
 
@@ -393,20 +485,67 @@ Mock
 
 
 
-<div class="buttons">
+<div class="mode-tabs">
 
 
-<button onclick="setLanguage('english')" id="engBtn" class="active">
+<button class="mode-btn active" id="practiceBtn">
+✍️ Practice Mode
+</button>
+
+
+<button class="mode-btn" id="examBtn">
+📝 Exam Mode
+</button>
+
+
+<button class="mode-btn" id="customBtn">
+📄 Add Your Text
+</button>
+
+
+</div>
+
+
+
+<div class="add-text-section" id="addTextSection">
+
+
+<textarea id="customText"
+placeholder="Apna paragraph yaha paste kare..."></textarea>
+
+
+<button class="btn btn-success" id="startCustom">
+Start Typing
+</button>
+
+
+</div>
+
+
+
+
+<div class="lang-tabs">
+
+
+<button class="lang-btn active" id="englishBtn">
 English
 </button>
 
 
-<button onclick="setLanguage('hindi')" id="hinBtn">
+<button class="lang-btn" id="mangalBtn">
 हिन्दी Mangal
 </button>
 
 
-<select id="duration" onchange="resetTest()">
+</div>
+
+
+
+
+<div class="controls">
+
+
+<select id="timeSelect">
 
 <option value="60">
 1 Minute
@@ -423,18 +562,38 @@ English
 </select>
 
 
-<button onclick="setMode('practice')" id="practiceBtn" class="active">
-Practice
-</button>
+
+<select id="lessonSelect">
+
+<option value="0">
+Lesson 1
+</option>
+
+<option value="1">
+Lesson 2
+</option>
+
+<option value="2">
+Lesson 3
+</option>
+
+<option value="3">
+Lesson 4
+</option>
+
+<option value="4">
+Lesson 5
+</option>
 
 
-<button onclick="setMode('exam')" id="examBtn">
-Exam
-</button>
+</select>
 
 
-<button onclick="resetTest()">
+
+<button class="btn btn-danger" id="restartBtn">
+
 🔄 Restart
+
 </button>
 
 
@@ -442,35 +601,52 @@ Exam
 
 
 
-<div class="typing-area">
+<div class="typing-area" onclick="focusInput()">
 
 
-<div id="textDisplay"></div>
 
-
-<input id="inputBox"
-placeholder="Start typing here..."
-autocomplete="off">
-
+<div class="text-display" id="textDisplay">
 
 </div>
 
 
 
-<div class="result" id="result">
+<input 
+type="text"
+id="hiddenInput"
+autocomplete="off"
+spellcheck="false"
+>
 
-<h2>
+
+</div>
+
+
+<p style="text-align:center;color:#666;margin-top:15px">
+
+Click typing area and start typing
+
+</p>
+
+
+
+<div class="result-box" id="resultBox">
+
+
+<h2 style="color:#004aad">
 🎉 Test Complete
 </h2>
 
+
 <p>
 Speed:
-<b id="finalWpm"></b> WPM
+<b id="finalSpeed">0</b> WPM
 </p>
+
 
 <p>
 Accuracy:
-<b id="finalAccuracy"></b>
+<b id="finalAccuracy">100</b>%
 </p>
 
 
@@ -481,200 +657,140 @@ Accuracy:
 </div>
 
 </div>
+
+
+
 <script>
 
-const englishText = [
-"the quick brown fox jumps over the lazy dog. typing practice improves speed and accuracy for government exams.",
-"government jobs require good typing speed and accuracy. practice daily to achieve your target.",
-"computer knowledge and typing skill are important for banking railway and ssc examinations."
-];
+
+const lessons={
 
 
-const hindiText = [
-"भारत एक महान देश है। यहां विभिन्न प्रकार की संस्कृति पाई जाती है। रोज अभ्यास करने से टाइपिंग गति बढ़ती है।",
-"सरकारी नौकरी के लिए टाइपिंग टेस्ट पास करना आवश्यक है। शुद्धता और गति दोनों महत्वपूर्ण हैं।",
-"कंप्यूटर ज्ञान आज के समय में बहुत जरूरी है। नियमित अभ्यास सफलता की कुंजी है।"
-];
+english:[
+
+"computer knowledge and typing skill are important for banking railway and ssc examination",
+
+"the quick brown fox jumps over the lazy dog typing practice improves speed and accuracy",
+
+"government jobs require good computer knowledge and typing skills for candidates",
+
+"ssc chsl cgl railway bank clerk typing test practice for government examination",
+
+"regular practice makes typing faster and improves accuracy every day"
+
+],
 
 
-let language="english";
-let mode="practice";
 
-let text="";
-let index=0;
+mangal:[
 
-let startTime=0;
+"कंप्यूटर ज्ञान और टाइपिंग कौशल बैंक रेलवे और एसएससी परीक्षा के लिए महत्वपूर्ण है",
+
+"भारत एक महान देश है यहाँ अनेक प्रकार की संस्कृति और भाषा पाई जाती है",
+
+"सरकारी नौकरी के लिए कंप्यूटर ज्ञान और टाइपिंग गति बहुत आवश्यक है",
+
+"एसएससी रेलवे बैंक परीक्षा में टाइपिंग टेस्ट पास करना जरूरी होता है",
+
+"नियमित अभ्यास करने से टाइपिंग गति और शुद्धता दोनों बढ़ती हैं"
+
+]
+
+};
+
+
+let currentLang="english";
+let currentLesson=0;
+let currentText="";
+let currentIndex=0;
+let errors=0;
+let totalTyped=0;
+
 let timer=null;
+let running=false;
 
 let timeLeft=60;
 let totalTime=60;
 
-let errors=0;
-let typed=0;
+let mode="practice";
+let customText="";
+
+
+const textDisplay=document.getElementById("textDisplay");
+const hiddenInput=document.getElementById("hiddenInput");
 
 
 
-const input=document.getElementById("inputBox");
-const display=document.getElementById("textDisplay");
+function focusInput(){
 
-
-
-
-function setLanguage(lang){
-
-language=lang;
-
-document.getElementById("engBtn").classList.remove("active");
-document.getElementById("hinBtn").classList.remove("active");
-
-
-if(lang==="english"){
-
-document.getElementById("engBtn").classList.add("active");
-
-display.classList.remove("mangal");
-
-}
-else{
-
-document.getElementById("hinBtn").classList.add("active");
-
-display.classList.add("mangal");
-
-}
-
-
-resetTest();
+hiddenInput.focus();
 
 }
 
 
 
+function renderText(){
 
-function setMode(m){
-
-mode=m;
-
-
-document.getElementById("practiceBtn").classList.remove("active");
-document.getElementById("examBtn").classList.remove("active");
+textDisplay.innerHTML="";
 
 
-if(m==="practice"){
-
-document.getElementById("practiceBtn").classList.add("active");
-
-}
-else{
-
-document.getElementById("examBtn").classList.add("active");
-
-}
+for(let i=0;i<currentText.length;i++){
 
 
-resetTest();
+let span=document.createElement("span");
+
+span.innerText=currentText[i];
+
+
+if(i<currentIndex){
+
+span.className=
+hiddenInput.value[i]===currentText[i]
+?"correct"
+:"incorrect";
 
 }
 
+else if(i===currentIndex){
+
+span.className="current";
+
+}
 
 
+textDisplay.appendChild(span);
 
+
+}
+
+}
 function loadText(){
 
-let arr = language==="english" ? englishText : hindiText;
+if(mode==="custom"){
 
-text=arr[Math.floor(Math.random()*arr.length)];
+currentText=customText;
 
+}
+else{
 
-
-let html="";
-
-
-for(let i=0;i<text.length;i++){
-
-html+=`<span>${text[i]}</span>`;
+currentText=lessons[currentLang][currentLesson];
 
 }
 
 
-display.innerHTML=html;
-
-
-}
-
-
-
-
-
-function resetTest(){
-
-clearInterval(timer);
-
-
-timeLeft=parseInt(
-document.getElementById("duration").value
-);
-
-
-totalTime=timeLeft;
-
-
-index=0;
-errors=0;
-typed=0;
-
-
-input.value="";
-
-
-updateTime();
-
-
-loadText();
-
-
-updateStats();
-
-
-document.getElementById("result").style.display="none";
-
-
-input.disabled=false;
-
-
-input.focus();
-
+resetValues();
+renderText();
 
 }
-
-
-
-
-
-function updateTime(){
-
-let min=Math.floor(timeLeft/60);
-
-let sec=timeLeft%60;
-
-
-document.getElementById("time").innerHTML=
-
-min+":"+sec.toString().padStart(2,"0");
-
-}
-
-
 
 
 
 function startTimer(){
 
+if(running)return;
 
-if(timer) return;
 
-
-startTime=new Date().getTime();
+running=true;
 
 
 timer=setInterval(()=>{
@@ -682,17 +798,12 @@ timer=setInterval(()=>{
 
 timeLeft--;
 
-
 updateTime();
-
-
-updateStats();
-
 
 
 if(timeLeft<=0){
 
-finishTest();
+endTest();
 
 }
 
@@ -704,35 +815,85 @@ finishTest();
 
 
 
+function updateTime(){
+
+let m=Math.floor(timeLeft/60);
+
+let s=timeLeft%60;
 
 
-input.addEventListener("input",function(){
+document.getElementById("time").innerText=
+m+":"+String(s).padStart(2,"0");
 
-
-if(!startTime){
-
-startTimer();
 
 }
 
 
 
-let value=input.value;
+
+function updateStats(){
+
+let minutes=(totalTime-timeLeft)/60;
 
 
-if(value.length>index){
+if(minutes<=0)
+
+minutes=0.01;
 
 
-typed++;
+let words=currentIndex/5;
 
 
-let char=value[value.length-1];
+let wpm=Math.round(words/minutes);
 
 
-if(char===text[index]){
+let accuracy=
+
+totalTyped>0
+
+?
+
+Math.round(((totalTyped-errors)/totalTyped)*100)
+
+:
+
+100;
 
 
-index++;
+
+document.getElementById("wpm").innerText=wpm;
+
+document.getElementById("accuracy").innerText=accuracy;
+
+document.getElementById("errors").innerText=errors;
+
+
+}
+
+
+
+hiddenInput.addEventListener("input",function(){
+
+
+if(!running)
+
+startTimer();
+
+
+
+let typed=this.value;
+
+
+if(typed.length>currentIndex){
+
+
+totalTyped++;
+
+
+if(typed[currentIndex]===currentText[currentIndex]){
+
+
+currentIndex++;
 
 }
 
@@ -741,12 +902,7 @@ else{
 
 errors++;
 
-
-if(mode==="exam"){
-
-index++;
-
-}
+currentIndex++;
 
 }
 
@@ -755,16 +911,15 @@ index++;
 
 
 
-showText();
-
+renderText();
 
 updateStats();
 
 
 
-if(index>=text.length){
+if(currentIndex>=currentText.length){
 
-finishTest();
+endTest();
 
 }
 
@@ -776,122 +931,61 @@ finishTest();
 
 
 
-
-
-function showText(){
-
-
-let html="";
-
-
-for(let i=0;i<text.length;i++){
-
-
-let cls="";
-
-
-if(i<index){
-
-cls="correct";
-
-}
-
-
-if(i===index){
-
-cls="current";
-
-}
-
-
-html+=
-`<span class="${cls}">
-${text[i]}
-</span>`;
-
-
-}
-
-
-display.innerHTML=html;
-
-
-}
-
-
-
-
-
-function updateStats(){
-
-
-let elapsed=
-
-(totalTime-timeLeft)/60;
-
-
-if(elapsed<=0){
-
-elapsed=.01;
-
-}
-
-
-let words=Math.floor(index/5);
-
-
-let wpm=Math.round(words/elapsed);
-
-
-let accuracy=typed?
-
-Math.round(((typed-errors)/typed)*100)
-
-:100;
-
-
-
-document.getElementById("wpm").innerHTML=wpm;
-
-
-document.getElementById("accuracy").innerHTML=
-accuracy+"%";
-
-
-document.getElementById("errors").innerHTML=
-errors;
-
-
-
-}
-
-
-
-
-
-function finishTest(){
+function resetValues(){
 
 
 clearInterval(timer);
 
 
-input.disabled=true;
+running=false;
 
 
-let wpm=document.getElementById("wpm").innerHTML;
+currentIndex=0;
+
+errors=0;
+
+totalTyped=0;
 
 
-let acc=document.getElementById("accuracy").innerHTML;
+hiddenInput.value="";
+
+
+timeLeft=parseInt(
+document.getElementById("timeSelect").value
+);
+
+
+totalTime=timeLeft;
+
+
+updateTime();
+
+updateStats();
+
+
+}
 
 
 
-document.getElementById("finalWpm").innerHTML=wpm;
+function endTest(){
 
 
-document.getElementById("finalAccuracy").innerHTML=acc;
+clearInterval(timer);
 
 
-document.getElementById("result").style.display="block";
+running=false;
+
+
+document.getElementById("resultBox").style.display="block";
+
+
+document.getElementById("finalSpeed").innerText=
+document.getElementById("wpm").innerText;
+
+
+document.getElementById("finalAccuracy").innerText=
+document.getElementById("accuracy").innerText;
+
 
 
 }
@@ -899,27 +993,243 @@ document.getElementById("result").style.display="block";
 
 
 
+document.getElementById("restartBtn").onclick=function(){
 
-document.addEventListener("keydown",function(e){
+loadText();
+
+};
 
 
-if(e.key==="Tab"){
 
-e.preventDefault();
+document.getElementById("timeSelect").onchange=function(){
 
-resetTest();
+loadText();
+
+};
+
+
+
+
+document.getElementById("lessonSelect").onchange=function(){
+
+
+currentLesson=parseInt(this.value);
+
+
+loadText();
+
+
+};
+
+
+
+
+
+document.getElementById("englishBtn").onclick=function(){
+
+
+currentLang="english";
+
+
+this.classList.add("active");
+
+document.getElementById("mangalBtn")
+.classList.remove("active");
+
+
+textDisplay.classList.remove("mangal");
+
+
+loadText();
+
+
+};
+
+
+
+
+
+document.getElementById("mangalBtn").onclick=function(){
+
+
+currentLang="mangal";
+
+
+this.classList.add("active");
+
+
+document.getElementById("englishBtn")
+.classList.remove("active");
+
+
+textDisplay.classList.add("mangal");
+
+
+loadText();
+
+
+};
+
+
+
+
+
+document.getElementById("practiceBtn").onclick=function(){
+
+
+mode="practice";
+
+
+this.classList.add("active");
+
+
+document.getElementById("examBtn")
+.classList.remove("active");
+
+
+document.getElementById("customBtn")
+.classList.remove("active");
+
+
+document.getElementById("addTextSection")
+.style.display="none";
+
+
+loadText();
+
+
+};
+
+
+
+
+
+document.getElementById("examBtn").onclick=function(){
+
+
+mode="exam";
+
+
+this.classList.add("active");
+
+
+document.getElementById("practiceBtn")
+.classList.remove("active");
+
+
+document.getElementById("customBtn")
+.classList.remove("active");
+
+
+document.getElementById("addTextSection")
+.style.display="none";
+
+
+loadText();
+
+
+};
+
+
+
+
+
+document.getElementById("customBtn").onclick=function(){
+
+
+mode="custom";
+
+
+this.classList.add("active");
+
+
+document.getElementById("practiceBtn")
+.classList.remove("active");
+
+
+document.getElementById("examBtn")
+.classList.remove("active");
+
+
+document.getElementById("addTextSection")
+.style.display="block";
+
+
+};
+
+
+
+
+
+document.getElementById("startCustom").onclick=function(){
+
+
+customText=
+document.getElementById("customText")
+.value.trim();
+
+
+
+if(customText===""){
+
+alert("Please add text");
+
+return;
 
 }
 
 
-});
+
+document.getElementById("addTextSection")
+.style.display="none";
+
+
+loadText();
+
+
+};
 
 
 
-resetTest();
+
+
+
+// INITIAL LOAD
+
+loadText();
 
 
 </script>
+
+
+
+<footer class="footer">
+
+
+<p>
+© 2026 Govt Exam Typing Tool
+</p>
+
+
+<p>
+Developed by:
+<b>AMBUJ SHUKLA</b>
+</p>
+
+
+<p>
+Contact:
+<b>soorajshukla1996@gmail.com</b>
+</p>
+
+
+<p>
+Free English & Hindi Mangal Typing Practice For Govt Exams
+</p>
+
+
+</footer>
+
 
 
 </body>
