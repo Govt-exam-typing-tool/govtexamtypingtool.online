@@ -1,1750 +1,234 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-<title>
-English Typing Test | SSC Railway Bank Government Exam Typing Practice
-</title>
-
-
-<meta name="description" content="Free English typing practice for SSC, Railway, Bank and government exams with WPM accuracy test.">
-
-
+<title>English Typing Test | SSC Railway Bank Government Exam</title>
 <style>
-
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Segoe UI',Arial,sans-serif;
-}
-
-
-body{
-
-background:#f4f7fb;
-color:#333;
-
-}
-
-
-/* HEADER */
-
-
-header{
-
-background:#004aad;
-padding:15px 20px;
-
-display:flex;
-justify-content:space-between;
-align-items:center;
-flex-wrap:wrap;
-
-}
-
-
-.logo{
-
-display:flex;
-align-items:center;
-
-font-size:18px;
-font-weight:bold;
-color:white;
-
-}
-
-
-.logo img{
-
-height:45px;
-width:45px;
-
-border-radius:50%;
-background:white;
-
-margin-right:10px;
-
-}
-
-
-.logo span{
-
-color:#ffd700;
-
-}
-
-
-
-nav a{
-
-color:white;
-text-decoration:none;
-
-padding:8px 12px;
-
-border-radius:5px;
-
-font-weight:bold;
-
-font-size:14px;
-
-}
-
-
-
-nav a:hover,
-nav a.active{
-
-background:#ffd700;
-color:#004aad;
-
-}
-
-
-
-
-
-/* CONTAINER */
-
-
-.container{
-
-max-width:1100px;
-
-margin:25px auto;
-
-padding:20px;
-
-}
-
-
-
-.card{
-
-background:white;
-
-padding:25px;
-
-border-radius:12px;
-
-box-shadow:0 3px 12px rgba(0,0,0,.1);
-
-margin-bottom:20px;
-
-}
-
-
-
-h1{
-
-color:#004aad;
-
-margin-bottom:15px;
-
-}
-
-
-
-
-
-/* STATS */
-
-
-.stats-box{
-
-display:grid;
-
-grid-template-columns:repeat(4,1fr);
-
-gap:15px;
-
-margin-bottom:20px;
-
-}
-
-
-
-.stat{
-
-background:linear-gradient(135deg,#004aad,#007bff);
-
-color:white;
-
-padding:15px;
-
-border-radius:10px;
-
-text-align:center;
-
-}
-
-
-
-.stat small{
-
-display:block;
-
-}
-
-
-
-.stat b{
-
-font-size:24px;
-
-}
-
-
-
-
-
-
-/* MODE */
-
-
-.mode-tabs{
-
-display:flex;
-
-gap:10px;
-
-margin-bottom:20px;
-
-}
-
-
-
-.mode-btn{
-
-flex:1;
-
-padding:12px;
-
-border:2px solid #004aad;
-
-background:white;
-
-color:#004aad;
-
-border-radius:8px;
-
-font-weight:bold;
-
-cursor:pointer;
-
-}
-
-
-
-.mode-btn.active{
-
-background:#004aad;
-
-color:white;
-
-}
-
-
-
-
-
-/* CONTROLS */
-
-
-.controls{
-
-display:flex;
-
-gap:10px;
-
-flex-wrap:wrap;
-
-margin-bottom:20px;
-
-}
-
-
-
-select,
-button{
-
-padding:10px 15px;
-
-border-radius:6px;
-
-border:2px solid #004aad;
-
-font-weight:bold;
-
-}
-
-
-
-button{
-
-background:#004aad;
-
-color:white;
-
-cursor:pointer;
-
-}
-
-
-
-button:hover{
-
-background:#00337a;
-
-}
-
-
-.danger{
-
-background:#dc2626;
-
-border-color:#dc2626;
-
-}
-
-
-
-.success{
-
-background:#16a34a;
-
-border-color:#16a34a;
-
-}
-
-
-
-
-
-
-/* TYPING WINDOW */
-
-
-.typing-section{
-
-display:none;
-
-}
-
-
-
-.lesson-title{
-
-color:#004aad;
-
-font-size:22px;
-
-}
-
-
-
-.text-display{
-
-height:180px;
-
-overflow:hidden;
-
-background:#f8fbff;
-
-border:3px solid #004aad;
-
-border-radius:10px;
-
-padding:20px;
-
-margin:20px 0;
-
-
-font-size:30px;
-
-line-height:1.8;
-
-letter-spacing:1px;
-
-color:#94a3b8;
-
-word-spacing:8px;
-
-
-}
-
-
-
-.text-display span.correct{
-
-color:#16a34a;
-
-}
-
-
-
-.text-display span.incorrect{
-
-color:#dc2626;
-
-background:#fee2e2;
-
-}
-
-
-
-.text-display span.current{
-
-background:#004aad;
-
-color:white;
-
-}
-
-
-
-
-
-#typingInput{
-
-width:100%;
-
-padding:15px;
-
-font-size:22px;
-
-border:2px solid #004aad;
-
-border-radius:8px;
-
-outline:none;
-
-}
-
-
-
-
-
-/* RESULT */
-
-
-.result-box{
-
-display:none;
-
-background:#f8fbff;
-
-padding:20px;
-
-border-radius:10px;
-
-margin-top:20px;
-
-}
-
-
-
-.result-box h2{
-
-color:#004aad;
-
-}
-
-
-
-
-
-/* CUSTOM TEXT */
-
-
-.custom-box{
-
-display:none;
-
-margin-bottom:20px;
-
-}
-
-
-
-.custom-box textarea{
-
-width:100%;
-
-height:150px;
-
-padding:15px;
-
-font-size:18px;
-
-border:2px solid #004aad;
-
-border-radius:8px;
-
-}
-
-
-
-
-
-@media(max-width:800px){
-
-
-.stats-box{
-
-grid-template-columns:repeat(2,1fr);
-
-}
-
-
-.mode-tabs{
-
-flex-direction:column;
-
-}
-
-
-.text-display{
-
-font-size:24px;
-
-}
-
-
-}
-
-
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial,sans-serif;}
+body{background:#f4f7fb;color:#333;}
+header{background:#004aad;padding:15px 20px;display:flex;justify-content:space-between;align-items:center;}
+.logo{color:#fff;font-size:20px;font-weight:bold;display:flex;align-items:center;gap:10px}
+.logo span{color:#ffd700}
+nav a{color:#fff;text-decoration:none;padding:8px 14px;border-radius:6px;font-weight:600;margin-left:8px;}
+nav a:hover, nav a.active{background:#ffd700;color:#004aad}
+.container{max-width:1100px;margin:25px auto;padding:20px;}
+.card{background:white;padding:25px;border-radius:12px;box-shadow:0 3px 12px rgba(0,0,0,.1);margin-bottom:20px;}
+h1{color:#004aad;margin-bottom:15px;}
+.stats-box{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-bottom:20px;}
+.stat{background:linear-gradient(135deg,#004aad,#007bff);color:white;padding:15px;border-radius:10px;text-align:center;}
+.stat small{display:block;font-size:12px;}
+.stat b{font-size:24px;}
+.mode-tabs{display:flex;gap:10px;margin-bottom:20px;}
+.mode-btn{flex:1;padding:12px;border:2px solid #004aad;background:white;color:#004aad;border-radius:8px;font-weight:bold;cursor:pointer;}
+.mode-btn.active{background:#004aad;color:white;}
+.controls{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;}
+select,button{padding:10px 15px;border-radius:6px;border:2px solid #004aad;font-weight:bold;cursor:pointer}
+button{background:#004aad;color:white;}
+.danger{background:#dc2626;border-color:#dc2626;}
+.text-display{height:200px;overflow-y:auto;background:#f8fbff;border:3px solid #004aad;border-radius:10px;padding:20px;margin:20px 0;font-size:26px;line-height:2.2;word-spacing:8px;}
+.text-display span.correct{color:#16a34a;}
+.text-display span.incorrect{color:#fff;background:#dc2626;padding:2px 3px;border-radius:3px;}
+.text-display span.current{background:#004aad;color:white;padding:3px 5px;border-radius:4px;}
+#typingInput{width:100%;padding:15px;font-size:22px;border:2px solid #004aad;border-radius:8px;outline:none;}
+.result-box{display:none;background:#f8fbff;padding:20px;border-radius:10px;margin-top:20px;}
+.custom-box{display:none;margin-bottom:20px;}
+.custom-box textarea{width:100%;height:150px;padding:15px;font-size:18px;border:2px solid #004aad;border-radius:8px;}
 </style>
-
-
 </head>
-
-
-
 <body>
 
-
-
 <header>
-
-
-<div class="logo">
-
-<img src="logo.png">
-
-
-<span>
-Govt Exam Typing Tool
-</span>
-
-</div>
-
-
-
-
+<div class="logo">⌨️ <span>Govt Exam Typing Tool</span></div>
 <nav>
-
-
-<a href="index.html">
-Home
-</a>
-
-
-<a class="active">
-Typing Test
-</a>
-
-
-<a href="learn-english.html">
-English
-</a>
-
-
-<a href="learn-hindi.html">
-Hindi Mangal
-</a>
-
-
-<a href="mock.html">
-Mock
-</a>
-
-
+<a href="index.html">Home</a>
+<a class="active">Typing Test</a>
+<a href="learn-english.html">English</a>
+<a href="learn-hindi.html">Hindi Mangal</a>
+<a href="mock.html">Mock</a>
 </nav>
-
-
 </header>
 
-
-
-
-
 <div class="container">
-
-
-
 <div class="card">
-
-
-
-<h1>
-⌨️ English Live Typing Test
-</h1>
-
-
-
+<h1>⌨️ English Live Typing Test</h1>
 
 <div class="stats-box">
-
-
-<div class="stat">
-
-<small>
-Speed
-</small>
-
-<b id="wpm">
-0
-</b>
-
-WPM
-
+<div class="stat"><small>Speed</small><b id="wpm">0</b> WPM</div>
+<div class="stat"><small>Accuracy</small><b id="accuracy">100</b> %</div>
+<div class="stat"><small>Time</small><b id="time">0:00</b></div>
+<div class="stat"><small>Errors</small><b id="errors">0</b></div>
 </div>
-
-
-
-<div class="stat">
-
-<small>
-Accuracy
-</small>
-
-<b id="accuracy">
-100
-</b>
-
-%
-
-</div>
-
-
-
-
-<div class="stat">
-
-<small>
-Time
-</small>
-
-<b id="time">
-0:00
-</b>
-
-</div>
-
-
-
-
-<div class="stat">
-
-<small>
-Errors
-</small>
-
-<b id="errors">
-0
-</b>
-
-</div>
-
-
-</div>
-
-
-
-
 
 <div class="mode-tabs">
-
-
-<button class="mode-btn active" id="practiceBtn">
-
-✍️ Practice Mode
-
-</button>
-
-
-<button class="mode-btn" id="examBtn">
-
-📝 Exam Mode
-
-</button>
-
-
-<button class="mode-btn" id="customBtn">
-
-📄 Add Text
-
-</button>
-
-
-
+<button class="mode-btn active" id="practiceBtn">✍️ Practice Mode</button>
+<button class="mode-btn" id="examBtn">📝 Exam Mode</button>
+<button class="mode-btn" id="customBtn">📄 Add Text</button>
 </div>
-
-
-
-
 
 <div class="controls">
-
-
 <select id="timeSelect">
-
-
-<option value="60">
-1 Minute
-</option>
-
-
-<option value="300">
-5 Minutes
-</option>
-
-
-<option value="900">
-15 Minutes
-</option>
-
-
-<option value="1800">
-30 Minutes
-</option>
-
-
+<option value="60">1 Minute</option>
+<option value="300">5 Minutes</option>
+<option value="900">15 Minutes</option>
+<option value="1800">30 Minutes</option>
 </select>
-
-
-
-
-<button class="danger" id="restartBtn">
-
-🔄 Restart
-
-</button>
-
-
-
+<button class="danger" id="restartBtn">🔄 Restart</button>
 </div>
 
-   <script>
-
-
-/* ===============================
-   VARIABLES
-================================ */
-
-
-let currentText="";
-
-let currentIndex=0;
-
-let errors=0;
-
-let totalTyped=0;
-
-let seconds=0;
-
-let timer=null;
-
-let running=false;
-
-let mode="practice";
-
-
-
-
-
-const typingInput =
-document.getElementById("typingInput");
-
-
-const textDisplay =
-document.getElementById("textDisplay");
-
-
-
-
-
-
-
-/* ===============================
-   START TEST
-================================ */
-
-
-function startTest(){
-
-
-currentIndex=0;
-
-errors=0;
-
-totalTyped=0;
-
-seconds=0;
-
-
-clearInterval(timer);
-
-
-running=false;
-
-
-typingInput.value="";
-
-
-typingInput.disabled=false;
-
-
-document.getElementById("resultBox")
-.style.display="none";
-
-
-
-if(mode==="practice"){
-
-
-currentText =
-generateText();
-
-
-}
-
-
-
-renderText();
-
-
-updateStats();
-
-
-typingInput.focus();
-
-
-}
-
-
-
-
-
-
-/* ===============================
-   PRACTICE GENERATOR
-================================ */
-
-
-function generateText(){
-
-
-let result="";
-
-
-
-while(result.length < 3000){
-
-
-let randomWord =
-
-englishWords[
-Math.floor(
-Math.random()*englishWords.length
-)
-];
-
-
-result += randomWord+" ";
-
-
-}
-
-
-
-return result.trim();
-
-
-}
-
-
-
-
-
-
-
-/* ===============================
-   RENDER ONLY VISIBLE AREA
-================================ */
-
-
-function renderText(){
-
-
-textDisplay.innerHTML="";
-
-
-
-let start =
-currentIndex-120;
-
-
-
-if(start<0)
-
-start=0;
-
-
-
-let end =
-start+300;
-
-
-
-let visible =
-currentText.substring(
-start,
-end
-);
-
-
-
-
-for(let i=0;i<visible.length;i++){
-
-
-
-let realIndex =
-start+i;
-
-
-
-let span =
-document.createElement("span");
-
-
-
-span.innerText =
-visible[i];
-
-
-
-if(realIndex < currentIndex){
-
-
-if(
-typingInput.value[realIndex]
-===
-currentText[realIndex]
-)
-
-span.className="correct";
-
-
-else
-
-span.className="incorrect";
-
-
-}
-
-
-else if(realIndex===currentIndex){
-
-
-span.className="current";
-
-
-}
-
-
-
-textDisplay.appendChild(span);
-
-
-
-}
-
-
-
-}
-
-
-
-
-
-
-
-
-/* ===============================
-   INPUT CHECK
-================================ */
-
-
-typingInput.addEventListener(
-"input",
-function(){
-
-
-
-if(!running){
-
-startTimer();
-
-}
-
-
-
-let value=this.value;
-
-
-
-if(value.length > currentIndex){
-
-
-
-totalTyped++;
-
-
-
-if(
-value[currentIndex]
-!==
-currentText[currentIndex]
-){
-
-
-errors++;
-
-
-}
-
-
-
-currentIndex++;
-
-
-}
-
-
-
-
-/*
-Auto add new paragraph
-before finishing
-*/
-
-
-if(
-currentIndex >
-currentText.length-200
-){
-
-
-currentText +=
-" "+generateText();
-
-
-
-}
-
-
-
-renderText();
-
-
-updateStats();
-
-
-
-});
-
-
-
-
-
-
-
-
-/* ===============================
-   TIMER
-================================ */
-
-
-function startTimer(){
-
-
-running=true;
-
-
-
-timer=setInterval(function(){
-
-
-
-seconds++;
-
-
-
-let min =
-Math.floor(seconds/60);
-
-
-
-let sec =
-seconds%60;
-
-
-
-document.getElementById("time")
-.innerText =
-min+":"+
-String(sec)
-.padStart(2,"0");
-
-
-
-let limit =
-parseInt(
-document.getElementById("timeSelect")
-.value
-);
-
-
-
-if(seconds>=limit){
-
-
-finishTest();
-
-
-}
-
-
-
-},1000);
-
-
-}
-
-
-
-
-
-
-
-
-/* ===============================
-   STATS
-================================ */
-
-
-function updateStats(){
-
-
-
-let minutes =
-seconds/60;
-
-
-
-if(minutes<=0)
-
-minutes=0.01;
-
-
-
-
-let words =
-currentIndex/5;
-
-
-
-
-let wpm =
-Math.round(
-words/minutes
-);
-
-
-
-let accuracy =
-totalTyped?
-
-Math.round(
-((totalTyped-errors)
-/totalTyped)*100
-)
-
-:
-
-100;
-
-
-
-
-document.getElementById("wpm")
-.innerText=wpm;
-
-
-
-document.getElementById("accuracy")
-.innerText=accuracy;
-
-
-
-document.getElementById("errors")
-.innerText=errors;
-
-
-
-}
-
-
-
-
-
-
-
-
-/* ===============================
-   RESULT
-================================ */
-
-
-function finishTest(){
-
-
-clearInterval(timer);
-
-
-running=false;
-
-
-
-typingInput.disabled=true;
-
-
-
-let result =
-document.getElementById("resultBox");
-
-
-
-result.style.display="block";
-
-
-
-result.innerHTML=`
-
-<h2>
-🎯 Typing Result
-</h2>
-
-
-<p>
-Speed:
-<b>
-${document.getElementById("wpm").innerText}
-</b>
-WPM
-</p>
-
-
-<p>
-Accuracy:
-<b>
-${document.getElementById("accuracy").innerText}
-</b>
-%
-</p>
-
-
-<p>
-Errors:
-<b>
-${errors}
-</b>
-</p>
-
-
-<p>
-Characters:
-<b>
-${currentIndex}
-</b>
-</p>
-
-
-<p>
-Time:
-<b>
-${seconds}
-Seconds
-</b>
-</p>
-
-
-`;
-
-
-
-}
-
-
-
-
-
-
-
-
-/* ===============================
-   BUTTONS
-================================ */
-
-
-document
-.getElementById("restartBtn")
-.onclick=function(){
-
-
-startTest();
-
-
-};
-
-
-
-
-
-
-
-document
-.getElementById("practiceBtn")
-.onclick=function(){
-
-
-mode="practice";
-
-
-this.classList.add("active");
-
-
-document
-.getElementById("examBtn")
-.classList.remove("active");
-
-
-startTest();
-
-
-};
-
-
-
-
-
-
-
-
-document
-.getElementById("examBtn")
-.onclick=function(){
-
-
-mode="exam";
-
-
-this.classList.add("active");
-
-
-document
-.getElementById("practiceBtn")
-.classList.remove("active");
-
-
-
-currentText =
-examParagraphs[
-Math.floor(
-Math.random()*
-examParagraphs.length
-)
-];
-
-
-startTest();
-
-
-};
-
-
-
-
-
-
-
-
-document
-.getElementById("customBtn")
-.onclick=function(){
-
-
-let box =
-document.querySelector(".custom-box");
-
-
-box.style.display="block";
-
-
-};
-
-
-
-</script>
-
-   
-<!-- ===============================
-     CUSTOM TEXT BOX
-================================ -->
-
-
+<!-- CUSTOM TEXT BOX -->
 <div class="custom-box card">
-
-
-<h3>
-Paste Your Paragraph
-</h3>
-
-
-<textarea id="customText"
-placeholder="Paste your typing paragraph here...">
-</textarea>
-
-
-
-<br>
-
-
-<button onclick="loadCustomText()">
-
-Start Custom Test
-
-</button>
-
-
+<h3>Paste Your Paragraph</h3>
+<textarea id="customText" placeholder="Paste your typing paragraph here..."></textarea><br>
+<button onclick="loadCustomText()">Start Custom Test</button>
 </div>
 
-
-
-
-
-
-<!-- ===============================
-     TYPING AREA
-================================ -->
-
-
-<div class="card typing-section" id="typingSection">
-
-
-<h2 class="lesson-title">
-
-English Typing Practice
-
-</h2>
-
-
-
-
-<div class="text-display" id="textDisplay">
-
+<!-- TYPING AREA -->
+<div class="card">
+<h2 style="color:#004aad">English Typing Practice</h2>
+<div class="text-display" id="textDisplay"></div>
+<input type="text" id="typingInput" placeholder="Start typing here..." autocomplete="off">
+<div class="result-box" id="resultBox"></div>
 </div>
 
-
-
-
-
-<input 
-type="text"
-id="typingInput"
-placeholder="Start typing here..."
-autocomplete="off"
->
-
-
-
-<div class="result-box" id="resultBox">
-
+</div>
 </div>
 
-
-
-</div>
-
-
-
-
-
+<footer style="background:#004aad;color:white;padding:20px;text-align:center;">English Typing Practice Tool</footer>
 
 <script>
-
-
-/* ===============================
-   CUSTOM TEXT LOAD
-================================ */
-
-
-function loadCustomText(){
-
-
-let text =
-document.getElementById("customText")
-.value.trim();
-
-
-
-if(text.length>0){
-
-
-mode="custom";
-
-
-currentText=text;
-
-
-
-document.querySelector(".custom-box")
-.style.display="none";
-
-
-
-document.getElementById("typingSection")
-.style.display="block";
-
-
-
-startCustomTest();
-
-
-}
-
-
-
-}
-
-
-
-
-function startCustomTest(){
-
-
-currentIndex=0;
-
-errors=0;
-
-totalTyped=0;
-
-seconds=0;
-
-running=false;
-
-
-typingInput.value="";
-
-
-clearInterval(timer);
-
-
-renderText();
-
-updateStats();
-
-
-typingInput.disabled=false;
-
-typingInput.focus();
-
-
-}
-
-
-
-
-
-
-
-/* ===============================
-   ENGLISH WORD DATABASE
-================================ */
-
-
-const englishWords=[
-
-
-"the",
-"and",
-"government",
-"computer",
-"education",
-"practice",
-"typing",
-"speed",
-"accuracy",
-"student",
-"candidate",
-"examination",
-"success",
-"important",
-"regular",
-"learning",
-"keyboard",
-"office",
-"department",
-"information",
-"development",
-"technology",
-"management",
-"application",
-"process",
-"result",
-"experience",
-"knowledge",
-"ability",
-"improve",
-"prepare",
-"question",
-"answer",
-"service",
-"system",
-"online",
-"training",
-"skill",
-"performance",
-"national",
-"country",
-"people",
-"work",
-"time",
-"correct",
-"method",
-"daily",
-"future",
-"career",
-"selection",
-"competition",
-"professional",
-"complete",
-"available",
-"required",
-"candidate",
-"government",
-"employee",
-"department",
-"official",
-"document",
-"report",
-"record",
-"data",
-"entry",
-"management",
-"communication",
-"computer",
-"keyboard",
-"practice",
-"accuracy",
-"typing"
-
-
-];
-
-
-
-
-
-
-
-/* ===============================
-   EXAM PASSAGES
-================================ */
-
-
+/* VARIABLES */
+let currentText="", currentIndex=0, errors=0, totalTyped=0, seconds=0, timer=null, running=false, mode="practice";
+const typingInput = document.getElementById("typingInput");
+const textDisplay = document.getElementById("textDisplay");
+
+/* ENGLISH WORDS */
+const englishWords=["the","and","government","computer","education","practice","typing","speed","accuracy","student","candidate","examination","success","important","regular","learning","keyboard","office","department","information","development","technology","management","application","process","result","experience","knowledge","ability","improve"];
+
+/* EXAM PASSAGES */
 const examParagraphs=[
-
-
-
-"Computer knowledge and typing skill are important requirements for many government examinations. Candidates should practice regularly to improve their speed and accuracy. A good typing speed with fewer mistakes helps in achieving better performance during the examination.",
-
-
-
-"Regular practice develops confidence and improves keyboard control. Government offices require accurate data entry and document preparation. Therefore typing skills have become an important part of many competitive examinations.",
-
-
-
-"Time management plays an important role in every examination. Candidates should maintain accuracy while increasing their typing speed. Continuous practice with proper technique can improve overall performance."
-
-
-
+"Computer knowledge and typing skill are important requirements for many government examinations. Candidates should practice regularly to improve their speed and accuracy.",
+"Regular practice develops confidence and improves keyboard control. Government offices require accurate data entry and document preparation.",
+"Time management plays an important role in every examination. Candidates should maintain accuracy while increasing their typing speed."
 ];
 
+/* START TEST */
+function startTest(){
+currentIndex=0; errors=0; totalTyped=0; seconds=0;
+clearInterval(timer); running=false; typingInput.value="";
+typingInput.disabled=false; document.getElementById("resultBox").style.display="none";
+document.getElementById("time").innerText = "0:00";
 
+if(mode==="practice"){ currentText = generateText(); }
+if(mode==="exam"){ currentText = examParagraphs[Math.floor(Math.random()*examParagraphs.length)]; }
 
+renderText(); updateStats(); typingInput.focus();
+}
 
+/* GENERATE TEXT */
+function generateText(){
+let result="";
+while(result.length < 2000){
+let randomWord = englishWords[Math.floor(Math.random()*englishWords.length)];
+result += randomWord+" ";
+}
+return result.trim();
+}
 
+/* RENDER TEXT */
+function renderText(){
+textDisplay.innerHTML="";
+let start = currentIndex-100; if(start<0) start=0;
+let end = start+250;
+let visible = currentText.substring(start, end);
+for(let i=0;i<visible.length;i++){
+let realIndex = start+i;
+let span = document.createElement("span");
+span.innerText = visible[i];
+if(realIndex < currentIndex){
+if(typingInput.value[realIndex] === currentText[realIndex]) span.className="correct";
+else span.className="incorrect";
+}else if(realIndex===currentIndex){ span.className="current"; }
+textDisplay.appendChild(span);
+}
+}
 
-/* ===============================
-   PAGE LOAD
-================================ */
+/* INPUT CHECK */
+typingInput.addEventListener("input", function(){
+if(!running){ startTimer(); }
+let value=this.value;
+if(value.length > currentIndex){
+totalTyped++;
+if(value[currentIndex]!== currentText[currentIndex]){ errors++; }
+currentIndex++;
+}
+if(currentIndex > currentText.length-200){ currentText += " "+generateText(); }
+renderText(); updateStats();
+});
 
+/* TIMER */
+function startTimer(){
+running=true;
+timer=setInterval(function(){
+seconds++;
+let min = Math.floor(seconds/60); let sec = seconds%60;
+document.getElementById("time").innerText = min+":"+String(sec).padStart(2,"0");
+let limit = parseInt(document.getElementById("timeSelect").value);
+if(seconds>=limit){ finishTest(); }
+},1000);
+}
 
-document
-.getElementById("typingSection")
-.style.display="block";
+/* STATS */
+function updateStats(){
+let minutes = seconds/60; if(minutes<=0) minutes=0.01;
+let words = currentIndex/5;
+let wpm = Math.round(words/minutes);
+let accuracy = totalTyped? Math.round(((totalTyped-errors)/totalTyped)*100) : 100;
+document.getElementById("wpm").innerText=wpm;
+document.getElementById("accuracy").innerText=accuracy;
+document.getElementById("errors").innerText=errors;
+}
 
+/* RESULT */
+function finishTest(){
+clearInterval(timer); running=false; typingInput.disabled=true;
+let result = document.getElementById("resultBox"); result.style.display="block";
+result.innerHTML=`<h2>🎯 Typing Result</h2>
+<p>Speed: <b>${document.getElementById("wpm").innerText}</b> WPM</p>
+<p>Accuracy: <b>${document.getElementById("accuracy").innerText}</b> %</p>
+<p>Errors: <b>${errors}</b></p>`;
+}
 
+/* BUTTONS */
+document.getElementById("restartBtn").onclick=function(){ startTest(); };
+document.getElementById("practiceBtn").onclick=function(){
+mode="practice"; this.classList.add("active");
+document.getElementById("examBtn").classList.remove("active");
+document.getElementById("customBtn").classList.remove("active");
 startTest();
+};
+document.getElementById("examBtn").onclick=function(){
+mode="exam"; this.classList.add("active");
+document.getElementById("practiceBtn").classList.remove("active");
+document.getElementById("customBtn").classList.remove("active");
+startTest();
+};
+document.getElementById("customBtn").onclick=function(){
+document.querySelector(".custom-box").style.display="block";
+};
 
+/* CUSTOM TEXT */
+function loadCustomText(){
+let text = document.getElementById("customText").value.trim();
+if(text.length>0){
+mode="custom"; currentText=text;
+document.querySelector(".custom-box").style.display="none";
+startTest();
+}
+}
 
-
+/* PAGE LOAD */
+window.onload = function(){ startTest(); }
 </script>
-
-
-
-<footer style="
-background:#004aad;
-color:white;
-padding:20px;
-text-align:center;
-margin-top:30px;
-">
-
-
-English Typing Practice Tool
-
-
-</footer>
-
-
-
-</div>
-
-
 </body>
-
 </html>
