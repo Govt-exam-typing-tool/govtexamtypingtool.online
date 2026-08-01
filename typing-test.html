@@ -160,9 +160,7 @@ const
 };
 
 
-
-
-  <script>
+<script>
 const examParagraphs = {... }; // PART 2 yaha pehle se hoga
 const examHindiParagraphs = {... }; // PART 3A + 3B yaha pehle se hoga
 
@@ -181,7 +179,8 @@ let allowHighlight = true;
 
 function updateInfoBar(){
   document.getElementById('examName').innerText = currentExam.toUpperCase();
-  document.getElementById('currentPara').innerText = currentParagraphIndex + 1;
+  let data = currentLanguage === "english"? examParagraphs[currentExam] : examHindiParagraphs[currentExam];
+  document.getElementById('currentPara').innerText = (currentParagraphIndex + 1) + '/' + data.length;
   document.getElementById('langName').innerText = currentLanguage === 'english'? 'English' : 'Hindi';
 }
 
@@ -265,7 +264,6 @@ function handleTyping(e){
   renderPassage();
   updateStats();
 
-  // Agar paragraph complete ho gaya
   if(typed.length >= fullText.length){
     clearInterval(timer);
     started = false;
@@ -295,9 +293,11 @@ document.getElementById("hindiLang").onclick=function(){
   loadParagraph();
 };
 
+// YAHI FIX KIYA HAI BAS
 document.getElementById("restart").onclick=function(){
+  let data = currentLanguage === "english"? examParagraphs[currentExam] : examHindiParagraphs[currentExam];
   currentParagraphIndex++;
-  if(currentParagraphIndex>=10)currentParagraphIndex=0; // Yaha 10 kiya hai
+  if(currentParagraphIndex >= data.length) currentParagraphIndex = 0;
   loadParagraph();
 };
 
@@ -310,16 +310,19 @@ document.getElementById("timeSelect").onchange=function(){
 
 document.getElementById("typingInput").addEventListener('input', handleTyping);
 
-// Backspace setting
-document.querySelectorAll('input[name="backspace"]').forEach(radio=>{
-  radio.onchange=function(){
-    allowBackspace = this.value === "enable";
-    document.getElementById("typingInput").readOnly =!allowBackspace;
-  }
-});
+// Backspace setting - ISE HATA DO KYUKI HTML ME HAI HI NAHI
+// document.querySelectorAll('input[name="backspace"]').forEach(radio=>{
+// radio.onchange=function(){
+// allowBackspace = this.value === "enable";
+// document.getElementById("typingInput").readOnly =!allowBackspace;
+// }
+// });
 
 window.onload = function(){loadParagraph();};
 </script>
+
+  
+    
 
   
   
