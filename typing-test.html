@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Govt Typing Tool v2.3 - Fixed</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial,sans-serif;}
+body{background:#f4f7fb;color:#333;}
+header{background:#004aad;padding:15px 20px;color:white;font-weight:bold;}
+.container{max-width:1200px;margin:25px auto;padding:20px;}
+.card{background:white;padding:25px;border-radius:12px;box-shadow:0 3px 12px rgba(0,0,0,.1);}
+.info-bar{margin-bottom:15px;padding:12px;background:#004aad;color:white;border-radius:8px;display:flex;justify-content:space-between;}
+.exam-box{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;}
+.exam-btn{padding:14px;border:2px solid #004aad;background:white;color:#004aad;border-radius:8px;cursor:pointer;font-weight:bold;}
+.exam-btn.active{background:#004aad;color:white;}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-bottom:20px;}
+.stat{background:#004aad;color:white;padding:16px;border-radius:10px;text-align:center;}
+.lang-tabs{display:flex;gap:10px;margin-bottom:20px;}
+.lang-btn{flex:1;padding:12px;border:2px solid #004aad;background:white;color:#004aad;border-radius:8px;cursor:pointer;font-weight:bold;}
+.lang-btn.active{background:#004aad;color:white;}
+#passage{height:280px;overflow-y:auto;font-size:24px;line-height:2.4;padding:12px;background:white;border:2px solid #004aad;border-radius:6px;white-space:pre-wrap;}
+#passage.hindi{font-family:'Mangal','Noto Sans Devanagari';font-size:27px;}
+.correct{color:green;}.wrong{background:red;color:white;}.current{background:blue;color:white;}
+#typingInput{width:100%;height:130px;padding:15px;font-size:20px;border:2px solid #004aad;border-radius:8px;margin-top:15px;}
+.btn{padding:10px 16px;border-radius:6px;border:2px solid #004aad;background:#004aad;color:white;font-weight:bold;cursor:pointer;margin:10px 0;}
+select{padding:10px;border-radius:6px;border:2px solid #004aad;margin-right:10px;}
+</style>
+</head>
+<body>
+<header>Govt Exam Typing Tool Pro v2.3 - Fixed</header>
+<div class="container"><div class="card">
+<h1>⌨️ Professional Typing Test</h1>
+<div class="info-bar">
+<span>Exam: <span id="examName">SSC</span></span>
+<span>Para: <span id="currentPara">1</span>/5</span>
+<span>Lang: <span id="langName">English</span></span>
+</div>
+<div class="exam-box" id="examBox">
+<button class="exam-btn active" data-exam="ssc">SSC</button>
+<button class="exam-btn" data-exam="railway">Railway</button>
+<button class="exam-btn" data-exam="bank">Bank</button>
+<button class="exam-btn" data-exam="highcourt">High Court</button>
+<button class="exam-btn" data-exam="uppsc">UPPSC</button>
+<button class="exam-btn" data-exam="practice">Practice</button>
+</div>
+<div class="stats">
+<div class="stat"><small>Speed</small><div><b id="wpm">0</b> WPM</div></div>
+<div class="stat"><small>Accuracy</small><div><b id="accuracy">100</b> %</div></div>
+<div class="stat"><small>Time</small><div><b id="time">10:00</b></div></div>
+<div class="stat"><small>Errors</small><div><b id="errors">0</b></div></div>
+</div>
+<div class="lang-tabs">
+<button class="lang-btn active" id="englishLang">English</button>
+<button class="lang-btn" id="hindiLang">Hindi</button>
+</div>
+<select id="timeSelect"><option value="600" selected>10 Minutes</option><option value="1800">30 Minutes</option></select>
+<button class="btn" id="restart">Next Para</button>
+<div id="passage"></div>
+<textarea id="typingInput" placeholder="Type here..."></textarea>
+</div></div>
+
+<script>
+const examParagraphs = {
+ ssc: [
+  "Computer is an essential tool in modern government offices. Every clerk LDC and DEO must have good typing speed and accuracy. The Staff Selection Commission conducts typing tests to ensure that candidates can handle daily office work efficiently. In today's digital world all files letters and reports are prepared on computer. Without typing skills it is impossible to get a government job in SSC. Regular practice is the only way to improve. Start with 10 minutes daily and slowly increase to 30 minutes.",
+  "The role of computer in banking sector has increased tremendously. All transactions are now online. This is why banks need fast and accurate typists. IBPS and SBI conduct typing tests for clerk and PO posts. A speed of 40 WPM is considered good for bank jobs. In banks you have to type customer details loan forms deposit slips and many other documents. One small mistake can cause big financial loss.",
+  "Indian Railways is the largest employer in India. RRB conducts exams for thousands of posts every year. Typing is mandatory for clerk typist and commercial apprentice posts. The required speed is 30 WPM in English and 25 WPM in Hindi. Railway offices handle huge amount of data daily. Passenger reservations ticket booking freight details all are computerized now.",
+  "The judiciary system requires 100 percent accuracy in documentation. High Court and District Court clerks must type judgments orders and case files without any mistake. One wrong word can change the meaning of a legal document. This is why courts conduct strict typing tests. Speed of 35 WPM with full accuracy is required.",
+  "Practice makes a man perfect. This is true for typing also. Daily practice of 30 minutes can increase your speed from 20 WPM to 60 WPM in 3 months. The key is consistency. Do not skip days. Set a fixed time for practice. Morning is the best time. Your mind is fresh. Start with simple words. Then move to sentences."
+ ],
+ railway: [
+  "Indian Railways is the lifeline of India. It connects the whole country. Millions of passengers travel daily. To manage this huge system railways need skilled computer operators. RRB conducts exams for various posts. Typing is compulsory for clerk and typist. The required speed is 30 WPM in English.",
+  "Railway Recruitment Board is responsible for hiring staff for Indian Railways. The process includes written test typing test and document verification. Typing test is qualifying in nature. But you must pass it. The speed requirement is 30 WPM in English and 25 WPM in Hindi.",
+  "Computerization has changed Indian Railways. All work is now done on computer. Ticket booking train scheduling freight management everything is online. This is why typing skill is mandatory. Every new recruit must pass typing test.",
+  "The life of a railway employee is challenging but rewarding. You serve the nation by keeping trains running. But before that you must clear the exam. Typing is an important part. RRB wants employees who can work fast on computer.",
+  "Railway jobs are in high demand. The reason is job security and good pay. But getting the job is not easy. You must clear written test and typing test. Typing test is often ignored by students. This is a mistake. Many fail here."
+ ],
+ bank: [
+  "Banking sector is one of the fastest growing sectors in India. IBPS and SBI recruit thousands of employees every year. Computer knowledge is mandatory. Part of the selection process is typing test. Required speed is 40 words per minute. This is higher than other exams because banks need fast data entry.",
+  "IBPS conducts exams for public sector banks. Process includes prelims mains and typing test. Typing is qualifying but you must pass it. Required speed is 40 WPM in English. Test is 10 minutes long. Paragraph will be related to banking.",
+  "Digital banking has increased the need for skilled typists. Now all transactions are online. Banks need employees who can type fast and accurately. That is why typing test is conducted. Standard is 40 WPM.",
+  "The role of bank clerk is important. They handle customer accounts. They process loans. They do data entry. All these require typing. Therefore banks test typing skills. Requirement is 40 WPM.",
+  "Core Banking Solution has made banking fast. But it requires skilled operators. Banks need typists who can do data entry quickly. That is why there is typing test. Required speed is 40 WPM."
+ ],
+ highcourt: [
+  "Judiciary is the backbone of democracy. Courts need accurate documents. That is why typing skill is important. High Court conducts typing test for clerk. Required speed is 35 words per minute and 100 percent accuracy is needed. Mistake is not allowed in legal documents.",
+  "Legal typing is different from normal typing. It requires knowledge of legal words. Plaintiff defendant affidavit petition verdict are common words. Practice these words. Required speed is 35 WPM.",
+  "Court proceedings are time sensitive. Judges need documents quickly. So typist must be fast. Required speed is 35 WPM. Practice with legal paragraphs.",
+  "High Court clerk job is prestigious. It comes with respect and good salary. You must clear typing test. Practice daily for 30 minutes.",
+  "In courts there is no scope for error. So practice with extra care. Sit in a quiet place while practicing. Focus completely. Avoid distractions."
+ ],
+ uppsc: [
+  "Uttar Pradesh Public Service Commission conducts ARO exam. Assistant Review Officer is an important post in UP government. Hindi typing is compulsory. Speed of 25 WPM in Mangal font is required. All government files in UP are in Hindi.",
+  "UPPSC exam is very competitive. Thousands of students appear. Good typing can give you advantage. The typing test is of 10 minutes. You must maintain speed throughout.",
+  "Government documents must be error free. One mistake can create legal problems. So practice daily for 30 minutes. Type news from Hindi newspapers.",
+  "Learn Kruti Dev and Mangal keyboard layout. Both are used in UP government offices. Accuracy is very important.",
+  "UP Secretariat needs fast typists. Files move quickly. So typing skill is tested. Prepare well for UPPSC."
+ ],
+ practice: [
+  "Practice makes a man perfect. Daily practice of 30 minutes can increase your speed from 20 WPM to 60 WPM in 3 months. The key is consistency. Do not skip days.",
+  "Career opportunities for fast typists are huge. Government jobs SSC LDC SSC DEO Bank Clerk Railway Clerk Court Clerk Data Entry Operator. All these need typing. Salary starts from 25000 and can go up to 60000.",
+  "Final tip for all typing aspirants Consistency beats talent. A person with average talent who practices daily will beat a talented person who practices once a week. So be consistent.",
+  "Many students ask how to increase typing speed quickly. There is no magic trick. But there are smart ways to practice. Learn proper finger placement.",
+  "Time management is very important in typing test. You have 10 minutes. You have to type 300 to 400 words. Maintain good rhythm from start."
+ ]
+};
+
+const examHindiParagraphs = {
+ ssc: [
+  "कंप्यूटर आधुनिक सरकारी कार्यालयों में एक आवश्यक उपकरण है। प्रत्येक क्लर्क एलडीसी और डीईओ के पास अच्छी टाइपिंग गति और सटीकता होनी चाहिए। कर्मचारी चयन आयोग टाइपिंग टेस्ट आयोजित करता है ताकि यह सुनिश्चित हो सके कि उम्मीदवार दैनिक कार्यालय कार्य कुशलतापूर्वक संभाल सकें।",
+  "बैंकिंग क्षेत्र में कंप्यूटर की भूमिका में जबरदस्त वृद्धि हुई है। सभी लेनदेन अब ऑनलाइन हैं। यही कारण है कि बैंकों को तेज और सटीक टाइपिस्ट की आवश्यकता है।",
+  "भारतीय रेलवे भारत का सबसे बड़ा नियोक्ता है। आरआरबी हर साल हजारों पदों के लिए परीक्षा आयोजित करता है। टाइपिंग क्लर्क टाइपिस्ट के लिए अनिवार्य है।",
+  "न्यायपालिका प्रणाली में दस्तावेजों में 100 प्रतिशत सटीकता की आवश्यकता होती है। हाईकोर्ट और जिला न्यायालय के क्लर्कों को बिना किसी गलती के निर्णय आदेश टाइप करने होते हैं।",
+  "अभ्यास मनुष्य को परिपूर्ण बनाता है। यह टाइपिंग पर भी सच है। रोज 30 मिनट का अभ्यास 3 महीने में आपकी गति 20 से 60 तक बढ़ा सकता है।"
+ ],
+ railway: [
+  "भारतीय रेलवे भारत की जीवन रेखा है। यह पूरे देश को जोड़ती है। लाखों यात्री रोज यात्रा करते हैं। इस विशाल प्रणाली को प्रबंधित करने के लिए रेलवे को कुशल कंप्यूटर ऑपरेटरों की आवश्यकता है।",
+  "रेलवे भर्ती बोर्ड भारतीय रेलवे के लिए कर्मचारियों की भर्ती के लिए जिम्मेदार है। प्रक्रिया में लिखित परीक्षा टाइपिंग टेस्ट और दस्तावेज सत्यापन शामिल है।",
+  "कंप्यूटरीकरण ने भारतीय रेलवे को बदल दिया है। अब सारा काम कंप्यूटर पर होता है। टिकट बुकिंग ट्रेन शेड्यूलिंग माल प्रबंधन सब कुछ ऑनलाइन है।",
+  "रेलवे कर्मचारी का जीवन चुनौतीपूर्ण लेकिन फायदेमंद है। आप ट्रेनों को चलाकर देश की सेवा करते हैं। लेकिन उससे पहले आपको परीक्षा पास करनी होगी।",
+  "रेलवे की नौकरियों की बहुत मांग है। कारण है नौकरी की सुरक्षा और अच्छा वेतन। लेकिन नौकरी पाना आसान नहीं है।"
+ ],
+ bank: [
+  "बैंकिंग क्षेत्र भारत के सबसे तेजी से बढ़ते क्षेत्रों में से एक है। आईबीपीएस और एसबीआई हर साल हजारों कर्मचारियों की भर्ती करते हैं। कंप्यूटर ज्ञान अनिवार्य है। चयन प्रक्रिया का हिस्सा टाइपिंग टेस्ट है।",
+  "आईबीपीएस सार्वजनिक क्षेत्र के बैंकों के लिए परीक्षाएं आयोजित करता है। प्रक्रिया में प्रीलिम्स मेंस और टाइपिंग टेस्ट शामिल है। टाइपिंग क्वालीफाइंग है।",
+  "डिजिटल बैंकिंग ने कुशल टाइपिस्टों की आवश्यकता बढ़ा दी है। अब सभी लेनदेन ऑनलाइन हैं। बैंकों को ऐसे कर्मचारियों की जरूरत है जो तेज और सटीक टाइप कर सकें।",
+  "बैंक क्लर्क की भूमिका महत्वपूर्ण है। वे ग्राहक खातों को संभालते हैं। वे ऋण प्रोसेस करते हैं। वे डाटा एंट्री करते हैं। इन सभी के लिए टाइपिंग की आवश्यकता होती है।",
+  "कोर बैंकिंग सॉल्यूशन ने बैंकिंग को तेज बना दिया है। लेकिन इसके लिए कुशल ऑपरेटरों की आवश्यकता है।"
+ ],
+ highcourt: [
+  "न्यायपालिका लोकतंत्र की रीढ़ है। अदालतों को सटीक दस्तावेजों की आवश्यकता होती है। इसी कारण टाइपिंग कौशल महत्वपूर्ण है। हाईकोर्ट क्लर्कों के लिए टाइपिंग टेस्ट आयोजित करता है।",
+  "कानूनी टाइपिंग सामान्य टाइपिंग से अलग है। इसके लिए कानून के शब्दों का ज्ञान आवश्यक है। वादी प्रतिवादी शपथ पत्र जैसे शब्द सामान्य हैं।",
+  "अदालत की कार्यवाही समय संवेदनशील होती है। जजों को दस्तावेज जल्दी चाहिए होते हैं। इसलिए टाइपिस्ट को तेज होना चाहिए।",
+  "हाईकोर्ट क्लर्क की नौकरी प्रतिष्ठित है। इसमें सम्मान मिलता है। इसलिए अच्छी तैयारी करें।",
+  "अदालतों में त्रुटि की कोई गुंजाइश नहीं है। इसलिए अतिरिक्त सावधानी से अभ्यास करें। शांत जगह पर बैठकर अभ्यास करें।"
+ ],
+ uppsc: [
+  "उत्तर प्रदेश लोक सेवा आयोग एआरओ परीक्षा आयोजित करता है। सहायक समीक्षा अधिकारी यूपी सरकार में एक महत्वपूर्ण पद है। हिंदी टाइपिंग अनिवार्य है।",
+  "यूपीपीएससी परीक्षा बहुत प्रतिस्पर्धी है। हजारों छात्र उपस्थित होते हैं। अच्छी टाइपिंग आपको बढ़त दे सकती है। टाइपिंग टेस्ट 10 मिनट का है।",
+  "सरकारी दस्तावेज त्रुटि मुक्त होने चाहिए। एक गलती कानूनी समस्या पैदा कर सकती है। इसलिए रोज 30 मिनट अभ्यास करें।",
+  "कृतिदेव और मंगल कीबोर्ड लेआउट सीखें। दोनों का उपयोग यूपी सरकारी कार्यालयों में किया जाता है।",
+  "यूपी सचिवालय को तेज टाइपिस्ट की आवश्यकता है। फाइलें तेजी से चलती हैं। इसलिए टाइपिंग कौशल का परीक्षण किया जाता है।"
+ ],
+ practice: [
+  "अभ्यास से सिद्धि मिलती है। यह कहावत टाइपिंग पर भी लागू होती है। रोज 30 मिनट अभ्यास से आप 3 महीने में 20 से 60 शब्द प्रति मिनट तक पहुंच सकते हैं। कुंजी है निरंतरता।",
+  "टाइपिंग एक ऐसा कौशल है जो आपके करियर में कई दरवाजे खोलता है। सरकारी क्षेत्र में एलडीसी डीईओ क्लर्क और कई अन्य पदों के लिए टाइपिंग अनिवार्य है।",
+  "बहुत से छात्र पूछते हैं कि टाइपिंग की गति जल्दी कैसे बढ़ाएं। कोई जादू की तरकीब नहीं है। लेकिन अभ्यास करने के स्मार्ट तरीके हैं। सही उंगली की स्थिति सीखें।",
+  "समय प्रबंधन टाइपिंग में बहुत महत्वपूर्ण है। आपके पास 10 मिनट हैं। आपको 300 से 400 शब्द टाइप करने हैं। अगर आप शुरू में धीमे हैं तो अंत में पीछे रह जाएंगे।",
+  "स्वास्थ्य का ध्यान रखना भी जरूरी है। लगातार टाइपिंग से कलाई में दर्द आंखों में खिंचाव हो सकता है। हर 30 मिनट में 5 मिनट का ब्रेक लें।"
+ ]
+};
+
+let currentLanguage = "english";
+let currentExam = "ssc";
+let currentParagraphIndex = 0;
+let fullText = "";
+let currentIndex = 0;
+let timer = null;
+let started = false;
+let timeLeft = 600;
+let errors = 0;
+let typedCharacters = 0;
+
+function updateInfoBar(){
+  document.getElementById('examName').innerText = currentExam.toUpperCase();
+  let data = currentLanguage === "english"? examParagraphs[currentExam] : examHindiParagraphs[currentExam];
+  document.getElementById('currentPara').innerText = (currentParagraphIndex + 1) + '/' + data.length;
+  document.getElementById('langName').innerText = currentLanguage === 'english'? 'English' : 'Hindi';
+}
+
+function setActiveExam(exam){
+  document.querySelectorAll('.exam-btn').forEach(btn=>{
+    btn.classList.remove('active');
+    if(btn.dataset.exam === exam) btn.classList.add('active');
+  });
+  currentExam = exam;
+  currentParagraphIndex = 0;
+  loadParagraph();
+}
+
+function loadParagraph(){
+  let data = currentLanguage === "english"? examParagraphs[currentExam] : examHindiParagraphs[currentExam];
+  if(!data){ data = examParagraphs['ssc']; }
+  fullText = data[currentParagraphIndex];
+  currentIndex = 0;
+  document.getElementById("typingInput").value = "";
+  document.getElementById("typingInput").disabled = false;
+  started = false;
+  if(timer){ clearInterval(timer); timer=null; }
+  timeLeft = parseInt(document.getElementById("timeSelect").value);
+  let min = Math.floor(timeLeft/60);
+  let sec = timeLeft%60;
+  document.getElementById("time").innerText = min + ":" + String(sec).padStart(2,"0");
+  renderPassage();
+  updateInfoBar();
+  updateStats();
+}
+
+function renderPassage(){
+  let html = "";
+  let typed = document.getElementById("typingInput").value;
+  for(let i=0;i<fullText.length;i++){
+    let cls = "";
+    if(i === currentIndex){cls = "current";}
+    else if(i < currentIndex){
+      cls = typed[i] === fullText[i]? 'correct' : 'wrong';
+    }
+    html += `<span class="${cls}">${fullText[i]}</span>`;
+  }
+  document.getElementById("passage").innerHTML = html;
+}
+
+function updateStats(){
+  let totalTime = parseInt(document.getElementById("timeSelect").value);
+  let minutes = (totalTime-timeLeft)/60;
+  if(minutes<=0) minutes=0.01;
+  let words = typedCharacters/5;
+  let speed = Math.round(words/minutes);
+  let accuracy = typedCharacters? Math.round(((typedCharacters-errors)/typedCharacters)*100) : 100;
+  document.getElementById("wpm").innerText = isFinite(speed)? speed : 0;
+  document.getElementById("accuracy").innerText = accuracy;
+  document.getElementById("errors").innerText = errors;
+}
+
+function startTimer(){
+  if(started) return;
+  started = true;
+  timer = setInterval(()=>{
+    timeLeft--;
+    let min = Math.floor(timeLeft/60);
+    let sec = timeLeft%60;
+    document.getElementById("time").innerText = min + ":" + String(sec).padStart(2,"0");
+    if(timeLeft<=0){
+      clearInterval(timer);
+      started=false;
+      document.getElementById("typingInput").disabled=true;
+    }
+  },1000);
+}
+
+function handleTyping(e){
+  if(!started){startTimer();}
+  let typed = e.target.value;
+  currentIndex = typed.length;
+  typedCharacters = typed.length;
+  errors = 0;
+  for(let i=0;i<typed.length;i++){
+    if(typed[i]!== fullText[i]){errors++;}
+  }
+  renderPassage();
+  updateStats();
+
+  if(typed.length >= fullText.length){
+    clearInterval(timer);
+    started = false;
+  }
+}
+
+document.querySelectorAll('.exam-btn').forEach(btn=>{
+  btn.onclick=function(){setActiveExam(btn.dataset.exam);}
+});
+
+document.getElementById("englishLang").onclick=function(){
+  currentLanguage="english";
+  this.classList.add("active");
+  document.getElementById("hindiLang").classList.remove("active");
+  document.getElementById("passage").classList.remove("hindi");
+  document.getElementById("typingInput").classList.remove("hindi");
+  currentParagraphIndex=0;
+  loadParagraph();
+};
+
+document.getElementById("hindiLang").onclick=function(){
+  currentLanguage="hindi";
+  this.classList.add("active");
+  document.getElementById("englishLang").classList.remove("active");
+  document.getElementById("passage").classList.add("hindi");
+  document.getElementById("typingInput").classList.add("hindi");
+  currentParagraphIndex=0;
+  loadParagraph();
+};
+
+document.getElementById("restart").onclick=function(){
+  let data = currentLanguage === "english"? examParagraphs[currentExam] : examHindiParagraphs[currentExam];
+  currentParagraphIndex++;
+  if(currentParagraphIndex >= data.length) currentParagraphIndex = 0;
+  loadParagraph();
+};
+
+document.getElementById("timeSelect").onchange=function(){
+  timeLeft = parseInt(this.value);
+  let min = Math.floor(timeLeft/60);
+  let sec = timeLeft%60;
+  document.getElementById("time").innerText = min + ":" + String(sec).padStart(2,"0");
+};
+
+document.getElementById("typingInput").addEventListener('input', handleTyping);
+
+window.onload = function(){loadParagraph();};
+</script>
+</body>
+</html>
