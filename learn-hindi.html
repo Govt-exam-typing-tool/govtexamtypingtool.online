@@ -241,6 +241,7 @@ function startLesson(lIndex, iIndex){
   currentLevel=lIndex; currentItem=iIndex; currentMode="lesson";
   document.getElementById('lessonMode').classList.add('active');
   document.querySelectorAll('.mode-btn').forEach(btn=>{if(btn.id!='lessonMode')btn.classList.remove('active')});
+  document.getElementById("customSection").style.display="none";
   
   let item = data.lessons[lIndex].items[iIndex];
   document.getElementById('currentLessonTitle').innerText = item.title;
@@ -311,13 +312,32 @@ function handleTyping(){
   if(typed === fullText && currentMode==="lesson"){finishTest();}
 }
 
-// MODE BUTTONS
-document.getElementById("lessonMode").onclick=function(){currentMode="lesson"; setActiveMode('lessonMode');};
+// MODE BUTTONS WITH TOGGLE
+document.getElementById("lessonMode").onclick=function(){currentMode="lesson"; setActiveMode('lessonMode'); startLesson(currentLevel, currentItem);};
 document.getElementById("practiceMode").onclick=function(){currentMode="practice"; setActiveMode('practiceMode'); let minutes=timeLeft/60; fullText=generateChunk(minutes*90); restartTest();};
 document.getElementById("examMode").onclick=function(){currentMode="exam"; setActiveMode('examMode'); let minutes=timeLeft/60; fullText=generateChunk(minutes*90); restartTest();};
-document.getElementById("customMode").onclick=function(){currentMode="custom"; setActiveMode('customMode'); document.getElementById("customSection").style.display="block";};
 
-function setActiveMode(id){document.querySelectorAll('.mode-btn').forEach(btn=>btn.classList.remove('active')); document.getElementById(id).classList.add('active');}
+document.getElementById("customMode").onclick=function(){
+  let customSection = document.getElementById("customSection");
+  if(customSection.style.display === "block"){
+    customSection.style.display = "none";
+    currentMode = "lesson";
+    setActiveMode('lessonMode');
+    startLesson(currentLevel, currentItem);
+  } else {
+    currentMode = "custom";
+    setActiveMode('customMode');
+    customSection.style.display = "block";
+  }
+};
+
+function setActiveMode(id){
+  document.querySelectorAll('.mode-btn').forEach(btn=>btn.classList.remove('active')); 
+  document.getElementById(id).classList.add('active');
+  if(id !== 'customMode'){
+    document.getElementById("customSection").style.display="none";
+  }
+}
 
 document.getElementById("timeSelect").onchange=function(){timeLeft = parseInt(this.value); let min = Math.floor(timeLeft/60); document.getElementById("time").innerText = min + ":00";};
 document.getElementById("startCustom").onclick=function(){let txt = document.getElementById("customText").value.trim(); if(txt===""){alert("कृपया टेक्स्ट जोड़ें"); return;} fullText = txt; document.getElementById("customSection").style.display="none"; restartTest();};
